@@ -1,0 +1,177 @@
+/* Root = Horizontal, Secondary = Vertical */
+ul#navmenu-h {
+  /*border: 1px solid #333;*/
+  border-right-color: #666;
+  border-bottom-color: #666;
+  padding: 0;
+  list-style: none;
+  height: 28px;
+  float:left;
+  width:1100px !important/*为了解决当浏览器屏幕缩小或是用手机浏览，菜单被分两行显示，导致第一行的下拉栏被第二行覆盖，设定了固定的宽度后，当屏幕缩小，就不会被分两行显示了*/
+}
+ul#navmenu-h i{
+	padding-left:10px;
+	color:#FFF;
+}
+ul#navmenu-h li {
+  margin: 0;
+  border: 0 none;
+  padding: 0;
+  float: left; /*For Gecko*/
+  display: inline;
+  list-style: none;
+  position: relative;
+  height: 28px;
+}
+
+ul#navmenu-h ul {
+  margin: 0;
+  border: 1px solid #333;
+  border-right-color: #666;
+  border-bottom-color: #666;
+  padding: 0;
+  width: 190px;
+  list-style: none;
+  display: none;
+  position: absolute;
+  top: 28px;
+  left: 0;
+}
+
+ul#navmenu-h ul:after /*From IE 7 lack of compliance*/{
+  clear: both;
+  display: block;
+  font: 1px/0px serif;
+  content: ".";
+  height: 0;
+  visibility: hidden;
+  
+}
+
+ul#navmenu-h ul li {
+  width: 190px;
+  float: left; /*For IE 7 lack of compliance*/
+  display: block !important;
+  display: inline; /*For IE*/
+  
+}
+
+/* Root Menu */
+ul#navmenu-h a {
+  border: 0 none;
+  padding: 0 7px;
+  float: none !important; /*For Opera*/
+  float: left; /*For IE*/
+  display: block;
+  background: #40AA53; /* 原 #ff6633 把所有的都替換了 */
+  color: #fff;
+  font: bold 16px/28px "Segoe UI",Tahoma,Arial/*Verdana, Arial, Helvetica, sans-serif*/;
+  text-decoration: none;
+  height: auto !important;
+  height: 1%; /*For IE*/ 
+  
+}
+
+ul#navmenu-h a.otherli {
+	border: 0 none;
+  padding: 0 7px;
+  float: none !important; /*For Opera*/
+  float: left; /*For IE*/
+  display: block;
+  background: #666;
+  color: #fff;
+  font: bold 16px/28px "Segoe UI",Tahoma,Arial/*Verdana, Arial, Helvetica, sans-serif*/;
+  text-decoration: none;
+  height: auto !important;
+  height: 1%; /*For IE*/
+  
+}
+
+/* Root Menu Hover Persistence */
+ul#navmenu-h a:hover,
+ul#navmenu-h li:hover a,
+ul#navmenu-h li.iehover a {
+  background: #666666;  /* 原 #000 */
+  
+}
+
+/* 2nd Menu */
+ul#navmenu-h li:hover li a,
+ul#navmenu-h li.iehover li a {
+  float: none;
+  background: #40AA53; /* 原 #cc3300 */
+  color: #FFF;
+  
+}
+
+/* 2nd Menu Hover Persistence */
+ul#navmenu-h li:hover li a:hover,
+ul#navmenu-h li:hover li:hover a,
+ul#navmenu-h li.iehover li a:hover,
+ul#navmenu-h li.iehover li.iehover a {
+  background: #666666;  /* 原 #000 */
+  color: #FFF;
+  
+}
+
+/* 3rd Menu */
+ul#navmenu-h li:hover li:hover li a,
+ul#navmenu-h li.iehover li.iehover li a {
+  background: #40AA53; /* 原 #943a1c */
+  color: #FFF;
+  
+}
+
+/* 3rd Menu Hover Persistence */
+ul#navmenu-h li:hover li:hover li a:hover,
+ul#navmenu-h li:hover li:hover li:hover a,
+ul#navmenu-h li.iehover li.iehover li a:hover,
+ul#navmenu-h li.iehover li.iehover li.iehover a {
+  background: #666666;  /* 原 #000 */
+  color: #FFF;
+  
+}
+
+/* 4th Menu */
+ul#navmenu-h li:hover li:hover li:hover li a,
+ul#navmenu-h li.iehover li.iehover li.iehover li a {
+  background: #40AA53; /* 原 #943a1c */
+  color: #FFF;
+  
+}
+
+/* 4th Menu Hover */
+ul#navmenu-h li:hover li:hover li:hover li a:hover,
+ul#navmenu-h li.iehover li.iehover li.iehover li a:hover {
+  background: #666666;  /* 原 #000 */
+  color: #FFF;
+  
+}
+
+ul#navmenu-h ul ul,
+ul#navmenu-h ul ul ul {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 190px;
+}
+
+/* Do Not Move - Must Come Before display:block for Gecko */
+ul#navmenu-h li:hover ul ul,
+ul#navmenu-h li:hover ul ul ul,
+ul#navmenu-h li.iehover ul ul,
+ul#navmenu-h li.iehover ul ul ul {
+  display: none;
+  
+}
+
+ul#navmenu-h li:hover ul,
+ul#navmenu-h ul li:hover ul,
+ul#navmenu-h ul ul li:hover ul,
+ul#navmenu-h li.iehover ul,
+ul#navmenu-h ul li.iehover ul,
+ul#navmenu-h ul ul li.iehover ul {
+  display: block;
+  
+}
+

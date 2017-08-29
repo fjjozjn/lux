@@ -1,0 +1,528 @@
+@charset "utf-8";
+
+/******************************************* reset start ***********************************/
+
+/*
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.7.0
+*/
+/**
+ * YUI Reset
+ * @module reset
+ * @namespace
+ * @requires 
+ */
+html {
+	color: #000;
+	background: #FFF;
+	font-size:15px;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	border-spacing: 0;
+}
+
+fieldset,
+img {
+	border: 0;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var,
+optgroup {
+	font-style: inherit;
+	font-weight: inherit;
+}
+
+del,
+ins {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+caption,
+th {
+	text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
+
+q:before,
+q:after {
+	content: '';
+}
+
+abbr,
+acronym {
+	border: 0;
+	font-variant: normal;
+}
+
+sup {
+	vertical-align: baseline;
+}
+
+sub {
+	vertical-align: baseline;
+}
+
+/*because legend doesn't inherit in IE */
+legend {
+	color: #000;
+}
+
+input,
+button,
+textarea,
+select,
+optgroup,
+option {
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+}
+
+/* purpose To enable resizing for IE */
+/* branch For IE6-Win, IE7-Win */
+input,
+button,
+textarea,
+select {
+	*font-size: 100%;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+/******************************************* reset end ***********************************/
+
+
+/******************************************* Form start ***********************************/
+
+/* form子框 */
+fieldset{
+	font-size:15px;
+	width:90%;
+	border:1px solid #999;
+	padding:4px 10px;
+	margin-top:10px;
+}
+
+/* form子框標題 */
+legend{
+	font-weight:bold;
+	color:#999;
+	padding:0 5px;
+	margin-left:40px;
+	font-size:12px;
+}
+
+/* 帶標題的field 外框 */
+div.set{
+	margin:5px 0 10px 30px;
+	float:left;
+	width:40%;
+}
+
+/*  set maybe none, so
+div.setfocus{
+	background-color:#fff7c0;
+}
+*/
+
+/* field標題 */
+.formtitle{
+	font-weight:bold;
+	line-height:200%;
+}
+
+/* field本身 */
+.formfield{}
+
+/* field中的選項(checkbox & radio) */
+.formfield label{
+	float:left;
+    display: block;
+	width:100px;
+}
+
+/* field補充說明 */
+p.forminfo{
+	font-size:12px;
+	color:#444;
+	display:block;
+	margin:3px 0 0 5px;
+}
+
+/* 按鈕外層 */
+div.buttonfield{
+	float:left;
+	clear:right;
+	margin:10px 0 20px 100px;
+}
+/* 按鈕補充說明 */
+div.buttonfield p.forminfo{
+	
+}
+
+div.selectfield{}
+div.selectfield div{}
+div.selectfield p.forminfo{}
+
+/* 必填寫的紅星 */
+h6.required{
+	display:inline;
+	color:#F00;
+	padding-left:15px;
+}
+
+/* 浮動的紅星 */
+h6.float{
+	display:block !important;
+	float:left;
+	clear:right;
+}
+
+/* 按鈕 */
+.defautButton{
+	padding:3px 5px;
+}
+
+/* 小按鈕 */
+.smallbutton{
+	padding:1px 2px;
+}
+
+/* 验证码 */
+#scodediv{
+	margin:3px;
+	cursor:pointer;
+}
+
+/* 輸入框初始 */
+.textinit{
+	font-family:"Segoe UI",Tahoma,Arial/*Verdana, Arial, 新細明體*/;
+	font-size:15px;
+	line-height:100%;
+	padding: 4px 5px 2px 20px;
+	height:20px;
+	border-width:1px;
+	border-style:solid;
+	font-weight:bold;
+}
+
+/* 輸入框錯誤 */
+.texterr
+{
+	border-color:red;
+	color:red;
+	background: #ffff99 url(../../images/exclamation.gif) no-repeat 2px center;
+	}
+
+/* 輸入框正確 */
+.textok
+{
+	border-color:green;
+	color:#000;
+	background: url(../../images/accept.gif) no-repeat 2px center;
+	}
+
+/* 輸入框初始背景 */
+.textinitb
+{
+	border-color:#666;
+	background: url(../../images/nofocus.gif) no-repeat 2px center;
+	}
+
+/* 輸入框焦點 */
+.textfocus
+{
+	border-color:#06C !important;
+	color:#06C !important;
+	}
+
+/* 只讀 */
+.readonly{
+	color:#000;
+	background-color:#DDD;
+}
+
+/* 禁止 */
+.disabled{
+	color:#888;
+	background-color:#eee;
+}
+
+/* textarea 對應input樣式 */
+textarea.tainit{
+	font-family:"Segoe UI",Tahoma,Arial/*Verdana, Arial, 新細明體*/;
+	font-size:15px;
+	line-height:150%;
+	padding: 5px;
+	border-width:1px;
+	border-style:solid;
+	font-weight:bold;
+}
+
+/* textarea 對應input樣式 */
+textarea.taerr
+{
+	border-color:red;
+	color:red;
+}
+
+/* textarea 對應input樣式 */
+textarea.taok
+{
+	border-color:green;
+	color:#000;
+}
+
+/* textarea 對應input樣式 */
+textarea.tainitb
+{
+	border-color:#666;
+}
+
+/* textarea 對應input樣式 */
+textarea.tafocus
+{
+	border-color:#06C;
+	color:#06C;
+}
+
+/* 約束為number的輸入框文字居右 */
+.number{
+	text-align: right;
+}
+
+/* textarea */
+textarea{
+	width:300px;
+}
+/******************************************* form end ***********************************/
+
+/******************************************* tooltip start ***********************************/
+
+#mytt
+{
+	z-index: 99;
+	position:absolute;
+	display:none;
+	width: 276px;
+	height: 35px;
+	overflow: hidden;
+	text-indent: 1em;
+	cursor:pointer;
+	line-height: 25px;
+	font-size: 12px;
+	background: url(../../images/tooltop2.gif) no-repeat left top;
+}
+
+#mytt.heavy
+{
+	background: url(../../images/tooltop_h.gif) no-repeat left top;
+}
+
+#mytt.reverse{
+	background: url(../../images/tooltop2r.gif) no-repeat left top;
+}
+
+#mytt.heavyr
+{
+	background: url(../../images/tooltop_hr.gif) no-repeat left top;
+}
+
+/******************************************* tooltip end ***********************************/
+
+
+/******************************************* general style *********************************/
+
+div.column div.sample {
+	font:30px/60px "Helvetica";
+	color: #000;
+	text-align: center;
+	border: 1px solid #000;
+	margin: 0 0 10px 0;
+	padding:10px;
+}
+
+.left{
+	text-align:left !important;
+}
+
+h2{
+	font:60px/100px "Verdana, Geneva, sans-serif";
+	font-weight:bold;
+}
+
+th strong{
+	display:block;
+	color:#F60;
+	margin-left:20px;
+}
+
+.red{
+	color:#F00;
+}
+.gray{
+	color:#999;
+}
+
+/* radio 的寬度示例 */
+.gender{
+	width:60px;
+}
+
+/* checkbox 的寬度示例 */
+.gotowhere{
+	width:80px;
+}
+.cb_permission{
+	width:200px;
+}
+/* 檢查用戶是否存在 */
+.checkname{
+	margin:38px 0 10px 0;
+	width:160px;
+	float:left;
+}
+.checkname a{
+	color:#06C;
+}
+
+/* 用戶不存在 */
+.checkok{
+	color:#fff;
+	background-color:#069;
+	font-weight:bold;
+	display:block;
+	padding:3px 0 3px 10px;
+}
+
+/* 頁面子標題 */
+h1{
+	display:block;
+	background-color:#FDE6D2;
+	font-size:15px;
+	font-weight:bold;
+	height:40px;
+	line-height:40px;
+	padding-left:15px;
+}
+
+/* 頁面子標題--table版 */
+th.title{
+	background-color:#FDE6D2;
+}
+
+/* 頁面提示 */
+.msgbox {
+	border:1px solid #090;
+	background-color:#090;
+	margin-bottom:5px;
+	color:#FFF;
+}
+.msgbox h1 {
+	background:none;
+}
+.msgbox div{
+	background:#fff url(../../images/apply.gif) no-repeat 5px top;
+	padding:10px 0 10px 55px;
+	color:#333;
+	line-height:150%;
+	min-height:200px;
+	height:auto !important;
+	height:200px;
+}
+.msgbox div input{
+	margin:20px 0 10px 100px;
+}
+
+/* 警告提示 */
+#warnbox {
+	border-color:#FC0;
+	background-color:#FC0;
+	color:#000;
+}
+#warnbox div{
+	background:#fff url(../../images/info.gif) no-repeat 5px top;
+	min-height:40px;
+	height:auto !important;
+	height:40px;
+}
+
+/* 錯誤提示 */
+#errorbox {
+	border-color:#F60;
+	background-color:#F60;
+}
+#errorbox div{
+	background:#fff url(../../images/error.gif) no-repeat 5px top;
+	min-height:40px;
+	height:auto !important;
+	height:40px;
+}
+
+/* 基於table的form表的子標題 */
+td.fieldset{
+	background-color:#eee;
+	border-bottom:1px solid #ccc;
+	padding-left:20px;
+	height:25px;
+	font-weight:bold;
+	font-size:12px;
+}
+

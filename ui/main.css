@@ -1,0 +1,719 @@
+@charset "utf-8";
+/* version 1.2 */
+/* history:
+	1.1		2010-09-03		modify h1 & msgbox
+	1.2		2010-11-04		modify msgbox(remove text box float & input margin)
+	1.21	2010-12-29		add paddings to textarea#agreement
+	1.22	2011-02-21		move tel1/2/3 class to form.css for Class Priority Problem
+			2011-06-30		add #loadingcode
+*/
+
+html{
+	font-family: "Segoe UI",Tahoma,Arial/*Verdana, Arial, 新細明體*/;
+	font-size:12px;
+	font-size-adjust:none;
+}
+
+.container{
+	margin:0px auto;
+	width:995px;
+}
+
+a:link {color:#06C;    text-decoration: none}     /* unvisited link */
+a:visited {color: #1f7fdf;    text-decoration: none}  /* visited link */
+a:hover {color: #FF0000;    text-decoration: underline }   /* mouse over link */
+a:active {color: #000000;    text-decoration: none}   /* selected link */
+
+/* css spirit */
+.textinit, .boxicon, #gosignin, #forgotpw, #loginstatus #signin, #loginstatus #login, li#logout, .selectbox{
+	background:url(../images/sprite/all.gif) no-repeat;
+}
+
+/**************************************** 左菜單 **************************************/
+div#menu{
+	width:170px;
+}
+#menu div, #menu .emptya, #emptybottom a{
+	background:#FFF url(../images/sprite/left_all.gif) no-repeat;
+}
+#menu a:hover{
+	text-decoration:none;
+}
+a.emptya{
+	display:block;
+	height:34px;
+	line-height:34px;
+	width:100%;
+}
+#menu #emptytop{
+	height:19px;
+}
+#menu a#home{
+	background-position:0 -19px;
+}
+#menu a#home:hover{
+	background-position:0 -334px;
+}
+#menu #accounts{
+	background-position:0 -53px;
+}
+#menu #accounts:hover{
+	background-position:0 -368px;
+}
+#menu #service{
+	background-position:0 -87px;
+}
+#menu a#service:hover{
+	background-position:0 -402px;
+}
+#menu #store{
+	background-position:0 -606px;
+}
+#menu a#store:hover{
+	background-position:0 -572px;
+}
+#menu #charge{
+	background-position:0 -121px;
+}
+#menu a#charge:hover{
+	background-position:0 -436px;
+}
+#menu #sitemap{
+	background-position:0 -155px;
+}
+#menu a#sitemap:hover{
+	background-position:0 -470px;
+}
+#menu #emptybottom{
+	height:135px;
+	padding-top:10px;
+	background-position:0 -189px;
+}
+#emptybottom a{
+	display:block;
+	margin-left:9px;
+	margin-bottom:10px;
+	height:32px;
+	width:155px;
+	text-decoration:none;
+}
+#emptybottom #goLogin{
+	background-color:transparent;
+	background-position:0 -540px;
+}
+#emptybottom #goSignin{
+	background-color:transparent;
+	background-position:0 -508px;
+}
+/* 左側菜單列表 */
+dl#leftmenu{
+	background:#FFF url(../images/left/bg.jpg) repeat-y left top;
+	line-height:25px;
+	font-weight:bold;
+}
+#leftmenu dt{
+	padding-left:25px;
+	height:25px;
+	cursor:pointer;
+	margin-left:10px;
+	width:122px;
+	border:1px solid #fff;
+}
+dt.origin{
+	background-color:#F3F3F3;
+	color:#666;
+}
+dt.lihover{
+	background-color:#fff;
+	color:#333;
+}
+#leftmenu dd{
+	display:none;
+}
+ul.submenu li a{
+	display:block;
+	height:25px;
+	line-height:25px;
+	text-decoration:none;
+	padding-left:40px;
+	margin-left:10px;
+	background-color:#F3F3F3;
+	margin-top:1px;
+	width:109px;
+	font-weight:normal;
+}
+li a:hover{
+	border-color:#898989;
+	text-decoration:none;
+	background-color:#fff;
+	color:#ce0000;
+}
+/************************************** 左菜單 end ****************************************/
+
+/************************************ 頁面標題 ***********************************/
+h1{
+	color:#000;
+	display:block;
+	background-color:#F3F3F3;
+	font-size:15px;
+	font-weight:bold;
+	height:40px;
+	line-height:40px;
+	padding-left:15px;
+	border-width:1px;
+	border-style:solid;
+	border-color:#DDDDDD #999999 #999999 #DDDDDD;
+	-moz-border-radius: 2px;
+	-khtml-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+}
+/* 綠色調的子標題 */
+h1.green{
+	border-color:#C7FF8E #236C00 #236C00 #C7FF8E;
+	background-color:#40AA53;
+	color:#FFF;
+}
+/* 橙色調的子標題 */
+h1.orange{
+	border-color:#FFE0AC #996000 #996000 #FFE0AC;
+	background-color:#ff9e00; 
+	color:#FFF;
+}
+/* 2010-09-03 */
+
+/* 頁面子標題--table版 */
+th.title{
+	background-color:#FDE6D2;
+}
+/************************************ 頁面標題 end ***********************************/
+
+/*************************************** 信息框 *************************************/
+/* 提示信息外框 */
+.boxshadow, .boxshadow .msgbox{
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.boxshadow{
+	border-bottom:1px solid #E7E7E7;
+	border-right:1px solid #E7E7E7;
+	margin-bottom:5px;
+}
+/* 頁面提示信息框 */
+.msgbox {
+	border-width:1px;
+	border-style:solid;
+	border-color:#C7FF8E #468C00 #468C00 #C7FF8E;
+}
+/* 提示信息標題 */
+.msgbox h1 {
+	color:#fff;
+	border:none;
+	background-color:#60BF00;
+	-moz-border-radius: 3px 3px 0 0;
+	-khtml-border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 3px 3px 0 0;
+	border-radius: 3px 3px 0 0;
+}
+/* 提示信息圖標 */
+.boxicon{
+	float:left;
+	width:80px;
+	height:80px;
+	background-position:15px -62px;
+}
+/* 提示信息正文 */
+.boxtext{
+	overflow: hidden;
+	zoom: 1;
+	padding:10px 0;
+	color:#333;
+	line-height:150%;
+	font-size:15px;
+}
+.clearfix {
+    display: block;
+    margin: 0px;
+    clear: both;
+    padding: 0px;
+    visibility: hidden;
+    background-color:#666666;
+    border:0px none #FFFFFF;
+}
+.clearfix:after {
+    height: 0px;
+}
+/* 提示信息按鈕 */
+.msgbox input{
+	margin:0 0 0 30px;
+}
+/* 警告提示標題與邊框 */
+#warnbox {
+	border-color:#FFE98E #FBAE46 #FBAE46 #FFE98E;
+}
+#warnbox h1{
+	color:#6B6B03;
+	background-color:#FFcc00;
+}
+/* 警告提示內容 */
+#warnbox .boxicon{
+	background-position:15px -320px;
+}
+/* 錯誤提示標題與邊框 */
+#errorbox {
+	border-color:#FFB584 #DB5700 #DB5700 #FFB584;
+}
+#errorbox h1{
+	background-color:#FF6600;
+}
+/* 錯誤提示內容 */
+#errorbox .boxicon{
+	background-position:15px -150px;
+}
+/******************************************** 信息框 end *******************************************/
+
+/********************************************* 分頁 *************************************/
+.Paginator { margin:15px auto 0 auto; text-align:center; height:35px; background: #ffffff; color:#333333; padding-top:3px; font-size:12px;}
+.Paginator a, .Paginator span { padding: 2px 4px; border: solid 1px #cccccc; text-decoration: none;}
+.Paginator .AtStart { margin-right: 10px; border: solid 1px #eeeeee; color: #aaa; }
+.Paginator .Prev { margin-right: 10px;}
+.Paginator .break { border: none; }
+.Paginator .Next { margin-left:10px; margin-right:10px; border:solid 2px #cccccc;}
+.Paginator .AtEnd { margin-left: 10px; border: solid 1px #eeeeee; color: #aaa; }
+.Paginator .this-page {border-color: #eeeeee; font-weight: bold; color: #FF0084; }
+.Paginator a:hover {color: #ffffff; background: #0063DC; border-color: #003366;}
+.Paginator .Results { margin-right: 5px; }
+.Paginator input { border:1px solid #999999; padding:1px; line-height:100%; color:#03C; background-color:#eee; text-align:center;}
+/********************************************* 分頁 end *************************************/
+
+/******************************************** 其他 *******************************************/
+
+a.news:link	{ 
+    text-decoration: none;
+    color : #FFFFFF;
+}
+a.news:visited {
+    text-decoration: none;
+    color : #FFFFFF;
+}
+a.news:hover {
+	color: #FF0000;    
+	text-decoration: underline
+}
+.newstitle {
+	color: #ffffff;    
+	font-size: 18px;
+	text-decoration: none;
+	font-weight: bold
+}
+.newsdate {
+	color: #ea4a00;
+	font-size: 12px;
+}
+.newscontent {
+	color: #FFFFFF;    
+	font-size: 12px;
+	text-decoration: none
+	padding-top: 1px;	
+	line-height: 18px;
+}
+
+div.column div.sample {
+	color: #000;
+	text-align: center;
+	border: 1px solid #000;
+	margin: 0 0 10px 0;
+	padding:10px;
+}
+
+.left{
+	text-align:left !important;
+}
+
+h2{
+	font-size:15px;
+	font-weight:bold;
+}
+
+th strong{
+	display:block;
+	color:#333;
+	font-weight:bold;
+	margin-left:20px;
+	font-size:200%;
+}
+
+.red{
+	color:#F00;
+}
+.gray{
+	color:#999;
+}
+
+/* radio 的寬度示例 */
+.gender{
+	width:60px;
+}
+
+/* checkbox 的寬度示例 */
+.gotowhere{
+	width:80px;
+}
+
+/* 檢查用戶是否存在 */
+.checkname, .winopener{
+	margin:30px 0 0 5px;
+	width:160px;
+	float:left;
+}
+.checkname a, .winopener a{
+	color:#06C;
+	text-decoration:underline;
+}
+.checkname img{
+	margin-left:4px;
+	vertical-align:middle;
+}
+
+/* 用戶不存在 */
+.checkok{
+	color:#fff;
+	background-color:#069;
+	font-weight:bold;
+	display:block;
+	padding:1px 0 1px 5px;
+}
+
+/* 基於table的form表的子標題 */
+td.fieldset{
+	background-color:#eee;
+	border-bottom:1px solid #ccc;
+	padding-left:20px;
+	height:25px;
+}
+/* 註冊協議內容div */
+div.agreement{
+	margin:10px auto; width:95%
+}
+/* 註冊協議內容框 */
+textarea#agreement{
+	width:100%;
+	padding:5px 2px;
+}
+/* 同意與不同意協議的checkbox */
+#diviagree{
+	margin:10px 0 40px 30px;
+	font-size:100%;
+	font-weight:bold;
+}
+#diviagree label{
+	display:block;
+	border-bottom:1px dashed #ddd;
+	width:350px;
+}
+#diviagree a{
+	color:#069;
+	text-decoration:none;
+}
+
+/* 登錄頁面的找回密碼連接 */
+#gosignin{
+	float:left;
+	display:inline;
+	margin-top:33px;
+	padding-left:24px;
+	text-align:left;
+	background-position:5px -1966px;
+	width:100px;
+}
+#forgotpw{
+	float:left;
+	display:inline;
+	margin-top:33px;
+	padding-left:24px;
+	text-align:left;
+	background-position:5px -1372px;
+	width:100px;
+}
+
+/* 頁面header中顯示的會員ID及GO點數、登出連接 */
+.userinfo{
+	width:100%;
+	border-top:1px solid #999;
+	color:#666;
+	text-align:right;
+	padding-top:4px;
+	line-height:150%;
+}
+/* H1的副標題 */
+h1 em{
+	color:#fff;
+	font-size:12px;
+	margin-left:20px;
+	font-style:normal;
+	font-weight:normal;
+}
+/* 登錄頁框體 */
+.halfborder{
+	width:98%;
+	border:1px solid #ddd;
+	padding:2px;
+}
+/* 普通em */
+em{
+	color:#999;
+	font-size:11px;
+}
+
+.center4button{
+	padding-left:200px;
+}
+
+/* 記錄列表 */
+.loglist{
+	width:80%;
+}
+.loglist td{
+	padding:3px;
+	border-bottom:1px solid #eee;
+	margin-bottom:3px;
+	line-height:20px;
+	vertical-align:top;
+}
+td.date{
+	width:150px;
+	font-size:11px;
+	color:#777;
+}
+/* 記錄中的關鍵詞 */
+i{
+	font-style:normal;
+	color:#06F;
+}
+/* 記錄中的錯誤提示 */
+u{
+	font-weight:normal;
+	color:#F30;
+}
+
+/* 主頁4個菜單 */
+.mainsc{
+	width:50%;
+	text-align:center;
+	height:47px;
+	border:1px solid #ddd;
+}
+.mainschover{
+	background-color:#F3F3F3;
+	border-color:#ccc;
+}
+
+/* 隱藏說明性質的標題 */
+span#pagetitle{
+	display:none;
+}
+
+/* 登入信息欄 */
+#loginstatus{
+	height:30px;
+	float:right;
+	background:#fff url(/images/loginstatus.gif) no-repeat 0 0;
+}
+#loginstatus li{
+	float:left;
+	height:30px;
+	line-height:30px;
+	padding:0 8px;
+	text-align:center;
+}
+#loginstatus li img{
+	display:block;
+	margin-top:8px;
+}
+#loginstatus #userinfo{
+	width:180px;
+	text-align:right;
+	padding-right:0;
+}
+#loginstatus #signin{
+	margin-left:30px;
+	padding-left:24px;
+	text-align:left;
+	background-position:5px -1959px;
+	width:70px;
+}
+#loginstatus #login{
+	padding-left:24px;
+	text-align:left;
+	background-position:5px -1497px;
+	width:50px;
+}
+li#logout{
+	margin-left:25px;
+	padding-left:20px;
+	padding-right:0;
+	background-position:0px -2157px;
+}
+
+#helper{
+	cursor:pointer;
+}
+.hidden{
+	display:none;
+}
+#footer{
+	margin-top:20px;
+	background-color:#f3f3f3;
+	height:60px;
+	width:995px;
+	text-align:right;
+	color:#666;
+	font-size:10px;
+	line-height:60px;
+}
+/* ih prize list */
+#showprize td{
+	border:1px solid #cccccc;
+	padding:0;
+}
+#loadingcode{
+	height:65px;color:#666666;line-height:45px;margin-left:50px;
+}
+
+
+/* add by zjn */
+.shadow{
+	float:left; 
+	margin-right:20px; 
+	background-color:#EFEFEF;
+	}
+.shadow img{
+	padding:4px; 
+	border:1px solid #CDCDCD; 
+	background-color:#FFFFFF; 
+	position:relative; 
+	top:-5px;
+	left:-5px;
+	}
+#tooltip{
+	position:absolute;
+	border:1px solid #ccc;
+	background:#333;
+	padding:2px;
+	display:none;
+	color:#fff;
+}
+#tooltip2{
+	position:absolute;
+	border:1px solid #ccc;
+	background:#333;
+	padding:2px;
+	display:none;
+	color:#fff;
+}
+/* for search */
+#q_pid {
+	/*text-align: center;*/
+	/*position:relative;*/
+}
+.autocomplete {
+	border: 1px solid #9ACCFB;
+	background-color: white;
+	text-align: left;
+	/*z-index:999;*/ /* 設置此層顯示在最前 */
+}
+.autocomplete li {
+	list-style-type: none;
+	/*margin-left:20px; 加了之後，焦點項的藍色也有20px不見了。。。*/
+}
+.clickable {
+	cursor: default;
+}
+.highlight {
+	background-color: #9ACCFB;
+}
+/*tableDnD 当拖动时候，当前tr层背景变为灰色*/
+.tDnD_whileDrag {
+    background-color: #eee;
+}
+td.dragHandle {
+    
+}
+td.showDragHandle {
+	background-image: url(../sys/images/updown2.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+	cursor: move;
+}
+/* for 返回顶部*/
+.backToTop {
+    display: none;
+    width: 31px;
+    line-height: 1.2;
+    /*padding: 5px 0;*/
+    background-color: #FFFFFF;/*因为用了图片，所以背景设为白色*/
+    color: #fff;
+    /*font-size: 12px;*/
+    text-align: center;
+    position: fixed;
+    _position: absolute;
+    right: 15px;
+    bottom: 60px;
+    _bottom: "auto";
+    cursor: pointer;
+    /*opacity: 1;*/
+    /*filter: Alpha(opacity=60);*/
+}
+
+/* tablesorter */
+table.tablesorter {
+	font-family:arial;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	width: 100%;
+	text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	background-color: #EEEEEE;
+	border: 1px solid #ABABAB;
+	font-size: 8pt;
+	padding: 4px;
+}
+table.tablesorter thead tr .header {
+	background-image: url(images/tablesorter/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(images/tablesorter/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(images/tablesorter/desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #8dbdd8;
+}
+
+/* 这个class放在td里，用于让数量或金额靠右对齐，而又能不粘着右边，以便查看*/
+.num_td{
+    text-align: right;
+    padding-right: 20px;
+}
+/*20131022*/
+#sub { text-align:right; padding-right:10px; } /*padding 10px 是因为太靠右粘着图片了*/
+.total { text-align:right; padding-right:10px; }
+#delivery_num{ text-align:right; padding-right:50px; }
+#packinglist_num{ text-align:right; padding-right:50px; }

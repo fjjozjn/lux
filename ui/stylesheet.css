@@ -1,0 +1,509 @@
+.p1{font-size:12px;}
+.p2{font-size:12px;line-height:140%;}
+.p3{font-size:14.8px;font-weight: bold;color:ffffff}
+.p4{font-size:14.8px;line-height:140%;}
+.p5{font-size:14.8px;line-height:140%;}
+.b1{border-color:A20000}
+.b2{border-color:ffffff}
+.b3{border-color:164093}
+
+BODY {	
+scrollbar-face-color:#D6DCE5; scrollbar-shadow-color: #163070; scrollbar-highlight-color: #D6DCE5; scrollbar-3dlight-color: #163070; scrollbar-darkshadow-color: #D6DCE5; scrollbar-track-color: #40AA53; scrollbar-arrow-color: #163070;}
+body, td{font-size:11pt;}
+
+.legend {color:#0066CC;font-family:"Segoe UI",Tahoma,Arial/*Arial,新細明體*/;font-size:10pt;font-weight: Bold;}
+
+A.th_sort_on:link {
+  font-size : 12pt; 
+  text-decoration : none;
+  color : #660000 }
+A.th_sort_on:visited {
+  font-size : 12pt;
+  text-decoration : none;
+  color : #660000 }
+A.th_sort_on:active {
+  text-decoration : none;
+  color : #660000 }
+A.th_sort_on:hover {
+  font-size : 12pt;
+  text-decoration : underline;
+  color : #660000 }
+
+A.th_sort_off:link {
+  font-size : 12pt;
+  text-decoration : none;
+  color : #000099 }
+A.th_sort_off:visited {
+  font-size : 12pt;
+  text-decoration : none;
+  color : #000099 }
+A.th_sort_off:active {
+  text-decoration : none;
+  color : #000099 }
+A.th_sort_off:hover {
+  font-size : 12pt;
+  text-decoration : underline;
+  color : #000099 }  
+
+
+.headertitle {color:#000000;font-family:"Segoe UI",Tahoma,Arial/*Arial,新細明體*/;font-size:14pt;font-weight:bold;}
+.headertitle2{color:#000000;font-family:"Segoe UI",Tahoma,Arial/*Arial,新細明體*/;font-size:20pt;font-weight:bold;text-decoration : underline}
+.normal {color:#000000;font-family:"Segoe UI",Tahoma,Arial/*Arial,新細明體*/;font-size:11pt;}
+.normal_num {color:#555555;font-family:Arial;font-size:11pt;}
+
+
+.news {color:#9B430A;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 21pt;}
+.mainnews {color:#9B430A;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 15pt;}
+.smallnews {color:#9B430A;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 12pt;}
+.tbhead {color:#40AA53;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:8pt;line-height: 13pt;font-weight:bold;text-decoration : underline;}
+.tbsubh {color:#40AA53;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:8pt;line-height: 13pt;font-weight:bold;}
+.tbtxt {color:#9B430A;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:8pt;line-height: 13pt;}
+.guidetxt {background:#FFCC66;color:#9B430A;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.guide2txt {background:#F9E9C7;color:#FF0000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-weight:bold;}
+.guide2btxt {background:#F9E9C7;color:#9B430A;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.guide2ctxt {background:#F8DEA6;color:#9B430A;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+
+.photo1l {background: #FCE2E4;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.photo2l {background: #FCF8E2;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.photo3l {background: #E2FCE4;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.photo4l {background: #FFFFFF;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.photo5l {background: #FDCF44;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.museum1l {color:#333333;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 15pt;}
+
+.install2h {background: #AEAD03;color:#FFFFFF;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-weight: Bold;}
+.install2l {background: #FCFBA3;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.install1l {background: #FCFCCB;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.spec1h {background: #FC8817;color:#FFFFFF;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;font-weight: Bold;}
+.spec1l {background:#FBE4CE;color:#555555;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.maptxt1l {color:#D06201;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.product1l {color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 15pt;}
+.support1h {color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;font-weight: Bold;}
+.support1l {color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:8pt;line-height: 11pt;}
+.support2h {background: #22D5FB;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;font-weight: Bold;}
+.support2l {color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.support3l {color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.down1h {background: #F5E3FE;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;}
+.down1l {color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.down2l {color:#FFFFFF;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-weight: Bold;}
+.news3h {background: #B1E6F3;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;}
+.news2h {background: #FADDBD;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;}
+.news1h {background: #FCDFDF;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;}
+.news3c {background: #EDFEFE;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 17pt;}
+.news1l {background: #EEEEEE;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.news2c {background: #FEFAED;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 17pt;}
+.news1c {background: #FEF7ED;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 17pt;}
+.footer2 {color:#333333;font-family:Verdana,Arial;font-size:7pt;}
+.leftmenu-lk {color:#555555;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;font-weight: Bold;}
+.border1 {
+        border-style: solid;
+        border-width: 1;        /* sets border width on all sides */
+        border-color: #999999;
+      }
+.border2 {
+        border-style: solid;
+        border-width: 1;        /* sets border width on all sides */
+        border-color: #000000;
+      }
+
+.news0 {color:#383838;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;}
+.menu0 {color:#383838;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;}
+.headt0 {color:#FFFFFF;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;font-weight: Bold;}
+.copy0 {color:#FFFFFF;font-family:Verdana,Arial;font-size:8pt;}
+.galn0 {color:#383838;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height:16pt;}
+
+A.menu1:HOVER{ clip: rect( ); position: relative; left: 1px; top: 1px}
+
+A.news:link {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #9B430A }
+A.news:visited {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #9B430A }
+A.news:active {
+  text-decoration : none;
+  color : #9B430A }
+A.news:hover {
+  font-size : 10pt;
+  text-decoration : underline;
+  color : #000000 }
+
+A.newsb:link {
+  font-size : 10pt;
+  text-decoration : underline;
+  color : #9B430A }
+A.newsb:visited {
+  font-size : 10pt;
+  text-decoration : underline;
+  color : #9B430A }
+A.newsb:active {
+  text-decoration : underline;
+  color : #9B430A }
+A.newsb:hover {
+  font-size : 10pt;
+  font-weight: bold;
+  text-decoration : none;
+  color : #9B430A }
+
+
+A.temail:link {
+  font-size : 7pt;
+  text-decoration : none;
+  color : #333333 }
+A.temail:visited {
+  font-size : 7pt;
+  text-decoration : none;
+  color : #333333 }
+A.temail:active {
+  text-decoration : none;
+  color : #333333 }
+A.temail:hover {
+  font-size : 7pt;
+  text-decoration : none;
+  color : #FF6900 }
+
+A.newsa:link {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #602905 }
+A.newsa:visited {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #602905 }
+A.newsa:active {
+  text-decoration : none;
+  color : #602905 }
+A.newsa:hover {
+  font-size : 10pt;
+  text-decoration : underline;
+  color : #FF6900 }
+
+A.leftmenu:link {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #555555 }
+A.leftmenu:visited {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #555555 }
+A.leftmenu:active {
+  text-decoration : none;
+  color : #555555 }
+A.leftmenu:hover {
+  font-size : 10pt;
+  font-weight:bold;
+  text-decoration : none;
+  color : #555555 }
+
+
+
+  
+A.gss:link {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #0000FF }
+A.gss:visited {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #0000FF }
+A.gss:active {
+  text-decoration : none;
+  color : #0000FF }
+A.gss:hover {
+  font-size : 10pt;
+  text-decoration : none;
+  background: #8B8A8A;
+  color : #BEF9F6 }
+
+.td_ {
+	font-family: "Segoe UI",Tahoma,Arial/*新細明體, Arial*/;
+	font-size: 12px;
+	color: #000000;
+	background-color:#FFFFFF;
+	line-height: 15pt;
+	text-decoration: none;
+}
+.td_highlight {
+	font-family: "Segoe UI",Tahoma,Arial/*新細明體, Arial*/;
+	font-size: 12px;
+	color: #000000;
+	background-color:#F3F3F3;
+	line-height: 15pt;
+	text-decoration: none;
+}
+.td_ td, .td_highlight td{
+	height:30px;
+	padding:4px;
+}
+.texth1 {color:#FFFFFF;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:12pt;line-height: 20pt;font-weight: Bold;}
+.text_head1 {color:#333333;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:15pt;line-height: 20pt;}
+
+.news1 {color:#333333;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:12pt;line-height: 20pt;}
+.mlist {background: #FCE6E6;color:#000000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;}
+.time1 {color:#A4011C;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:9pt;}
+.lnk2 {color:#FFFF99;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 17pt;}
+.footer {color:#770000;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:9pt;}
+.allnewshow1 {color:#333333;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 20pt;}
+
+.linktext {color:#006699;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;font-weight: Bold;}
+.systext {color:#D3FF39;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;}
+.systext2 {color:#006600;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;font-size:10pt;line-height: 14pt;}
+.text {color:#666666;font-family:Verdana,Arial;font-size:10pt;line-height: 15pt;}
+.newstext {color:#143D5B;font-family:"Segoe UI",Tahoma,Arial/*新細明體*/;}
+.tbtext {background: #40AA53;color:#FFFFFF;font-family:Verdana, Aria; text-align: right; vertical-align: middle;}
+.tbtextred2 {background: #FB3B48;color:#FFFFFF;font-family:Verdana, Aria; text-align: center; vertical-align: middle;}
+.tbtextb {background: #B9B9B9;color:#FFFFFF;font-family:Verdana, Aria; text-align: right; vertical-align: middle;}
+.tbtext2 {background: #E6FBCB;color:#666666;font-family:Verdana, Aria; text-align: left; vertical-align: middle;}
+.tbtext2reg {background: #E6FBCB;color:#BC7E4B;font-family:Verdana, Aria; text-align: left; vertical-align: middle;}
+.tbtextred {background: #FEDDDF;color:#FF0000;font-family:Verdana, Aria; text-align: center; vertical-align: middle;}
+.stbtext {background: #E6FBCB;color:#666666;font-family:Verdana, Aria;}
+.stbtext2 {background: #A0EB7E;color:#666666;font-family:Verdana, Aria;}
+.stbtext3 {background: #FDAC6A;color:#FFFFFF;font-family:Verdana, Aria;}
+.stbtext4 {background: #40AA53;color:#FFFFFF;font-family:Verdana, Aria;font-weight:bold;}
+.stbtext5 {color:#333333;font-family:"Segoe UI",Tahoma,Arial/*新細明體, Aria*/;font-size:10pt;line-height: 15pt;}
+.number {color:#40AA53;font-family:Verdana, Aria; font-size:20pt;font-weight:bold;}
+
+.btn1 {font-family:"Segoe UI",Tahoma,Arial/*新細明體*/; font-size:13px; color:#990000; background-color:#FF9900; cursor:pointer; font-weight:bold;}
+.btn2 {font-family:"Segoe UI",Tahoma,Arial/*新細明體*/; font-size:13px; color:#990000; background-color:#FFFFCC; cursor:pointer; font-weight:bold;}
+.btn3 {font-family:"Segoe UI",Tahoma,Arial/*新細明體*/; font-size:13px; color:#006600; background-color:#99CC99; cursor:pointer; font-weight:bold;}
+.btn4 {font-family:Verdana,Arial; font-size:13px; color:#FFFFFF; background-color:#40AA53; cursor:pointer; font-weight:normal;border-top: 1px solid black;	border-right: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black;}
+.btnm {font-family:Verdana,Arial; font-size:13px; color:#FFFFFF; background-color:#6E97B6; cursor:pointer; font-weight:normal;border-top: 1px solid black;	border-right: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black;}
+.btnss {font-family:"Segoe UI",Tahoma,Arial/*新細明體*/; font-size:13px; color:#FFFFCC; background-color:#40AA53; cursor:pointer; font-weight:normal;}
+
+.tbolder {border-top: 1px solid black;	border-right: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black;}
+
+
+A.menu1:HOVER{ clip: rect( ); position: relative; left: 1px; top: 1px}
+
+A.link2:link {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #FF0000 }
+A.link2:visited {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #FF0000 }
+A.link2:active {
+  text-decoration : none;
+  color : #FF0000 }
+A.link2:hover {
+  font-size : 10pt;
+  text-decoration : underline;
+  color : #FF0000 }
+
+A.link3:link {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #333333 }
+A.link3:visited {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #333333 }
+A.link3:active {
+  text-decoration : none;
+  color : #333333 }
+A.link3:hover {
+  font-size : 10pt;
+  text-decoration : underline;
+  color : #666666 }
+
+A.link4:link {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #40AA53 }
+A.link4:visited {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #40AA53 }
+A.link4:hover {
+  font-size : 10pt;
+  text-decoration : underline;
+  font-weight:bold;
+  color : #CC3333 }
+A.link4:active {
+  text-decoration : none;
+  color : #40AA53 }
+
+A.link5:link {
+  font-size : 20pt;
+  line-height: 27pt;
+  text-decoration : none;
+  color : #40AA53 }
+A.link5:visited {
+  font-size : 20pt;
+  line-height: 27pt;
+  text-decoration : none;
+  color : #40AA53 }
+A.link5:hover {
+  font-size : 20pt;
+  line-height: 27pt;
+  text-decoration : underline;
+  font-weight:bold;
+  color : #CC3333 }
+A.link5:active {
+  text-decoration : none;
+  color : #40AA53 }
+  
+A.linkgrey:link {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #999999 }
+A.linkgrey:visited {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #999999 }
+A.linkgrey:hover {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #999999 }
+A.linkgrey:active {
+  text-decoration : none;
+  color : #999999 }
+
+A.linktext:link {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #CC3300 }
+A.linktext:visited {
+  font-size : 10pt;
+  text-decoration : none;
+  color : #CC3300 }
+A.linktext:active {
+  text-decoration : none;
+  color : #CC3300 }
+A.linktext:hover {
+  font-size : 10pt;
+  text-decoration : underline;
+  color : #CC3300 }
+
+a.button {
+font-weight: bold;
+font-size: 12px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+padding: 4px 8px;
+border-style: double;
+text-align: center;
+min-width: 75px;
+text-transform: uppercase;
+line-height: 25pt;
+}
+a.button:link {
+background-color: #999999;
+color: #FFFFFF;
+text-decoration: none;
+}
+a.button:visited {
+background-color: #999999;
+color: #FFFFFF;
+text-decoration: none;
+}
+a.button:hover {
+background-color: #40AA53;
+border-style: double;
+text-decoration: none;
+}
+a.button:active {
+background-color: #40AA53;
+color: #FFFFFF;
+text-decoration: none;
+}
+
+a.button2 {
+font-weight: bold;
+font-size: 12px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+padding: 4px 8px;
+border-style: double;
+text-align: center;
+min-width: 75px;
+text-transform: uppercase;
+line-height: 25pt;
+}
+a.button2:link {
+background-color: #6E889C;
+color: #FFFFFF;
+text-decoration: none;
+}
+a.button2:visited {
+background-color: #6E889C;
+color: #FFFFFF;
+text-decoration: none;
+}
+a.button2:hover {
+background-color: #FF9900;
+border-style: double;
+text-decoration: none;
+}
+a.button2:active {
+background-color: #FF9900;
+color: #FFFFFF;
+text-decoration: none;
+}
+
+a.button3 {
+font-weight: bold;
+font-size: 12px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+padding: 4px 8px;
+border-style: double;
+text-align: center;
+min-width: 75px;
+text-transform: uppercase;
+line-height: 25pt;
+}
+a.button3:link {
+background-color: #FF0000;
+color: #FFFFFF;
+text-decoration: none;
+}
+a.button3:visited {
+background-color: #FF0000;
+color: #FFFFFF;
+text-decoration: none;
+}
+a.button3:hover {
+background-color: #FF00FF;
+border-style: double;
+text-decoration: none;
+}
+a.button3:active {
+background-color: #FF00FF;
+color: #FFFFFF;
+text-decoration: none;
+}
+
+.fieldset {
+	width:300px; }
+.label {
+	font-family:Verdana,Arial; font-size:13px; color:#666666; background-color:#FFFFFF; 
+	border:1px solid #000000;
+	}
+.labelno {
+	font-family:Verdana,Arial; font-size:13px; color:#40AA53; background-color:#E0E0E0; font-weight:bold;
+	border:1px solid #000000;
+	}
+.fieldset .nobr {
+	display:none; }  
+.fieldset .textfield {
+	margin:3px;
+	height:20px;
+	width:200px; }
+.fieldset .textarea {
+	margin:3px;
+	height:165px;
+	width:200px; }
+
+.faq_low_light_row {background: #FFFFFF;}
+.faq_high_light_row {background: #FED3B0;}
+
+fieldset{
+	margin:0 auto;
+	padding:10px;
+	width:98%;
+}
+.msgbox{
+	width:500px;
+	margin:0 auto;
+}
+	

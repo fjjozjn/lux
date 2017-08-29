@@ -1,0 +1,1 @@
+C:\AppServ\php6\php.exe -q C:\Dropbox\luxerp\mytools\payment_delay.php

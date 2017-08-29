@@ -1,0 +1,364 @@
+@charset "utf-8";
+/* version 1.1 */
+/* history:
+	1.1		2010-09-03		add outline
+	1.11	2011-02-21		move tel1/2/3 class from form.css for Class Priority Problem
+	1.12	2011-02-22		add idcard class
+	1.13	2011-04-07		add -moz-mox-shadow:none; to .textinit & .tainit
+
+*/
+
+/*add 20120420*/
+input{
+	/*输入框圆角*/
+	border-radius: 5px; /* css 3标准 */
+	-moz-border-radius: 5px; /* mozilla */
+	-webkit-border-radius: 5px; /* webkit */
+	/* 让人蛋疼的IE不支持CSS3 即使是IE9...虽然有用背景圆角图片的办法，但是太烦了，不搞了 */
+}
+
+/* form子框 */
+fieldset{
+	font-size:110%;
+	width:80%;
+	border:1px solid #999;
+	padding:4px 10px;
+	margin-top:10px;
+	margin-left:20px;
+}
+
+/* form的說明文字 */
+form p{
+	margin:5px 15px;
+	font-size:14px;
+	color:#036;
+}
+
+/* form子框標題 */
+legend{
+	color:#999;
+	padding:0 5px;
+	margin-left:40px;
+}
+
+/* 帶標題的field 外框 */
+.set{
+	margin:3px 0 3px 30px;
+	float:left;
+	width:215px;
+	width:225px\9;
+	display:block;
+	_display:inline;
+}
+.fullset{
+	width:90%;
+}
+/* 表單中出現的br將自動清除float */
+form br{
+	clear:both;
+}
+/*  set maybe none, so
+div.setfocus{
+	background-color:#fff7c0;
+}
+*/
+
+/* 令某些頁面內容居中顯示 */
+.center2col{
+	padding-left:50px;
+}
+.center2col .set{
+	width:200px;
+	width:255px\9;
+}
+.center1col{
+	padding-left:180px;
+	width:90%;
+}
+
+/* field標題 */
+.formtitle{
+	line-height:200%;
+	color:#40AA53;
+}
+
+/* field本身 */
+.formfield{
+    /* display: inline; */ 
+}
+
+/* field中的選項(checkbox & radio) */
+.formfield label{
+	float:left;
+    display: inline;
+	_display:inline;
+	width:100px;
+}
+/* 為了自動搜索，css和這裡的li有衝突，才去掉，不知道這裡的是用在哪的。。。
+.formfield li{
+	border:1px solid #ddd;
+	background-color:#f3f3f3;
+	margin:1px;
+	height:22px;
+	line-height:22px;
+	padding-left:10px;
+}
+*/
+/* field補充說明 */
+p.forminfo{
+	color:#006393;
+	display:block;
+	margin:3px 0 0 10px;
+	font-size:12px;
+}
+
+/* 按鈕外層 */
+div.buttonfield{
+	display:inline;
+	float:left;
+	clear:right;
+	margin:10px 0 20px 100px;
+}
+/* 按鈕補充說明 */
+div.buttonfield p.forminfo{
+	
+}
+
+div.selectfield{}
+div.selectfield div{}
+div.selectfield p.forminfo{}
+
+/* 必填寫的紅星 */
+h6.required{
+	display:inline;
+	color:#F00;
+	padding-left:15px;
+}
+
+/* 浮動的紅星 */
+h6.float{
+	display:block !important;
+	float:left;
+	clear:right;
+}
+
+/* 按鈕 */
+.defautButton{
+	padding:3px 5px;
+}
+
+/* 小按鈕 */
+.smallbutton{
+	padding:1px 2px;
+	font-size:12px;
+	font-weight:normal;
+}
+
+/* 验证码 */
+.scodediv{
+	margin:3px;
+	cursor:pointer;
+}
+/* 輸入框初始 */
+.textinit{
+	background-color:#fff;
+	font-size:105%;
+	line-height:100%;
+	padding: 4px 5px 2px 20px;
+	height:20px;
+	border-width:1px;
+	border-style:solid;
+	font-weight:bold;
+	width:175px;
+	-moz-mox-shadow:none;
+}
+
+/* 輸入框錯誤 */
+.texterr{
+	border-color:red;
+	color:red;
+	background-position: 2px -258px;
+	background-color: #ffffd8;
+}
+
+/* 輸入框正確 */
+.textok{
+	border-color:green;
+	color:#000;
+	background-position: 2px 4px;
+}
+
+/* 輸入框初始背景 */
+.textinitb{
+	border-color:#666;
+	background-position: 2px -680px;
+}
+
+/* 輸入框焦點 */
+.textfocus{
+	border-color:#06C;
+	outline:2px solid #A4D1FF;
+	background-color:#F4F8FF;
+	color:#06C;
+}
+/* 只讀 */
+.readonly{
+	color:#000;
+	background-color:#DDD;
+}
+
+/* 禁止 */
+.disabled{
+	/*color:#888;*/
+    /*20150105*/
+    color:#000;
+	background-color:#eee;
+}
+
+/* textarea 對應input樣式 */
+textarea.tainit{
+	background-color:#fff;
+	font-family:"Segoe UI",Tahoma,Arial/*Verdana, Arial, 新細明體*/;
+	font-size:105%;
+	line-height:150%;
+	padding: 5px;
+	border-width:1px;
+	border-style:solid;
+	font-weight:bold;
+	-moz-mox-shadow:none;
+	/*输入框圆角*/
+	border-radius: 5px; /* css 3标准 */
+	-moz-border-radius: 5px; /* mozilla */
+	-webkit-border-radius: 5px; /* webkit */
+}
+
+/* textarea 對應input樣式 */
+textarea.taerr{
+	border-color:red;
+	color:red;
+	background-color: #ffffd8;
+}
+
+/* textarea 對應input樣式 */
+textarea.taok{
+	border-color:green;
+	color:#000;
+}
+
+/* textarea 對應input樣式 */
+textarea.tainitb{
+	border-color:#666;
+}
+
+/* textarea 對應input樣式 */
+textarea.tafocus{
+	border-color:#06C;
+	outline:2px solid #A4D1FF;
+	background-color:#F4F8FF;
+	color:#06C;
+}
+
+/* add by zjn textarea class為disabled的樣式 */
+textarea.disabled{
+	/*color:#888;*/
+    /*20150105*/
+	color:#000;
+	background-color:#eee;
+}
+
+/* 約束為number的輸入框文字居右 */
+.number{
+	text-align: right;
+}
+
+/* textarea */
+textarea{
+	width:200px;
+}
+.center2col textarea{
+	width:400px;
+}
+textarea{
+    width:400px;
+}
+div.line{
+	width:100%;
+	margin:0 0 3px 0;
+	clear:both;
+	border-bottom:1px dashed #ccc;
+	height:8px;
+	line-height:8px;
+}
+/* 電話號碼 */
+.tel1{
+	width:40px;
+}
+.tel2{
+	width:80px;
+}
+.tel3{
+	width:160px;
+}
+/* 身份證 */
+.idcard{
+	width:182px;
+}
+/******************************************* form end ***********************************/
+
+/******************************************* tooltip start ***********************************/
+#mytt{
+	z-index: 99;
+	position:absolute;
+	display:none;
+	width: 276px;
+	height: 35px;
+	overflow: hidden;
+	text-indent: 1em;
+	cursor:pointer;
+	line-height: 25px;
+	font-size: 12px;
+}
+.ttnormal,.heavy,.ttreverse,.heavyr{
+	background:url(../images/sprite/all.gif) no-repeat;
+}
+.ttnormal{
+	background-position:0 -900px;
+}
+.heavy{
+	background-position: 0 -1070px;
+}
+.ttreverse{
+	background-position: 0 -985px;
+}
+.heavyr{
+	background-position: 0 -1155px;
+}
+
+
+
+/* add by zjn */
+.setlux{
+	margin:3px 0 3px 30px;
+	float:left;
+	/*width:215px;
+	width:225px\9; 有这些ie显示就不正常了，FF 一直都OK */
+	display:block;
+	_display:inline;
+}
+.center2col .setlux{
+	width:90%;
+	/*width:255px\9;*/
+}
+.formfieldlux label{
+	float:left;
+    display: inline;
+	_display:inline;
+	width:120px;
+}
+.luxinput{
+	width:50px; !important	
+}
+.luxdiv{
+	width:25%;	
+	float:left; /* 沒有這個div就豎着排了，有了這個就能橫着排了 */
+}

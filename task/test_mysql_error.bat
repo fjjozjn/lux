@@ -1,0 +1,1 @@
+C:\AppServ\php6\php.exe -q C:\Dropbox\luxerp\mytools\test_mysql_error.php

@@ -1,0 +1,61 @@
+div.selectbox-wrapper {
+  position:absolute;
+  width:400px;
+  background-color:white;
+  border:1px solid #069;
+  margin:0px;
+  margin-top:-10px;
+  padding:0px;
+  font-size:0.8em;
+  text-align:left;
+  /* height:200px; */
+  overflow: auto;
+}
+div.selectbox-wrapper ul {
+  list-style-type:none;
+  margin:0px;
+  padding:0px;
+}
+div.selectbox-wrapper ul li.selected { 
+  background-color:#0095DD;
+  color:#fff;
+}
+div.selectbox-wrapper ul li.current { 
+  background-color:#069;
+  color:#fff;
+}
+div.selectbox-wrapper ul li {
+  list-style-type:none;
+  display:block;
+  margin:0;
+  padding:3px;
+  cursor:pointer;
+}
+.selectbox /* look&fell of  select box*/
+{
+  margin: 0 5px 10px 0;
+  padding:4px 0 0 4px;
+  font-family:"Segoe UI",Tahoma,Arial/*Verdana, Geneva, Arial, Helvetica, sans-serif*/;
+  width :170px;
+  height:20px;
+  display : block;
+  background: url('../images/selectbg.gif') right no-repeat;
+  cursor: pointer;
+  border:1px solid #666;
+  line-height:20px;
+  color:#333;
+  font-size:12px;
+  vertical-align:middle;
+-moz-border-radius: 5px 5px 0 0;
+-khtml-border-radius: 5px 5px 0 0;
+-webkit-border-radius: 5px 5px 0 0;
+border-radius: 5px 5px 0 0;
+}
+
+.selectbox_h{
+	background: url('../images/selectbg_h.gif') right no-repeat !important;
+	border:1px solid #069;
+}
+.selectp div{
+	float:left;
+}

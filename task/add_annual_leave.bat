@@ -1,0 +1,1 @@
+C:\AppServ\php6\php.exe -q C:\Dropbox\luxerp\mytools\script_add_annual_leave.php

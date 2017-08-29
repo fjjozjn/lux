@@ -1,0 +1,989 @@
+@charset "utf-8";
+
+/* version 1.0 */
+
+/******************************************* reset start ***********************************/
+
+/*
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.7.0
+*/
+/**
+ * YUI Reset
+ * @module reset
+ * @namespace
+ * @requires 
+ */
+html {
+	color: #000;
+	background: #FFF;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+fieldset,
+img {
+	border: 0;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var,
+optgroup {
+	font-style: inherit;
+	font-weight: inherit;
+}
+
+del,
+ins {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+caption,
+th {
+	text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
+
+q:before,
+q:after {
+	content: '';
+}
+
+abbr,
+acronym {
+	border: 0;
+	font-variant: normal;
+}
+
+sup {
+	vertical-align: baseline;
+}
+
+sub {
+	vertical-align: baseline;
+}
+
+/*because legend doesn't inherit in IE */
+/* no use
+legend {
+	color: #000;
+}
+*/
+
+input,
+button,
+textarea,
+select,
+optgroup,
+option {
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+}
+
+/* purpose To enable resizing for IE */
+/* branch For IE6-Win, IE7-Win */
+input,
+button,
+textarea,
+select {
+	*font-size: 100%;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+/******************************************* reset end ***********************************/
+
+
+/******************************************* Form start ***********************************/
+.textinit, #mytt, .msgbox div, #gosignin, #forgotpw, #loginstatus #signin, #loginstatus #login, li#logout, .selectbox{
+	background:url(../images/sprite/all.gif) no-repeat left top;
+}
+/* form子框 */
+fieldset{
+	font-size:110%;
+	width:80%;
+	border:1px solid #999;
+	padding:4px 10px;
+	margin-top:10px;
+	margin-left:20px;
+}
+
+/* form的說明文字 */
+form p{
+	margin:5px 15px;
+	font-size:14px;
+	color:#036;
+}
+
+/* form子框標題 */
+legend{
+	color:#999;
+	padding:0 5px;
+	margin-left:40px;
+}
+
+/* 帶標題的field 外框 */
+.set{
+	margin:3px 0 3px 30px;
+	float:left;
+	width:215px;
+	width:225px\9;
+	display:block;
+	_display:inline;
+}
+
+.fullset{
+	width:90%;
+}
+
+/*  set maybe none, so
+div.setfocus{
+	background-color:#fff7c0;
+}
+*/
+
+/* 令某些頁面內容居中顯示 */
+.center2col{
+	padding-left:50px;
+}
+.center2col .set{
+	width:245px;
+	width:255px\9;
+}
+.center1col{
+	padding-left:180px;
+	width:70%;
+}
+
+/* field標題 */
+.formtitle{
+	line-height:200%;
+	color:#000;
+}
+
+/* field本身 */
+.formfield{
+    /* display: inline; */
+}
+
+/* field中的選項(checkbox & radio) */
+.formfield label{
+	float:left;
+    display: inline;
+	_display:inline;
+	width:100px;
+}
+.formfield li{
+	border:1px solid #ddd;
+	background-color:#f3f3f3;
+	margin:1px;
+	height:22px;
+	line-height:22px;
+	padding-left:10px;
+}
+
+/* field補充說明 */
+p.forminfo{
+	color:#006393;
+	display:block;
+	margin:3px 0 0 10px;
+	font-size:12px;
+}
+
+/* 按鈕外層 */
+div.buttonfield{
+	display:inline;
+	float:left;
+	clear:right;
+	margin:10px 0 20px 100px;
+}
+/* 按鈕補充說明 */
+div.buttonfield p.forminfo{
+	
+}
+
+div.selectfield{}
+div.selectfield div{}
+div.selectfield p.forminfo{}
+
+/* 必填寫的紅星 */
+h6.required{
+	display:inline;
+	color:#F00;
+	padding-left:15px;
+}
+
+/* 浮動的紅星 */
+h6.float{
+	display:block !important;
+	float:left;
+	clear:right;
+}
+
+/* 按鈕 */
+.defautButton{
+	padding:3px 5px;
+}
+
+/* 小按鈕 */
+.smallbutton{
+	padding:1px 2px;
+}
+
+/* 验证码 */
+.scodediv{
+	margin:3px;
+	cursor:pointer;
+}
+/* 輸入框初始 */
+.textinit{
+	font-size:105%;
+	line-height:100%;
+	padding: 4px 5px 2px 20px;
+	height:20px;
+	border-width:1px;
+	border-style:solid;
+	font-weight:bold;
+	width:175px;
+}
+
+/* 輸入框錯誤 */
+.texterr
+{
+	border-color:red;
+	color:red;
+	background-position: 2px -258px;
+	background-color: #ffffd8;
+	}
+
+/* 輸入框正確 */
+.textok
+{
+	border-color:green;
+	color:#000;
+	background-position: 2px 4px;
+	}
+
+/* 輸入框初始背景 */
+.textinitb
+{
+	border-color:#666;
+	background-position: 2px -680px;
+	}
+
+/* 輸入框焦點 */
+.textfocus
+{
+	border-color:#06C;
+	background-color:#F4F8FF;
+	color:#06C;
+	}
+
+/* 只讀 */
+.readonly{
+	color:#000;
+	background-color:#DDD;
+}
+
+/* 禁止 */
+.disabled{
+	color:#888;
+	background-color:#eee;
+}
+
+/* textarea 對應input樣式 */
+textarea.tainit{
+	font-family:"Segoe UI",Tahoma,Arial/*Verdana, Arial, 新細明體*/;
+	font-size:105%;
+	line-height:150%;
+	padding: 5px;
+	border-width:1px;
+	border-style:solid;
+	font-weight:bold;
+}
+
+/* textarea 對應input樣式 */
+textarea.taerr
+{
+	border-color:red;
+	color:red;
+	background-color: #ffffd8;
+}
+
+/* textarea 對應input樣式 */
+textarea.taok
+{
+	border-color:green;
+	color:#000;
+}
+
+/* textarea 對應input樣式 */
+textarea.tainitb
+{
+	border-color:#666;
+}
+
+/* textarea 對應input樣式 */
+textarea.tafocus
+{
+	border-color:#06C;
+	background-color:#F4F8FF;
+	color:#06C;
+}
+
+/* 約束為number的輸入框文字居右 */
+.number{
+	text-align: right;
+}
+
+/* textarea */
+textarea{
+	width:300px;
+}
+.center2col textarea{
+	width:200px;
+}
+div.line{
+	width:90%;
+	margin:0 0 3px 0;
+	clear:both;
+	border-bottom:1px dashed #ccc;
+	height:8px;
+	line-height:8px;
+}
+/******************************************* form end ***********************************/
+
+/******************************************* tooltip start ***********************************/
+
+#mytt
+{
+	z-index: 99;
+	position:absolute;
+	display:none;
+	width: 276px;
+	height: 35px;
+	overflow: hidden;
+	text-indent: 1em;
+	cursor:pointer;
+	line-height: 25px;
+	font-size: 12px;
+	background-position:0 -900px;
+}
+
+#mytt.heavy
+{
+	background-position: 0 -1070px;
+}
+
+#mytt.reverse{
+	background-position: 0 -985px;
+}
+
+#mytt.heavyr
+{
+	background-position: 0 -1155px;
+}
+
+/******************************************* tooltip end ***********************************/
+
+
+/******************************************* general style *********************************/
+html{
+	font-family:"Segoe UI",Tahoma,Arial/*Verdana, Arial, 新細明體*/;
+	font-size:12px;
+	font-size-adjust:none;
+}
+
+.container{
+	margin:0px auto;
+	width:995px;
+}
+
+a:link {color:#06C;    text-decoration: none}     /* unvisited link */
+a:visited {color: #1f7fdf;    text-decoration: none}  /* visited link */
+a:hover {color: #FF0000;    text-decoration: underline }   /* mouse over link */
+a:active {color: #000000;    text-decoration: none}   /* selected link */
+
+a.news:link	{ 
+    text-decoration: none;
+    color : #FFFFFF;
+}
+a.news:visited {
+    text-decoration: none;
+    color : #FFFFFF;
+}
+a.news:hover {
+	color: #FF0000;    
+	text-decoration: underline
+}
+.newstitle {
+	color: #ffffff;    
+	font-size: 18px;
+	text-decoration: none;
+	font-weight: bold
+}
+.newsdate {
+	color: #ea4a00;
+	font-size: 12px;
+}
+.newscontent {
+	color: #FFFFFF;    
+	font-size: 12px;
+	text-decoration: none
+	padding-top: 1px;	
+	line-height: 18px;
+}
+
+div.column div.sample {
+	color: #000;
+	text-align: center;
+	border: 1px solid #000;
+	margin: 0 0 10px 0;
+	padding:10px;
+}
+
+.left{
+	text-align:left !important;
+}
+
+h2{
+	font-size:15px;
+	font-weight:bold;
+}
+
+th strong{
+	display:block;
+	color:#333;
+	font-weight:bold;
+	margin-left:20px;
+	font-size:200%;
+}
+
+.red{
+	color:#F00;
+}
+.gray{
+	color:#999;
+}
+
+/* radio 的寬度示例 */
+.gender{
+	width:60px;
+}
+
+/* checkbox 的寬度示例 */
+.gotowhere{
+	width:80px;
+}
+
+/* 檢查用戶是否存在 */
+.checkname, .winopener{
+	margin:30px 0 0 5px;
+	width:160px;
+	float:left;
+}
+.checkname a, .winopener a{
+	color:#06C;
+	text-decoration:underline;
+}
+.checkname img{
+	margin-left:4px;
+	vertical-align:middle;
+}
+
+/* 用戶不存在 */
+.checkok{
+	color:#fff;
+	background-color:#069;
+	font-weight:bold;
+	display:block;
+	padding:1px 0 1px 5px;
+}
+
+/* 頁面子標題 */
+h1{
+	color:#000;
+	display:block;
+	background-color:#eeeeee;
+	font-size:15px;
+	font-weight:bold;
+	height:40px;
+	line-height:40px;
+	padding-left:15px;
+	border:1px solid #dbdbdb;
+}
+/* 綠色調的子標題 */
+h1.green{
+	border-color:#0C0 #000 #000 #0C0;
+	background-color:#390;
+	color:#FFF;
+}
+/* 橙色調的子標題 */
+h1.orange{
+	background-color:#ff9e00;
+	border:1px solid #F60;
+	color:#FFF;
+}
+
+/* 頁面子標題--table版 */
+th.title{
+	background-color:#FDE6D2;
+}
+
+/* 頁面提示信息框 */
+.msgbox {
+	border:1px solid #090;
+	background-color:#090;
+	margin-bottom:5px;
+	color:#FFF !important;
+	color:#FFF;
+	/*
+	width:80%;
+	display:table;
+	*/
+}
+/* 提示信息標題 */
+.msgbox h1 {
+	border:none;
+	background-color:transparent;
+}
+/* 提示信息內容 */
+.msgbox div{
+	background-color:#fff;
+	background-position:5px -62px;
+	padding:10px 0 10px 55px;
+	color:#333;
+	line-height:150%;
+	min-height:40px;
+	height:auto !important;
+	height:40px;
+	font-size:15px;
+}
+/* 提示信息按鈕 */
+.msgbox input{
+	margin:2px 0 2px 30px;
+}
+
+/* 警告提示標題與邊框 */
+#warnbox {
+	border-color:#FFCC00;
+	background-color:#FFCC00;
+}
+/* 警告提示內容 */
+#warnbox div{
+	background-position:5px -324px;
+	min-height:40px;
+	height:auto !important;
+	height:40px;
+}
+
+/* 錯誤提示標題與邊框 */
+#errorbox {
+	border-color:#F60;
+	background-color:#F60;
+}
+#errorbox h1{
+	color:#fff;
+}
+/* 錯誤提示內容 */
+#errorbox div{
+	background-position:5px -160px;
+	min-height:40px;
+	height:auto !important;
+	height:40px;
+}
+
+/* 基於table的form表的子標題 */
+td.fieldset{
+	background-color:#eee;
+	border-bottom:1px solid #ccc;
+	padding-left:20px;
+	height:25px;
+}
+/* 註冊協議內容div */
+div.agreement{
+	margin:10px auto; width:95%
+}
+/* 註冊協議內容框 */
+textarea#agreement{
+	width:100%;
+}
+/* 同意與不同意協議的checkbox */
+#diviagree{
+	margin:10px 0 40px 30px;
+	font-size:100%;
+	font-weight:bold;
+}
+#diviagree label{
+	display:block;
+	border-bottom:1px dashed #ddd;
+	width:350px;
+}
+#diviagree a{
+	color:#069;
+	text-decoration:none;
+}
+
+/* 登錄頁面的找回密碼連接 */
+#gosignin{
+	float:left;
+	display:inline;
+	margin-top:33px;
+	padding-left:24px;
+	text-align:left;
+	background-position:5px -1966px;
+	width:100px;
+}
+#forgotpw{
+	float:left;
+	display:inline;
+	margin-top:33px;
+	padding-left:24px;
+	text-align:left;
+	background-position:5px -1372px;
+	width:100px;
+}
+
+/* 頁面header中顯示的會員ID及GO點數、登出連接 */
+.userinfo{
+	width:100%;
+	border-top:1px solid #999;
+	color:#666;
+	text-align:right;
+	padding-top:4px;
+	line-height:150%;
+}
+/* 表單中出現的br將自動清除float */
+form br{
+	clear:both;
+}
+
+/* H1的副標題 */
+h1 em{
+	color:#fff;
+	font-size:12px;
+	margin-left:20px;
+	font-style:normal;
+	font-weight:normal;
+}
+/* 登錄頁框體 */
+.halfborder{
+	width:98%;
+	border:1px solid #ddd;
+	padding:2px;
+}
+/* 普通em */
+em{
+	color:#999;
+	font-size:11px;
+}
+
+/* 分頁 */
+.Paginator { margin:15px auto 0 auto; text-align:center; height:35px; background: #ffffff; color:#333333; padding-top:3px; font-size:12px;}
+.Paginator a, .Paginator span { padding: 2px 4px; border: solid 1px #cccccc; text-decoration: none;}
+.Paginator .AtStart { margin-right: 10px; border: solid 1px #eeeeee; color: #aaa; }
+.Paginator .Prev { margin-right: 10px;}
+.Paginator .break { border: none; }
+.Paginator .Next { margin-left:10px; margin-right:10px; border:solid 2px #cccccc;}
+.Paginator .AtEnd { margin-left: 10px; border: solid 1px #eeeeee; color: #aaa; }
+.Paginator .this-page {border-color: #eeeeee; font-weight: bold; color: #FF0084; }
+.Paginator a:hover {color: #ffffff; background: #0063DC; border-color: #003366;}
+.Paginator .Results { margin-right: 5px; }
+.Paginator input { border:1px solid #999999; padding:1px; line-height:100%; color:#03C; background-color:#eee; text-align:center;}
+
+.center4button{
+	padding-left:200px;
+}
+
+/* 記錄列表 */
+.loglist{
+	width:80%;
+}
+.loglist td{
+	padding:3px;
+	border-bottom:1px solid #eee;
+	margin-bottom:3px;
+	line-height:20px;
+	vertical-align:top;
+}
+td.date{
+	width:150px;
+	font-size:11px;
+	color:#777;
+}
+/* 記錄中的關鍵詞 */
+i{
+	font-style:normal;
+	color:#06F;
+}
+/* 記錄中的錯誤提示 */
+u{
+	font-weight:normal;
+	color:#F30;
+}
+
+/* 主頁4個菜單 */
+.mainsc{
+	width:50%;
+	text-align:center;
+	height:47px;
+	border:1px solid #ddd;
+}
+.mainschover{
+	background-color:#F3F3F3;
+	border-color:#ccc;
+}
+
+/* 隱藏說明性質的標題 */
+span#pagetitle{
+	display:none;
+}
+
+/* 登入信息欄 */
+#loginstatus{
+	height:30px;
+	float:right;
+	background:#fff url(/images/loginstatus.gif) no-repeat 0 0;
+}
+#loginstatus li{
+	float:left;
+	height:30px;
+	line-height:30px;
+	padding:0 8px;
+	text-align:center;
+}
+#loginstatus li img{
+	display:block;
+	margin-top:8px;
+}
+#loginstatus #userinfo{
+	width:180px;
+	text-align:right;
+	padding-right:0;
+}
+#loginstatus #signin{
+	margin-left:30px;
+	padding-left:24px;
+	text-align:left;
+	background-position:5px -1959px;
+	width:70px;
+}
+#loginstatus #login{
+	padding-left:24px;
+	text-align:left;
+	background-position:5px -1497px;
+	width:50px;
+}
+li#logout{
+	margin-left:25px;
+	padding-left:20px;
+	padding-right:0;
+	background-position:0px -2157px;
+}
+
+#helper{
+	cursor:pointer;
+}
+.tel1{
+	width:40px;
+}
+.tel2{
+	width:80px;
+}
+.tel3{
+	width:160px;
+}
+.hidden{
+	display:none;
+}
+
+/* 新菜單欄 */
+div#menu{
+	width:170px;
+}
+#menu div, #menu .emptya, #emptybottom a{
+	background:#FFF url(../images/sprite/left_all.gif) no-repeat left top;
+}
+#menu a:hover{
+	text-decoration:none;
+}
+a.emptya{
+	display:block;
+	height:34px;
+	line-height:34px;
+	width:100%;
+}
+#menu #emptytop{
+	height:19px;
+}
+#menu a#home{
+	background-position:0 -19px;
+}
+#menu a#home:hover{
+	background-position:0 -334px;
+}
+#menu #accounts{
+	background-position:0 -53px;
+}
+#menu #accounts:hover{
+	background-position:0 -368px;
+}
+#menu #service{
+	background-position:0 -87px;
+}
+#menu a#service:hover{
+	background-position:0 -402px;
+}
+#menu #store{
+	background-position:0 -606px;
+}
+#menu a#store:hover{
+	background-position:0 -572px;
+}
+#menu #charge{
+	background-position:0 -121px;
+}
+#menu a#charge:hover{
+	background-position:0 -436px;
+}
+#menu #sitemap{
+	background-position:0 -155px;
+}
+#menu a#sitemap:hover{
+	background-position:0 -470px;
+}
+#menu #emptybottom{
+	height:135px;
+	padding-top:10px;
+	background-position:0 -189px;
+}
+#emptybottom a{
+	display:block;
+	margin-left:9px;
+	margin-bottom:10px;
+	height:32px;
+	width:155px;
+	text-decoration:none;
+}
+#emptybottom #goLogin{
+	background-color:transparent;
+	background-position:0 -540px;
+}
+#emptybottom #goSignin{
+	background-color:transparent;
+	background-position:0 -508px;
+}
+/* 左側菜單列表 */
+dl#leftmenu{
+	background:#FFF url(../images/left/bg.jpg) repeat-y left top;
+	line-height:25px;
+	font-weight:bold;
+}
+#leftmenu dt{
+	padding-left:25px;
+	height:25px;
+	cursor:pointer;
+	margin-left:10px;
+	width:122px;
+	border:1px solid #fff;
+}
+dt.origin{
+	background-color:#F3F3F3;
+	color:#666;
+}
+dt.lihover{
+	background-color:#fff;
+	color:#333;
+}
+#leftmenu dd{
+	display:none;
+}
+ul.submenu li a{
+	display:block;
+	height:25px;
+	line-height:25px;
+	text-decoration:none;
+	padding-left:40px;
+	margin-left:10px;
+	background-color:#F3F3F3;
+	margin-top:1px;
+	width:109px;
+	font-weight:normal;
+}
+li a:hover{
+	border-color:#898989;
+	text-decoration:none;
+	background-color:#fff;
+	color:#ce0000;
+}
+/* footer */
+#footer{
+	margin-top:20px;
+	background-color:#f3f3f3;
+	height:60px;
+	width:995px;
+	text-align:right;
+	color:#666;
+	font-size:10px;
+	line-height:60px;
+}
+

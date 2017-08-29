@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<!--meta http-equiv="refresh" content="10" /-->
+<title>TotalRecall</title>
+<script language="Javascript">
+	function resize() {
+		var ctrl = document.getElementById("thinclientctrl");
+		if(ctrl)
+		{
+			ctrl.style.left 	= 0;
+			ctrl.style.top 		= 0;
+			ctrl.style.width 	= document.documentElement.clientWidth+"px";
+			ctrl.style.height 	= document.documentElement.clientHeight+"px";			
+		}	
+	}
+	function loaded() {
+		resize();
+	}
+</script>
+</head>
+<body leftmargin=0 topmargin=0 rightmargin=0 bottommargin=0 scroll="no" onResize="resize()" onload="loaded()" background="http://tlt.zqgame.com/images/landingpage5.jpg">
+<script language="Javascript">
+		function check_plugin()
+		{
+			var len = navigator.plugins.length;
+			for( var i=0; i<len; i++)
+			{
+				if(navigator.plugins[i].name=="Thinclient")
+				{
+					var des = navigator.plugins[i].description;
+					var idx = des.indexOf("_v");
+					var rut = des.substr(idx+2);
+					return rut;
+				}
+			}
+			return false;
+		}
+		
+		
+		
+		function check_update(isplugin,version)
+		{
+			if(!isplugin)
+			{
+				return true;
+			}
+			return (version>isplugin);
+		}
+		
+		function check_java()
+		{
+			for (i = 0;i < navigator.mimeTypes.length;i++)
+			{
+				var mimetype = navigator.mimeTypes[i].type;
+				if (((mimetype.indexOf("application/x-java-applet;version=1."))!=-1)&&(mimetype>= "application/x-java-applet;version=1.3"))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		
+		function write_xiazai()
+		{
+			var ctrl = document.getElementById("xiazai"); 
+			if(ctrl)
+			{
+				document.getElementById("xiazai").style.display="";
+			}
+			else
+			{
+				document.write(
+					'<div id="xiazai" style="width: 401px; margin-top: 25%; margin-right: auto; margin-bottom: auto; margin-left: auto; position: relative; ">&nbsp;&nbsp;Click the image to download the game plugin'+
+					'<a href="http://183.60.42.233/plugin/pv_1.0.7.0/thinclient_setup.exe" '+
+					'title="genericwork thinclient. Install now!"'+'style="display: block; height: 82px; position: relative; top: 0px; ">'+
+					'<img id="getunity" alt="Gentek Web Player. Install now!" src="http://tlt.zqgame.com/test/button.png" '+
+					'width="401" height="82"style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px;"></a></div>');
+			}
+		}
+		
+		function write_applet()
+		{
+			var ctrl = document.getElementById("aplet"); 
+			if(ctrl)
+			{
+				return ;
+			}
+			else
+			{
+				document.write(
+					'<div id="applet"> <APPLET codebase="." code="installer.Installer.class" archive="http://183.60.42.233/plugin/thinclient.jar" width="400" height="400" MAYSCRIPT>'+
+					'<param name="url" value="http://183.60.42.233/plugin/pv_1.0.7.0/thinclient_setup.exe" /></div>');
+			}
+		}
+		
+		function write_embed()
+		{
+			var ctrl = document.getElementById("xiazai");  
+			if(ctrl)
+			{
+				document.getElementById("xiazai").style.display="";
+			}
+			document.write(
+				'<embed name="we3dctrl2" id="test3" WMODE="Opaque" style="position:absolute; width:100%;height:100%;" type=application/generic.thinclient'+
+				'	PatchUrl="http://183.60.42.233/tr_bin/" '+
+				' PatchVersion="1.0.1.0"'+
+				'	PatchFileList="tr_clients.exe;13780992;2013-05-25 11:55:00;" '+
+				'	TargetEnv="game_server_ip=183.60.42.233;game_server_port=8431;game_server_version=0.0.0.0;client_patch_version=1.0.1.0;" '+
+				'	ServerIP="111.111.111.111" '+
+				'	ServerPort="5188" '+
+				'	ConnectionCountPerSite="1" '+
+				'	SkipPatch="0" '+
+				'	DownloadUrls="http://183.60.42.233/tr_file/" '+
+				'	needcachespace="500" '+
+				'	productuid="totalrecall_us"></embed>');
+		}
+		
+		function write_object() 
+		{
+			document.write(
+					'<OBJECT ID="thinclientctrl" CLASSID="CLSID:547AE7EB-EAD8-46D8-871F-BAE00047B22E" codeBase="http://183.60.42.233/plugin/pv_1.0.7.0/thinclient.cab#version=1,0,7,0">'+
+					'	<param name="PatchUrl" value="http://183.60.42.233/tr_bin/"/> '+
+					' <param name="PatchVersion" value="1.0.1.0"/>'+
+					'	<param name="PatchFileList" value="tr_clients.exe;13780992;2013-05-25 11:55:00;"/>'+
+					'	<param name="TargetEnv" value="game_server_ip=183.60.42.233;game_server_port=8431;game_server_version=0.0.0.0;client_patch_version=1.0.1.0;"/>'+
+					'	<param name="ServerIP" value="111.111.111.111" />'+
+					'	<param name="ServerPort" value="5188" />	'+
+					'	<param name="ConnectionCountPerSite" value="1" /> '+
+					'	<param name="SkipPatch" value="0"/> '+
+					'	<param name="DownloadUrls" value="http://183.60.42.233/tr_file/"/> '+
+					'	<param name="needcachespace" value="500"/>'+
+					'	<param name="productuid" value="totalrecall_us"/> '+
+					'</OBJECT>');
+		}
+		
+		function has_update()
+		{
+			var version1 = "1.0.7.0";
+			navigator.plugins.refresh(false);
+			var hasplugin1 = check_plugin();
+			var update1 = check_update(hasplugin1,version1);
+			return update1;
+		}
+		
+		function test_applet_installed()
+		{
+			var update1 = has_update();
+			if (!update1)
+			{
+				write_embed();
+			}
+			else
+			{
+				setTimeout("test_applet_installed()",3000);
+			}
+		}
+		
+		function ff_refresh()
+		{
+			var update = has_update();
+			if (!update)
+			{
+				write_embed();
+				return false;
+			}
+			if (check_java())
+			{
+				write_applet();
+				test_applet_installed();
+				return false;
+			}
+			else
+			{
+				write_xiazai();
+				//return false;
+			}
+			setTimeout("ff_refresh()",3000);
+		}
+		
+		
+		
+	</script>
+	<script language="Javascript">
+			function content()
+			{
+				if (navigator.appName.indexOf("Microsoft Internet")==-1)
+				{
+					ff_refresh();
+				}
+				else
+				{
+					write_object();
+				}
+			}
+			content();
+	</script>
+	<SCRIPT language="VBScript">
+		function DetectWebgame3dActiveX
+			on error resume next
+			dim tControl
+			dim res
+			res = 0
+			set tControl = CreateObject("547AE7EB-EAD8-46D8-871F-BAE00047B22E")
+			if IsObject(tControl) then
+				res = 1
+			end if
+			DetectWebgame3dActiveX = res
+		end function
+	</SCRIPT>
+		
+	<script language="JavaScript">
+		/*function window.onhelp()
+		{
+			return false;
+		}*/
+	</script>
+</body>
+</html>
