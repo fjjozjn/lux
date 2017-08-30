@@ -471,7 +471,7 @@ if(in_array($_SERVER['SERVER_NAME'], array('192.168.1.200', 'fjjozjn.vicp.cc')))
 	$goDbInfo = array(
 		'host' => '127.0.0.1',
 		'user' => 'root',
-		'passwd' => '3993979102',
+		'passwd' => '123456',
 		'database' => 'krnt_db',
 		'port' => NULL,
 		'socket' => NULL,

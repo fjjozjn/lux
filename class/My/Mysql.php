@@ -96,6 +96,7 @@ final class My_Mysql{
 		*/
 
 		//旧连接方式
+        $this->_debug($this->_dbInfo);
 		$this->_conn = mysqli_connect($this->_dbInfo['host'], $this->_dbInfo['user'], $this->_dbInfo['passwd'], $this->_dbInfo['database'], $this->_dbInfo['port'], $this->_dbInfo['socket']);
 		if(!$this->_conn){
 			$this->_error($this->_output('systemError'));
