@@ -34,6 +34,7 @@ $pic_path_com_trend_books= "upload/trend_books/";			//公司效果图上传目�
 $pic_path_qc_normal = 'upload/qc_normal/';
 $pic_path_qc_small  = 'upload/qc_small/';
 $product_file_path_com = "upload/product_file/"; //product附加的文件
+$sample_order_file_path_com = "upload/sample_order_file/"; //sample order附加的文件
 
 $pic_path_fty_bom   = "upload/photo/";
 

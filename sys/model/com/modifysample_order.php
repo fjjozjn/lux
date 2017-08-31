@@ -135,17 +135,43 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 	
 	
 	if(!$myerror->getAny() && $goodsForm->check()){
-		
-		if(isset($_GET['modid'])){
-			$so_no = $_POST['so_no']; 
-		}elseif(isset($_GET['copyso_no'])){
-			$so_no = autoGenerationID();
-		}elseif(isset($_GET['appendso_no'])){
-			$so_no = autoGenerationAddID($_GET['appendso_no']);
-		}elseif(isset($_GET['rev_so_no'])){
+
+        $so_no = '';
+        if(isset($_GET['modid'])){
+            $so_no = $_POST['so_no'];
+        }elseif(isset($_GET['copyso_no'])){
+            $so_no = autoGenerationID();
+        }elseif(isset($_GET['appendso_no'])){
+            $so_no = autoGenerationAddID($_GET['appendso_no']);
+        }elseif(isset($_GET['rev_so_no'])){
             $so_no = autoGenerationAddID($_GET['rev_so_no'], 'rev');
         }
-		
+
+        //20170831
+        $add_tip = '';
+        $file_target = '';
+        $file_date = date('YmdHis');
+        if( (@$_FILES['sample_order_file']['type'] == 'application/pdf' && (@$_FILES['sample_order_file']['size'] / 1024) <= 10240) || @$_FILES['sample_order_file']['name'] == '' ) {
+            if (@$_FILES['sample_order_file']['error'] > 0 && @$_FILES['sample_order_file']['error'] != 4){
+                $myerror->error('Upload file failure ! Return Code: '.@$_FILES['sample_order_file']['error'], 'BACK');
+            }else {
+                if (@$_FILES['sample_order_file']['name'] != '') {
+                    // 转为大写字母(pid + 时间 + 原图片的后缀名)
+                    $temp = end(explode('.', @$_FILES['sample_order_file']['name']));
+                    $file_target = strtoupper($so_no . '_' . $file_date .'.'. $temp);
+                    //上传图片
+                    move_uploaded_file(@$_FILES['sample_order_file']['tmp_name'], iconv('UTF-8', 'GBK', $sample_order_file_path_com . $file_target));
+                    if (file_exists(iconv('UTF-8', 'GBK', $sample_order_file_path_com . $file_target))) {
+                        $add_tip .= 'Upload file ' . $file_target . ' success! ';
+                    } else {
+                        $add_tip .= 'Upload file ' . $file_target . ' <i>failure</i>! ';
+                    }
+                }
+            }
+        }else{
+            $myerror->error('上传文件 失败! 请选择PDF格式的文件上传! 且文件大小不要超过 10 MB!', 'BACK');
+        }
+
 		$send_to = $_POST['sid'];
 		$attention = $_POST['attention'];
 		$customer = $_POST['customer'];
@@ -176,8 +202,10 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 		$creation_date = ((date('Y-m-d', strtotime($mod_result['creation_date'])) == $_POST['creation_date'])?$mod_result['creation_date']:$_POST['creation_date'].' 00:00:00');
 		$created_by = $_POST['created_by'];
 
+        $sample_order_file = $file_target;
+
 		if(isset($_GET['copyso_no']) && $_GET['copyso_no'] != ''){
-			$result = $mysql->q('insert into sample_order (so_no, send_to, attention, customer, reference, etd, remark, photo_page_num, page_total, product_each_num, product_num, product_total, color_total, is_change, select_gold, gold_other, select_is_layer, layer_other, select_is_electroplate, select_is_lead, select_earrings, packaging_card, ring_tag, ring_size, packaging_require, others, creation_date, created_by, s_status) values ('.moreQm(29).')', $so_no, $send_to, $attention, $customer, $reference, $etd, $remark, $photo_page_num, $page_total, $product_each_num, $product_num, $product_total, $color_total, $is_change, $select_gold, $gold_other, $select_is_layer, $layer_other, $select_is_electroplate, $select_is_lead, $select_earrings, $packaging_card, $ring_tag, $ring_size, $packaging_require, $others, $creation_date, $created_by, '(I)');
+			$result = $mysql->q('insert into sample_order (so_no, send_to, attention, customer, reference, etd, remark, photo_page_num, page_total, product_each_num, product_num, product_total, color_total, is_change, select_gold, gold_other, select_is_layer, layer_other, select_is_electroplate, select_is_lead, select_earrings, packaging_card, ring_tag, ring_size, packaging_require, others, creation_date, created_by, s_status, sample_order_file) values ('.moreQm(30).')', $so_no, $send_to, $attention, $customer, $reference, $etd, $remark, $photo_page_num, $page_total, $product_each_num, $product_num, $product_total, $color_total, $is_change, $select_gold, $gold_other, $select_is_layer, $layer_other, $select_is_electroplate, $select_is_lead, $select_earrings, $packaging_card, $ring_tag, $ring_size, $packaging_require, $others, $creation_date, $created_by, '(I)', $sample_order_file);
 			if($result){
 
                 //add action log
@@ -190,7 +218,7 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 				$myerror->error('新增 Sample Order 失败', 'com-searchsample_order&page=1');	
 			}
 		}elseif(isset($_GET['modid']) && $_GET['modid'] != ''){		
-			$result = $mysql->q('update sample_order set send_to = ?, attention = ?, customer = ?, reference = ?, etd = ?, remark = ?, photo_page_num = ?, page_total = ?, product_each_num = ?, product_num = ?, product_total = ?, color_total = ?, is_change = ?, select_gold = ?, gold_other = ?, select_is_layer = ?, layer_other = ?, select_is_electroplate = ?, select_is_lead = ?, select_earrings = ?, packaging_card = ?, ring_tag = ?, ring_size = ?, packaging_require = ?, others = ?, creation_date = ?, created_by = ? where so_no = ?', $send_to, $attention, $customer, $reference, $etd, $remark, $photo_page_num, $page_total, $product_each_num, $product_num, $product_total, $color_total, $is_change, $select_gold, $gold_other, $select_is_layer, $layer_other, $select_is_electroplate, $select_is_lead, $select_earrings, $packaging_card, $ring_tag, $ring_size, $packaging_require, $others, $creation_date, $created_by, $so_no);
+			$result = $mysql->q('update sample_order set send_to = ?, attention = ?, customer = ?, reference = ?, etd = ?, remark = ?, photo_page_num = ?, page_total = ?, product_each_num = ?, product_num = ?, product_total = ?, color_total = ?, is_change = ?, select_gold = ?, gold_other = ?, select_is_layer = ?, layer_other = ?, select_is_electroplate = ?, select_is_lead = ?, select_earrings = ?, packaging_card = ?, ring_tag = ?, ring_size = ?, packaging_require = ?, others = ?, creation_date = ?, created_by = ?, sample_order_file = ? where so_no = ?', $send_to, $attention, $customer, $reference, $etd, $remark, $photo_page_num, $page_total, $product_each_num, $product_num, $product_total, $color_total, $is_change, $select_gold, $gold_other, $select_is_layer, $layer_other, $select_is_electroplate, $select_is_lead, $select_earrings, $packaging_card, $ring_tag, $ring_size, $packaging_require, $others, $creation_date, $created_by, $sample_order_file, $so_no);
 			if($result){
 
                 //add action log
@@ -203,7 +231,7 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 				$myerror->error('修改 Sample Order 失败', 'com-searchsample_order&page=1');	
 			}
 		}elseif(isset($_GET['appendso_no']) && $_GET['appendso_no'] != ''){
-			$result = $mysql->q('insert into sample_order (so_no, send_to, attention, customer, reference, etd, remark, photo_page_num, page_total, product_each_num, product_num, product_total, color_total, is_change, select_gold, gold_other, select_is_layer, layer_other, select_is_electroplate, select_is_lead, select_earrings, packaging_card, ring_tag, ring_size, packaging_require, others, creation_date, created_by, s_status) values ('.moreQm(29).')', $so_no, $send_to, $attention, $customer, $reference, $etd, $remark, $photo_page_num, $page_total, $product_each_num, $product_num, $product_total, $color_total, $is_change, $select_gold, $gold_other, $select_is_layer, $layer_other, $select_is_electroplate, $select_is_lead, $select_earrings, $packaging_card, $ring_tag, $ring_size, $packaging_require, $others, $creation_date, $created_by, '(I)');
+			$result = $mysql->q('insert into sample_order (so_no, send_to, attention, customer, reference, etd, remark, photo_page_num, page_total, product_each_num, product_num, product_total, color_total, is_change, select_gold, gold_other, select_is_layer, layer_other, select_is_electroplate, select_is_lead, select_earrings, packaging_card, ring_tag, ring_size, packaging_require, others, creation_date, created_by, s_status, sample_order_file) values ('.moreQm(30).')', $so_no, $send_to, $attention, $customer, $reference, $etd, $remark, $photo_page_num, $page_total, $product_each_num, $product_num, $product_total, $color_total, $is_change, $select_gold, $gold_other, $select_is_layer, $layer_other, $select_is_electroplate, $select_is_lead, $select_earrings, $packaging_card, $ring_tag, $ring_size, $packaging_require, $others, $creation_date, $created_by, '(I)', $sample_order_file);
 			if($result){
 
                 //add action log
@@ -216,7 +244,7 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 				$myerror->error('Sample Order 加单失败', 'com-searchsample_order&page=1');	
 			}			
 		}elseif($_GET['rev_so_no'] && $_GET['rev_so_no'] != ''){
-            $result = $mysql->q('insert into sample_order (so_no, send_to, attention, customer, reference, etd, remark, photo_page_num, page_total, product_each_num, product_num, product_total, color_total, is_change, select_gold, gold_other, select_is_layer, layer_other, select_is_electroplate, select_is_lead, select_earrings, packaging_card, ring_tag, ring_size, packaging_require, others, creation_date, created_by, s_status) values ('.moreQm(29).')', $so_no, $send_to, $attention, $customer, $reference, $etd, $remark, $photo_page_num, $page_total, $product_each_num, $product_num, $product_total, $color_total, $is_change, $select_gold, $gold_other, $select_is_layer, $layer_other, $select_is_electroplate, $select_is_lead, $select_earrings, $packaging_card, $ring_tag, $ring_size, $packaging_require, $others, $creation_date, $created_by, '(I)');
+            $result = $mysql->q('insert into sample_order (so_no, send_to, attention, customer, reference, etd, remark, photo_page_num, page_total, product_each_num, product_num, product_total, color_total, is_change, select_gold, gold_other, select_is_layer, layer_other, select_is_electroplate, select_is_lead, select_earrings, packaging_card, ring_tag, ring_size, packaging_require, others, creation_date, created_by, s_status, sample_order_file) values ('.moreQm(30).')', $so_no, $send_to, $attention, $customer, $reference, $etd, $remark, $photo_page_num, $page_total, $product_each_num, $product_num, $product_total, $color_total, $is_change, $select_gold, $gold_other, $select_is_layer, $layer_other, $select_is_electroplate, $select_is_lead, $select_earrings, $packaging_card, $ring_tag, $ring_size, $packaging_require, $others, $creation_date, $created_by, '(I)', $sample_order_file);
             if($result){
                 $myerror->ok('Sample Order 加改版单成功!', 'com-searchsample_order&page=1');
             }else{
@@ -276,19 +304,19 @@ $goodsForm->begin();
                 <td width="35%"><? $goodsForm->show('reference');?></td>
                 <td width="15%">要求出货日期：<h6 class="required">*</h6></td>
                 <td width="35%"><? $goodsForm->show('etd');?></td>
-            </tr>  
+            </tr>
             <tr>
                 <td width="15%">备注：</td>
                 <td width="35%"><? $goodsForm->show('remark');?></td>
                 <td width="15%">日期：<h6 class="required">*</h6></td>
                 <td width="35%"><? $goodsForm->show('creation_date');?></td>
-            </tr>  
+            </tr>
             <tr>
                 <td width="15%"></td>
                 <td width="35%"></td>
                 <td width="15%">负责同事：<h6 class="required">*</h6></td>
                 <td width="35%"><? $goodsForm->show('created_by');?></td>
-            </tr> 			  
+            </tr>
         </table>
         <br />
         <table class="formtitle">
@@ -361,7 +389,13 @@ $goodsForm->begin();
                 	无
                 </td>
             <? } ?>
-            </tr>                 
+            </tr>
+            <tr>
+                <td>7）上传Product PDF：</td>
+            </tr>
+            <tr>
+                <td><input type='file' name='sample_order_file' id='sample_order_file' /></td>
+            </tr>
         </table>
         
         <div class="line"></div>
