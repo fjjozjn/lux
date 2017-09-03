@@ -64,7 +64,7 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 		$mod_supplier_contact = array(array($mod_result['attention'], $mod_result['attention']));
 		
 		//20121011 加显示此 sample_order 包含的 product ID 
-		$mysql->q('select pid from product where sample_order_no = ?', $_GET['modid']);
+		$mysql->q('select pid, photos from product where sample_order_no = ?', $_GET['modid']);
 		$product_rtn = $mysql->fetch();
         $no = $_GET['modid'];
 	}elseif(isset($_GET['copyso_no']) && $_GET['copyso_no'] != ''){
@@ -381,8 +381,15 @@ $goodsForm->begin();
             <tr>
             <? if(isset($product_rtn) && $product_rtn != ''){ ?>
             	<td><?
-				 	foreach($product_rtn as $v)
-						echo '<a href="?act=com-modifyproduct&modid='.$v['pid'].'">'.$v['pid'].'</a>'.' ';
+				 	foreach($product_rtn as $v) {
+                        echo '<div style="float:left">';
+                        if ($v['photos']) {
+                            echo '<a href="/sys/upload/lux/' . $v['photos'] . '" target="_blank" title="' . $v['photos'] . '"><img src="/sys/upload/luxsmall/s_' . $v['photos'] . '" border="0" align="middle" width="80" height="60"></a>';
+                        } else {
+                            echo '<img src="/images/nopic.gif" border="0" align="middle" width="80" height="60">';
+                        }
+                        echo '<br /><a target="_blank" href="?act=com-modifyproduct_new&modid=' . $v['pid'] . '">' . $v['pid'] . '</a></div>';
+                    }
 				 	?></td>                
             <? }else{ ?>
             	<td>
