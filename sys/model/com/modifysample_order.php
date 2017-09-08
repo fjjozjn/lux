@@ -92,7 +92,7 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 		die('Need modid!');	
 	}
 	
-	$goodsForm = new My_Forms();
+	$goodsForm = new My_Forms(array('multipart'=>true));
 	
 	$formItems = array(
 			'sid' => array('type' => 'select', 'options' => $supplier_so, 'required' => 1, 'nostar' => true, 'value' => isset($mod_result['send_to'])?$mod_result['send_to']:''),
@@ -151,6 +151,8 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
         $add_tip = '';
         $file_target = '';
         $file_date = date('YmdHis');
+        fb('$_FILES');
+        fb($_FILES);
         if( (@$_FILES['sample_order_file']['type'] == 'application/pdf' && (@$_FILES['sample_order_file']['size'] / 1024) <= 10240) || @$_FILES['sample_order_file']['name'] == '' ) {
             if (@$_FILES['sample_order_file']['error'] > 0 && @$_FILES['sample_order_file']['error'] != 4){
                 $myerror->error('Upload file failure ! Return Code: '.@$_FILES['sample_order_file']['error'], 'BACK');
