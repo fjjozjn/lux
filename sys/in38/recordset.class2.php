@@ -283,6 +283,12 @@ Class RecordSetControl2 {
                             }else{
                                 echo '<a title="BOM" href="javascript:alert(\'none\')"><img src="../../images/button_bom.png"></a>';
                             }
+                        }elseif( $this->col_content[$j]["title"] == 'SAMPLE_ORDER_APPROVE'){
+                            if($value_arr[$i]['s_status'] == '(D)'){
+                                echo "<a title='Approve' href='".$temp_link."'><img src='../../images/button_ok.png'></a>";
+                            }elseif($value_arr[$i]['s_status'] != '(D)' && $value_arr[$i]['s_status'] != 'delete'){
+                                echo "<a title='Disapprove' href='".$temp_link."'><img src='../../images/button_action-undo.png'></a>";
+                            }
                         }else{
 							echo "<a class='button' href='".$temp_link."'>".$this->col_content[$j]["title"]."</a>";
 						}

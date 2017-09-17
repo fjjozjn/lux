@@ -28,8 +28,9 @@ if($myerror->getWarn()){
         'submitbutton' => array(
             'type' => 'submit',
             'value' => 'Search',
-            'title' => ''),
-        );
+            'title' => ''
+        ),
+    );
     $form->init($formItems);
     $form->begin();
 
@@ -65,17 +66,22 @@ if($myerror->getWarn()){
     <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
         <tr valign='top'>
             <td align="center" width="80%">
-
                 <?
                 if (strlen(@$_SESSION['search_criteria']['search_by'])){
                 //$s_name = $mysql->qone('select name from supplier where sid = ?',$_SESSION['search_criteria']['supplier']);
                 //$rs = $mysql->q('select total, mark_date from purchase where sid = ? and istatus <> ? order by mark_date', $_SESSION['search_criteria']['supplier'], 'delete');
-                    $rs = $mysql->q('select total, expected_date from proforma where istatus <> ? and expected_date <> ?', 'delete', '');
+                    $rs = '';
+                    if ($_SESSION['search_criteria']['search_by'] == 1) {
+                        $rs = $mysql->q('select total, mark_date as pi_date from proforma where istatus <> ? and mark_date <> ?', 'delete', '');
+                    } elseif ($_SESSION['search_criteria']['search_by'] == 2) {
+                        $rs = $mysql->q('select total, expected_date as pi_date from proforma where istatus <> ? and expected_date <> ?', 'delete', '');
+                    }
+
                     if($rs){
                         $rtn = $mysql->fetch();
                         $purchase_total = array();
                         foreach($rtn as $v){
-                            $the_etd_date = explode('-', $v['expected_date']);
+                            $the_etd_date = explode('-', $v['pi_date']);
                             @$pi_etd_total[$the_etd_date[0]][intval($the_etd_date[1])] += $v['total'];
                         }
                         //fb($pi_etd_total);die();
@@ -118,8 +124,8 @@ if($myerror->getWarn()){
                                 ?>
                                 <fieldset style="width:475px;">
                                     <legend class='legend'>Information</legend>
-                                    <div><?=$s_name['name']?> 没有记录</div>
-
+                                    <div>没有记录</div>
+                                </fieldset>
                                     <?
                                 }
                             }

@@ -38,15 +38,15 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 }elseif(isset($_GET['chg_status']) && $_GET['chg_status'] != ''){
 	$rtn = $mysql->qone('select s_status from sample_order where so_no = ?', $_GET['chg_status']);
     $to_status = '';
+    $rs = '';
 	if($rtn['s_status'] == '(I)'){
         $to_status = '(S)';
 		$rs = $mysql->q('update sample_order set s_status = ? where so_no = ?', $to_status, $_GET['chg_status']);
-	}else{
+	}elseif($rtn['s_status'] == '(S)'){
         $to_status = '(I)';
         $rs = $mysql->q('update sample_order set s_status = ? where so_no = ?', $to_status, $_GET['chg_status']);
 	}
 	if($rs){
-
         //add action log
         $mysql->sp('CALL admin_log_insert(?, ?, ?, ?, ?, ?, ?, ?)'
             , $_SESSION['logininfo']['aID'], $ip_real
@@ -88,6 +88,31 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
         //20130828 设置为当天日期
         $mod_result['creation_date'] = date('Y-m-d');
         $no = $_GET['rev_so_no'];
+    }elseif(isset($_GET['approve_so_no']) && $_GET['approve_so_no'] != ''){
+        $mod_supplier_contact = array();
+        $now = dateMore();
+        $rtn = $mysql->qone('select s_status from sample_order where so_no = ?', $_GET['approve_so_no']);
+        if($rtn['s_status'] == '(D)'){
+            $rs = $mysql->q('update sample_order set s_status = ?, approved_by = ?, approved_date = ? where so_no = ?', '(I)', $_SESSION["logininfo"]["aName"], $now, $_GET['approve_so_no']);
+            if($rs){
+                $myerror->ok('状态由(D)改为(I)!', 'com-searchsample_order&page=1');
+            }else{
+                $myerror->error('状态更改失败!', 'com-searchsample_order&page=1');
+            }
+        }elseif($rtn['s_status'] == '(I)'){
+            if(isSysAdmin()){
+                $rs = $mysql->q('update sample_order set s_status = ?, approved_by = concat(approved_by,?), approved_date = ? where so_no = ?', '(D)', 'disapproved', $now, $_GET['approve_so_no']);
+                if($rs){
+                    $myerror->ok('状态由(I)改为(D)!', 'com-searchsample_order&page=1');
+                }else{
+                    $myerror->error('状态更改失败!', 'com-searchsample_order&page=1');
+                }
+            }else{
+                $myerror->error('Without Permission To Access', 'main');
+            }
+        }else{
+            $myerror->error('状态为(D)时才能approve!', 'com-searchsample_order&page=1');
+        }
     }else{
 		die('Need modid!');	
 	}
@@ -403,7 +428,7 @@ $goodsForm->begin();
                 <td>7）上传Product PDF：</td>
             </tr>
             <tr>
-                <td><input type='file' name='sample_order_file' id='sample_order_file' /></td>
+                <td><input type='file' name='sample_order_file' id='sample_order_file' /><a target="_blank" href="/sys/<?=$sample_order_file_path_com.$mod_result['sample_order_file']?>"><?=$mod_result['sample_order_file']?></a></td>
             </tr>
         </table>
         
