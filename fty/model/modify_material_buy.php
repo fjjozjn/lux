@@ -39,10 +39,12 @@ if($myerror->getWarn()){
             $m_item_num = 0;
             if($rs_m){
                 $mod_result_m = $mysql->fetch();
+                $old_total = 0;//更新物料供应商ap用
                 //20130401 查找出损耗率
                 for($i = 0; $i < count($mod_result_m); $i++){
                     $temp = $mysql->qone('select m_loss from fty_material where m_id = ?', $mod_result_m[$i]['m_id']);
                     $mod_result_m[$i]['m_loss'] = $temp['m_loss'];
+                    $old_total += $mod_result_m[$i]['m_total'];
                 }
 
                 $m_item_num = count($mod_result_m);
@@ -145,12 +147,18 @@ if($myerror->getWarn()){
                 //更改库存
                 delWarehouseMaterial('fty_material_buy_item', $_GET['modid']);
                 $rtn = $mysql->q('delete from fty_material_buy_item where main_id = ?', $_GET['modid']);
+                $total = 0;
                 foreach($material_arr as $v){
                     $rtn = $mysql->qone('select m_name, m_type, m_color, m_unit, m_loss from fty_material where m_id = ?', $v['m_id']);
-                    $mysql->q('insert into fty_material_buy_item set main_id = ?, m_type = ?, m_id = ?, m_name = ?, m_color = ?, m_unit = ?, m_price = ?, m_value = ?, m_total = ?, m_remark = ?', $_GET['modid'], $rtn['m_type'], $v['m_id'], $rtn['m_name'], $rtn['m_color'], $rtn['m_unit'], $v['price'], $v['value'], round($v['price']*$v['value']*(1+$rtn['m_loss']/100), 2), $v['remark']);
+                    $m_total = round($v['price']*$v['value']*(1+$rtn['m_loss']/100), 2);
+                    $mysql->q('insert into fty_material_buy_item set main_id = ?, m_type = ?, m_id = ?, m_name = ?, m_color = ?, m_unit = ?, m_price = ?, m_value = ?, m_total = ?, m_remark = ?', $_GET['modid'], $rtn['m_type'], $v['m_id'], $rtn['m_name'], $rtn['m_color'], $rtn['m_unit'], $v['price'], $v['value'], $m_total, $v['remark']);
                     //更改库存
                     changeFtyMaterialNum($v['m_id'], $v['value']);
+                    $total += $m_total;
                 }
+
+                //物料供应商ap（应付欠款）修改
+                $mysql->q('update fty_wlgy_customer set ap = ap + ? where cid = ?', ($total - $old_total), $wlgy_cid);
 
                 $myerror->ok('修改 物料采购单 成功!', 'search_material_buy&page=1');
             }else{

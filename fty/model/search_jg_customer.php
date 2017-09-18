@@ -168,6 +168,7 @@ if($myerror->getWarn()){
         //$rs->SetRecordCol("Deposit ( % )", "deposit");
         //$rs->SetRecordCol("Balance ( day )", "balance");
         $rs->SetRecordCol("创建者", "created_by");
+        $rs->SetRecordCol("AP", "ap");
 
         $sort = GENERAL_NO;
         $edit = GENERAL_YES;

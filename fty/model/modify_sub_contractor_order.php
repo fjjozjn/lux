@@ -238,6 +238,9 @@ if($myerror->getWarn()){
                             $mysql->q('insert into fty_sub_contractor_order_item set main_id = ?, pid = ?, price = ?, quantity = ?, description = ?, description_chi = ?, photos = ?, ccode = ?, scode = ?, task = ?', $_GET['modid'], $q_pid[$k], $q_p_price[$k], $q_p_quantity[$k], '', $q_p_description[$k], $q_p_photos[$k], $q_p_ccode[$k], $q_p_scode[$k], $q_p_task[$k]);
                         }
 
+                        //加工商ap（应付欠款）修改
+                        $mysql->q('update fty_jg_customer set ap = ap + ? where cid = ?', ($total - $mod_result['total']), $jg_cid);
+
                         $myerror->ok('修改加工单成功!', 'search_sub_contractor_order&page=1');
                     }else{
                         $myerror->error('修改加工单失败', 'BACK');
@@ -256,6 +259,9 @@ if($myerror->getWarn()){
                                 //description 只寫入數據庫中的 description_chi字段，description保持為空
                                 $mysql->q('insert into fty_sub_contractor_order_item set main_id = ?, pid = ?, price = ?, quantity = ?, description = ?, description_chi = ?, photos = ?, ccode = ?, scode = ?, task = ?', $main_id, $q_pid[$k], $q_p_price[$k], $q_p_quantity[$k], '', $q_p_description[$k], $q_p_photos[$k], $q_p_ccode[$k], $q_p_scode[$k], $q_p_task[$k]);
                             }
+
+                            //加工商ap（应付欠款）修改
+                            $mysql->q('update fty_jg_customer set ap = ap + ? where cid = ?', $total, $jg_cid);
 
                             $myerror->ok('新增加工单成功!', 'search_sub_contractor_order&page=1');
                         }else{

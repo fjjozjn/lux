@@ -105,12 +105,18 @@ if(!$myerror->getAny() && $goodsForm->check()){
         $result = $mysql->q('insert into fty_material_buy set m_id = ?, cid = ?, attention = ?, address = ?, reference = ?, expected_date = ?, remark = ?, in_date = ?, mod_date = ?, created_by = ?, mod_by = ?', $m_id, $wlgy_cid, $wlgy_attention, $wlgy_address, $wlgy_reference, $wlgy_expected_date, $wlgy_remark, $today, $today, $staff, $staff);
 
         if($result){
+            $total = 0;
             foreach($material_arr as $v){
                 $rtn = $mysql->qone('select m_name, m_type, m_color, m_unit, m_loss from fty_material where m_id = ?', $v['m_id']);
-                $mysql->q('insert into fty_material_buy_item set main_id = ?, m_type = ?, m_id = ?, m_name = ?, m_color = ?, m_unit = ?, m_price = ?, m_value = ?, m_total = ?, m_remark = ?', $result, $rtn['m_type'], $v['m_id'], $rtn['m_name'], $rtn['m_color'], $rtn['m_unit'], $v['price'], $v['value'], round($v['price']*$v['value']*(1+$rtn['m_loss']/100), 2), $v['remark']);
+                $m_total = round($v['price']*$v['value']*(1+$rtn['m_loss']/100), 2);
+                $mysql->q('insert into fty_material_buy_item set main_id = ?, m_type = ?, m_id = ?, m_name = ?, m_color = ?, m_unit = ?, m_price = ?, m_value = ?, m_total = ?, m_remark = ?', $result, $rtn['m_type'], $v['m_id'], $rtn['m_name'], $rtn['m_color'], $rtn['m_unit'], $v['price'], $v['value'], $m_total, $v['remark']);
                 //更改库存
                 changeFtyMaterialNum($v['m_id'], $v['value']);
+                $total += $m_total;
             }
+
+            //物料供应商ap（应付欠款）修改
+            $mysql->q('update fty_wlgy_customer set ap = ap + ? where cid = ?', $total, $wlgy_cid);
 
             $myerror->ok('新增 物料采购单 成功!', 'search_material_buy&page=1');
         }else{
