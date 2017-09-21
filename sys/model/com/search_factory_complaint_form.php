@@ -145,6 +145,7 @@ if($myerror->getWarn()){
         $rs->SetRecordCol("创建日期", "form_date");
         $rs->SetRecordCol("回应人", "fty_staff");
         $rs->SetRecordCol("回应时间", "fty_reply_date");
+        $rs->SetRecordCol("回复满意度", "reply_satisfaction");
 
         $sort = GENERAL_NO;
         $edit = GENERAL_YES;

@@ -91,11 +91,24 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
     }elseif(isset($_GET['approve_so_no']) && $_GET['approve_so_no'] != ''){
         $mod_supplier_contact = array();
         $now = dateMore();
-        $rtn = $mysql->qone('select s_status from sample_order where so_no = ?', $_GET['approve_so_no']);
+        $rtn = $mysql->qone('select attention, s_status from sample_order where so_no = ?', $_GET['approve_so_no']);
         if($rtn['s_status'] == '(D)'){
             $rs = $mysql->q('update sample_order set s_status = ?, approved_by = ?, approved_date = ? where so_no = ?', '(I)', $_SESSION["logininfo"]["aName"], $now, $_GET['approve_so_no']);
             if($rs){
-                $myerror->ok('状态由(D)改为(I)!', 'com-searchsample_order&page=1');
+                require_once(ROOT_DIR.'class/Mail/mail.php');
+                $notice = '';
+                $user_rtn = $mysql->qone('select email from contact where concat(title, ?, name, ?, family_name) like ? and email <> ?', ' ', ' ', '%'.trim($rtn['attention']).'%', '');
+                if($user_rtn){
+                    $notice .= '(send mail to ';
+                    $account_info = array('date' => date('Y-m-d'));
+                    //邮件的信息
+                    $info = trim($rtn['attention'])." 你好,<br />樣版訂單 ".$_GET['approve_so_no']." 審核通過, 你可以在樂思系統內查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
+
+                    send_mail($user_rtn['email'], '', "樣版訂單 - ".$_GET['approve_po_no']." 審核通過", $info, $account_info);
+                    $notice .= trim($rtn['attention']).')';
+                }
+
+                $myerror->ok('状态由(D)改为(I)! <span style="color:red">'.$notice.'</span>', 'com-searchsample_order&page=1');
             }else{
                 $myerror->error('状态更改失败!', 'com-searchsample_order&page=1');
             }

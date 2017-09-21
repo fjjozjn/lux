@@ -214,7 +214,7 @@ $form->begin();
         //20130217 不能在这里用 isSysAdmin 因为里面有select语句，会替代了上面的 backend_list_withfield 找出的数据，导致数据都不见了
         //20170917
         if ($_SESSION['logininfo']['aName'] == 'ZJN' || $_SESSION['logininfo']['aName'] == 'KEVIN'){
-            $rs->SetRecordCol("SAMPLE_ORDER_APPROVE", "so_no", $sort, $edit,"?act=com-modifysample_order", "approve_so_no");
+            $rs->SetRecordCol("APPROVE", "so_no", $sort, $edit,"?act=com-modifysample_order", "approve_so_no");
         }
         $rs->SetRecordCol("APPROVE BY", "approved_by");
 		$rs->SetRecordCol("PDF", "so_no", $sort, $edit,"model/com/sample_order_pdf.php?pdf=1","so_no");
