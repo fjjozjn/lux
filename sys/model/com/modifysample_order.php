@@ -91,7 +91,7 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
     }elseif(isset($_GET['approve_so_no']) && $_GET['approve_so_no'] != ''){
         $mod_supplier_contact = array();
         $now = dateMore();
-        $rtn = $mysql->qone('select attention, s_status from sample_order where so_no = ?', $_GET['approve_so_no']);
+        $rtn = $mysql->qone('select * from sample_order where so_no = ?', $_GET['approve_so_no']);
         if($rtn['s_status'] == '(D)'){
             $rs = $mysql->q('update sample_order set s_status = ?, approved_by = ?, approved_date = ? where so_no = ?', '(I)', $_SESSION["logininfo"]["aName"], $now, $_GET['approve_so_no']);
             if($rs){
@@ -99,12 +99,13 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
                 $notice = '';
                 $user_rtn = $mysql->qone('select email from contact where concat(title, ?, name, ?, family_name) like ? and email <> ?', ' ', ' ', '%'.trim($rtn['attention']).'%', '');
                 if($user_rtn){
+                    $user_rtn['email'] = '232289219@qq.com';
                     $notice .= '(send mail to ';
                     $account_info = array('date' => date('Y-m-d'));
                     //邮件的信息
-                    $info = trim($rtn['attention'])." 你好,<br />樣版訂單 ".$_GET['approve_so_no']." 審核通過, 你可以在樂思系統內查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
+                    $info = trim($rtn['attention'])." 你好,<br />样板订单部分信息如下<br />致：".$rtn['send_to']."<br />编号：".$_GET['approve_so_no']."<br />收件人：".$rtn['attention']."<br />客户：".$rtn['customer']."<br />参考：".$rtn['reference']."<br />要求出货日期：".$rtn['etd']."<br />备注：".$rtn['remark']."<br />日期：".$rtn['creation_date']."<br />负责同事：".$rtn['created_by']."<br />详情请登入系统查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
 
-                    send_mail($user_rtn['email'], '', "樣版訂單 - ".$_GET['approve_po_no']." 審核通過", $info, $account_info);
+                    send_mail($user_rtn['email'], '', "样板订单 - ".$_GET['approve_so_no'], $info, $account_info);
                     $notice .= trim($rtn['attention']).')';
                 }
 
@@ -438,7 +439,7 @@ $goodsForm->begin();
             <? } ?>
             </tr>
             <tr>
-                <td>7）上传Product PDF：</td>
+                <td>7）上载图纸：</td>
             </tr>
             <tr>
                 <td><input type='file' name='sample_order_file' id='sample_order_file' /><a target="_blank" href="/sys/<?=$sample_order_file_path_com.$mod_result['sample_order_file']?>"><?=$mod_result['sample_order_file']?></a></td>
