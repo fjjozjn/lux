@@ -99,7 +99,6 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
                 $notice = '';
                 $user_rtn = $mysql->qone('select email from contact where concat(title, ?, name, ?, family_name) like ? and email <> ?', ' ', ' ', '%'.trim($rtn['attention']).'%', '');
                 if($user_rtn){
-                    $user_rtn['email'] = '232289219@qq.com';
                     $notice .= '(send mail to ';
                     $account_info = array('date' => date('Y-m-d'));
                     //邮件的信息
