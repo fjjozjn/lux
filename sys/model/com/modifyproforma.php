@@ -633,7 +633,7 @@ if($myerror->getWarn()){
 		<td><?=$photo_string?></td>
 	
 		<? /*<td><div class="del"><input name='' type='button' value='Del' /></div></td>*/?>
-		<td><div id="his<?=$i?>"><img src="../../sys/images/Actions-edit-copy-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="History" /></div></td>
+		<td><div id="his<?=$i?>"><img src="../../sys/images/history-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="History" /></div></td>
 <!--        <td><div id="clear--><?//=$i?><!--"><img src="../../sys/images/clear.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="Clear" /></div></td>-->
 		<td><div id="del<?=$i?>"><img src="../../sys/images/del-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="Delete" /></div></td>
 	  </tr>

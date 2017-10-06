@@ -1110,7 +1110,7 @@ function searchProduct(num, i){
                             //第一个加了del真的很麻烦，如果第一个被删掉了，以后就不能copy出新的行了，所以，如果第一个行写错了，可以把第二行的数据复制到第一行，然后删了第二行。。。
                             //del_div.html("<input class='defautButton' name='' type='button' value='Del' />").end();
                             sub_td.html( accMul(parseFloat(rmb_input.val()), parseFloat(qut_input.val())) );
-                            his_div.html('<img src="../../sys/images/Actions-edit-copy-icon.png" onmouseout="$(this).css(\'opacity\',\'0.5\')" onmouseover="$(this).css(\'opacity\',\'1\')" style="opacity: 0.5;" title="History" />').end();
+                            his_div.html('<img src="../../sys/images/history-icon.png" onmouseout="$(this).css(\'opacity\',\'0.5\')" onmouseover="$(this).css(\'opacity\',\'1\')" style="opacity: 0.5;" title="History" />').end();
                             //clear_div.html('<img src="../../sys/images/clear.png" onmouseout="$(this).css(\'opacity\',\'0.5\')" onmouseover="$(this).css(\'opacity\',\'1\')" style="opacity: 0.5;" title="Clear" />').end();
                             del_div.html('<img src="../../sys/images/del-icon.png" onmouseout="$(this).css(\'opacity\',\'0.5\')" onmouseover="$(this).css(\'opacity\',\'1\')" style="opacity: 0.5;" title="Delete" />').end();
                             bom_div.html('<a href="?act=formdetail&gid="+pid_text target="_blank"></a>').end();

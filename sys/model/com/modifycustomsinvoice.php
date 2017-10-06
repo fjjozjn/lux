@@ -488,7 +488,7 @@ MADE IN CHINA';
 		<td><? $goodsForm->show('q_p_price'.$i); $goodsForm->show('q_p_photos'.$i); $goodsForm->show('q_p_ccode'.$i); $goodsForm->show('q_p_scode'.$i);?></td>
 		<td id="sub"><?=formatMoney($ci_item_rtn[$i]['price']*(($ci_item_rtn[$i]['quantity'] == 0 || $ci_item_rtn[$i]['quantity'] == '')?1:$ci_item_rtn[$i]['quantity']))?></td>
 		<td><?=$photo_string?></td>
-		<td><div id="his<?=$i?>"><img src="../../sys/images/Actions-edit-copy-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="History" /></div></td>
+		<td><div id="his<?=$i?>"><img src="../../sys/images/history-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="History" /></div></td>
 <!--		<td><div id="clear--><?//=$i?><!--"><img src="../../sys/images/clear.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="Clear" /></div></td>-->
 		<? /*<td><div class="del"><input name='' type='button' value='Del' /></div></td>*/?>
 		<td><div id="del<?=$i?>"><img src="../../sys/images/del-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="Delete" /></div></td>
