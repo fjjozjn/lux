@@ -5,7 +5,7 @@
 //check permission 
 //checkAdminPermission(PERM_ENQ_GAME_ACC);
 if($myerror->getWarn()){
-    require_once(ROOT_DIR.'model/innamee_warn.php');
+    require_once(ROOT_DIR.'model/inside_warn.php');
 }else{
     //引用特殊的recordset class 文件
     require_once(ROOT_DIR.'sys/in38/recordset.class2.php');

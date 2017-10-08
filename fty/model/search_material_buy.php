@@ -5,7 +5,7 @@
 //check permission 
 //checkAdminPermission(PERM_ENQ_GAME_ACC);
 if($myerror->getWarn()){
-    require_once(ROOT_DIR.'model/insend_toe_warn.php');
+    require_once(ROOT_DIR.'model/inside_warn.php');
 }else{
 
 // 如果有post资料则给Session，并且清除附在上次翻页时残留的$_GET['page']
