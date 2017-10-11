@@ -188,6 +188,16 @@ if(strpos($rtn['FtyGrpID'], '1') !== false){
         </ul>
     </li>
 
+    <li><a href="#">财务<i>&gt;</i></a>
+        <ul>
+            <li><a href="?act=search_payment_request&page=1">付款申请单<i>&gt;</i></a>
+                <ul>
+                    <li><a href="?act=add_payment_request">新增</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+
     <li><a href="#">行政<i>&gt;</i></a>
         <ul>
             <li><a href="?act=search_it_request&page=1">IT服务申请<i>&gt;</i></a>
