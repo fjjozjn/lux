@@ -412,7 +412,7 @@ MADE IN CHINA';
                                     , ACTION_LOG_SYS_APPEND_INVOICE, $_SESSION["logininfo"]["aName"]." <i>add invoice</i> from '".$_GET['appendid']."' to '".$i_vid."' in sys", ACTION_LOG_SYS_APPEND_INVOICE_S, "", "", 0);
                             }
 
-                            $myerror->ok('新增 Invoice 成功! <font color="#FF0000">Continue to complete shipment</font>', 'com-shipment&pi_no='.$i_vid.'&page=1');
+                            $myerror->ok('新增 Invoice 成功! <font color="#FF0000">Continue to complete packing list</font>', 'com-invoice_to_packing_list&vid='.$i_vid.'&page=1');
                         }else{
                             $myerror->error('新增 Invoice 失败', 'BACK');
                         }
