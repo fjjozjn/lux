@@ -140,7 +140,7 @@ $form->begin();
 	if ($getAnyPost || isset($_GET['page'])){
 		$rs = new RecordSetControl2;
 		$rs->record_per_page = ADMIN_ROW_PER_PAGE;
-		$rs->addnew_link = "?act=com-searchsample_order";
+		$rs->addnew_link = "?act=searchsample_order";
 		$rs->display_new_button = false;
 		$rs->sort_field = "so_no";
 		$rs->sort_seq = "DESC";
@@ -181,7 +181,7 @@ $form->begin();
 		}
 		
 		//普通用户只能搜索到自己开的单
-		if (!isSysAdmin()){
+		if (!isFtyAdmin()){
 			//$where_sql .= " AND created_by in (SELECT AdminName FROM tw_admin WHERE AdminLuxGroup = (SELECT AdminLuxGroup FROM tw_admin WHERE AdminName = '".$_SESSION['logininfo']['aName'].'\'))';
 			$where_sql .= " AND created_by in (SELECT AdminName FROM tw_admin WHERE AdminLuxGroup LIKE '%".$_SESSION['logininfo']['aName']."%' OR AdminName = '".$_SESSION['logininfo']['aName']."')";
 		}		
@@ -213,15 +213,15 @@ $form->begin();
 		$edit = GENERAL_YES;
         //20130217 不能在这里用 isSysAdmin 因为里面有select语句，会替代了上面的 backend_list_withfield 找出的数据，导致数据都不见了
         //20170917
-        if ($_SESSION['logininfo']['aName'] == 'ZJN' || $_SESSION['logininfo']['aName'] == 'KEVIN'){
-            $rs->SetRecordCol("APPROVE", "so_no", $sort, $edit,"?act=com-modifysample_order", "approve_so_no");
-        }
+//        if ($_SESSION['logininfo']['aName'] == 'ZJN' || $_SESSION['logininfo']['aName'] == 'KEVIN'){
+//            $rs->SetRecordCol("APPROVE", "so_no", $sort, $edit,"?act=modifysample_order", "approve_so_no");
+//        }
         $rs->SetRecordCol("APPROVE BY", "approved_by");
-		$rs->SetRecordCol("PDF", "so_no", $sort, $edit,"model/com/sample_order_pdf.php?pdf=1","so_no");
-		$rs->SetRecordCol("SHIPPED", "so_no", $sort, $edit,"?act=com-modifysample_order","chg_status");
-		$rs->SetRecordCol("MODIFY", "so_no", $sort, $edit,"?act=com-modifysample_order","modid");
-		$rs->SetRecordCol("DEL", "so_no", $sort, $edit,"?act=com-modifysample_order","delid");
-		$rs->SetRSSorting('?act=com-searchsample_order');
+		$rs->SetRecordCol("PDF", "so_no", $sort, $edit,"model/sample_order_pdf.php?pdf=1","so_no");
+//		$rs->SetRecordCol("SHIPPED", "so_no", $sort, $edit,"?act=modifysample_order","chg_status");
+//		$rs->SetRecordCol("MODIFY", "so_no", $sort, $edit,"?act=modifysample_order","modid");
+//		$rs->SetRecordCol("DEL", "so_no", $sort, $edit,"?act=modifysample_order","delid");
+		$rs->SetRSSorting('?act=searchsample_order');
 
 /*
 $cur_page = 0;
