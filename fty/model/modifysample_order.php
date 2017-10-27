@@ -5,7 +5,8 @@ if(!defined('BEEN_INCLUDE') || !is_object($myerror))exit('Welcome to The Matrix'
 //ipRestrict();
 
 //20130807 加copyso_no和appendso_no，原来忘了加
-judgeUserPermNew( (isset($_GET['modid'])?$_GET['modid']:'').(isset($_GET['delid'])?$_GET['delid']:'').(isset($_GET['chg_status'])?$_GET['chg_status']:'').(isset($_GET['copyso_no'])?$_GET['copyso_no']:'').(isset($_GET['appendso_no'])?$_GET['appendso_no']:'').(isset($_GET['rev_so_no'])?$_GET['rev_so_no']:'') );
+//20171027 暂时去掉
+//judgeUserPermNew( (isset($_GET['modid'])?$_GET['modid']:'').(isset($_GET['delid'])?$_GET['delid']:'').(isset($_GET['chg_status'])?$_GET['chg_status']:'').(isset($_GET['copyso_no'])?$_GET['copyso_no']:'').(isset($_GET['appendso_no'])?$_GET['appendso_no']:'').(isset($_GET['rev_so_no'])?$_GET['rev_so_no']:'') );
 
 if(isset($_GET['delid']) && $_GET['delid'] != ''){	
 	if (!isSysAdmin()){
@@ -133,9 +134,9 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 	$goodsForm = new My_Forms(array('multipart'=>true));
 	
 	$formItems = array(
-			'sid' => array('type' => 'select', 'options' => $supplier_so, 'required' => 1, 'nostar' => true, 'value' => isset($mod_result['send_to'])?$mod_result['send_to']:''),
+			'sid' => array('type' => 'select', 'options' => getSupplier(), 'required' => 1, 'nostar' => true, 'value' => isset($mod_result['send_to'])?$mod_result['send_to']:''),
 			'attention' => array('type' => 'select', 'options' => $mod_supplier_contact, 'required' => 1, 'nostar' => true, 'value' => isset($mod_result['attention'])?$mod_result['attention']:''),
-			'customer' => array('type' => 'select', 'options' => get_customer(), 'required' => 1, 'nostar' => true, 'value' => isset($mod_result['customer'])?$mod_result['customer']:''),
+			'customer' => array('type' => 'select', 'options' => array()/*20171027 暂时去掉 get_customer()*/, 'required' => 1, 'nostar' => true, 'value' => isset($mod_result['customer'])?$mod_result['customer']:''),
 			'reference' => array('type' => 'text', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['reference'])?$mod_result['reference']:''),
 			'etd' => array('type' => 'text', 'restrict' => 'date', 'nostar' => true, 'required' => 1, 'value' => isset($mod_result['etd'])?date('Y-m-d', strtotime($mod_result['etd'])):''),
 			'remark' => array('type' => 'text', 'minlen' => 1, 'maxlen' => 100, 'value' => isset($mod_result['remark'])?$mod_result['remark']:''),
@@ -160,9 +161,9 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 			'others' => array('type' => 'textarea', 'rows' => 5, 'addon' => 'style="width:400px"', 'value' => isset($mod_result['others'])?$mod_result['others']:''),
 			
 			'creation_date' => array('type' => 'text', 'restrict' => 'date', 'nostar' => true, 'required' => 1, 'value' => isset($mod_result['creation_date'])?date('Y-m-d', strtotime($mod_result['creation_date'])):''),
-			'created_by' => array('type' => 'select', 'required' => 1, 'options' => $user, 'nostar' => true, 'value' => isset($mod_result['created_by'])?$mod_result['created_by']:''),
+			'created_by' => array('type' => 'select', 'required' => 1, 'options' => array()/*20171027 暂时去掉 $user*/, 'nostar' => true, 'value' => isset($mod_result['created_by'])?$mod_result['created_by']:''),
 					
-			'submitbtn'	=> array('type' => 'submit', 'value' => ' Submit '),
+			//'submitbtn'	=> array('type' => 'submit', 'value' => ' Submit '),
 			);		
 		
 	if(isset($_GET['modid'])){
@@ -315,14 +316,14 @@ $goodsForm->begin();
 	<tr><td class='headertitle' align="center"><?php if(strpos($no, 'REV')){ echo '改版单'; }else{ echo '样板订单'; }?></td></tr>
     <tr><td>
 	<? if(isset($_GET['modid'])){ ?>
-		<fieldset class="center2col"> 
+<!--		<fieldset class="center2col">
 		<legend class='legend'>Action</legend>
-			<a class="button" href="model/com/sample_order_pdf.php?so_no=<?=$_GET['modid']?>" target='_blank' onclick="return pdfConfirm()"><b>PDF</b></a>
-			<a class="button" href="?act=com-modifysample_order&copyso_no=<?=$_GET['modid']?>" onclick="return pdfConfirm()"><b>COPY</b></a>
-            <a class="button" href="?act=com-modifysample_order&appendso_no=<?=$_GET['modid']?>" onclick="return pdfConfirm()"><b>加单</b></a>
-            <a class="button" href="?act=com-modifysample_order&rev_so_no=<?=$_GET['modid']?>" onclick="return pdfConfirm()"><b>改版单</b></a>
-            <a class="button" href="?act=com-modifyproforma&so_no=<?=$_GET['modid']?>" onclick="return pdfConfirm()"><b>ADD TO PROFORMA</b></a>
-		</fieldset>
+			<a class="button" href="model/com/sample_order_pdf.php?so_no=<?/*=$_GET['modid']*/?>" target='_blank' onclick="return pdfConfirm()"><b>PDF</b></a>
+			<a class="button" href="?act=com-modifysample_order&copyso_no=<?/*=$_GET['modid']*/?>" onclick="return pdfConfirm()"><b>COPY</b></a>
+            <a class="button" href="?act=com-modifysample_order&appendso_no=<?/*=$_GET['modid']*/?>" onclick="return pdfConfirm()"><b>加单</b></a>
+            <a class="button" href="?act=com-modifysample_order&rev_so_no=<?/*=$_GET['modid']*/?>" onclick="return pdfConfirm()"><b>改版单</b></a>
+            <a class="button" href="?act=com-modifyproforma&so_no=<?/*=$_GET['modid']*/?>" onclick="return pdfConfirm()"><b>ADD TO PROFORMA</b></a>
+		</fieldset>-->
 	<? }?>
         <fieldset class="center2col"> 
         <legend class='legend'>Modify Sample Order</legend>
@@ -447,18 +448,18 @@ $goodsForm->begin();
         
         <div class="line"></div>
         <?
-        $goodsForm->show('submitbtn');
+        //$goodsForm->show('submitbtn');
         ?>         
         </fieldset>
 		
 		<? if(isset($_GET['modid'])){ ?>
-		<fieldset class="center2col"> 
+<!--		<fieldset class="center2col">
 		<legend class='legend'>Action</legend>
-			<a class="button" href="model/com/sample_order_pdf.php?so_no=<?=$_GET['modid']?>" target='_blank' onclick="return pdfConfirm()"><b>PDF</b></a>
-			<a class="button" href="?act=com-modifysample_order&copyso_no=<?=$_GET['modid']?>" onclick="return pdfConfirm()"><b>COPY</b></a>
-            <a class="button" href="?act=com-modifysample_order&appendso_no=<?=$_GET['modid']?>" onclick="return pdfConfirm()"><b>加单</b></a>
-            <a class="button" href="?act=com-modifyproforma&so_no=<?=$_GET['modid']?>" onclick="return pdfConfirm()"><b>ADD TO PROFORMA</b></a>
-		</fieldset>
+			<a class="button" href="model/com/sample_order_pdf.php?so_no=<?/*=$_GET['modid']*/?>" target='_blank' onclick="return pdfConfirm()"><b>PDF</b></a>
+			<a class="button" href="?act=com-modifysample_order&copyso_no=<?/*=$_GET['modid']*/?>" onclick="return pdfConfirm()"><b>COPY</b></a>
+            <a class="button" href="?act=com-modifysample_order&appendso_no=<?/*=$_GET['modid']*/?>" onclick="return pdfConfirm()"><b>加单</b></a>
+            <a class="button" href="?act=com-modifyproforma&so_no=<?/*=$_GET['modid']*/?>" onclick="return pdfConfirm()"><b>ADD TO PROFORMA</b></a>
+		</fieldset>-->
 		<? }?>
 		
     </td></tr>

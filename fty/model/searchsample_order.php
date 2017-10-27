@@ -221,7 +221,7 @@ $form->begin();
         //http://58.177.207.149/sys/upload/sample_order_file/SO00000968_20171023123429.PDF
 		$rs->SetRecordCol("Sketches", "so_no", $sort, $edit,"model/sample_order_pdf.php?pdf=1","so_no");
 //		$rs->SetRecordCol("SHIPPED", "so_no", $sort, $edit,"?act=modifysample_order","chg_status");
-//		$rs->SetRecordCol("MODIFY", "so_no", $sort, $edit,"?act=modifysample_order","modid");
+		$rs->SetRecordCol("MODIFY", "so_no", $sort, $edit,"?act=modifysample_order","modid");
 //		$rs->SetRecordCol("DEL", "so_no", $sort, $edit,"?act=modifysample_order","delid");
 		$rs->SetRSSorting('?act=searchsample_order');
 
