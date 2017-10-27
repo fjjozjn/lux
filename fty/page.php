@@ -125,10 +125,10 @@ if(strpos($rtn['FtyGrpID'], '1') !== false){
         		</ul>
             </li>
             <li><a href="?act=addtask&page=1">管理工序</a></li>
-            <li><a href="?act=searchsample_order&page=1">样板订单<i>&gt;</i></a>
-                <ul>
+            <li><a href="?act=searchsample_order&page=1">样板订单<!--<i>&gt;</i>--></a>
+                <!--<ul>
                     <li><a href="?act=addsample_order">新增</a></li>
-                </ul>
+                </ul>-->
             </li>
         </ul>
     </li>

@@ -182,16 +182,16 @@ $form->begin();
 		
 		//普通用户只能搜索到自己开的单
 		if (!isFtyAdmin()){
-			//$where_sql .= " AND created_by in (SELECT AdminName FROM tw_admin WHERE AdminLuxGroup = (SELECT AdminLuxGroup FROM tw_admin WHERE AdminName = '".$_SESSION['logininfo']['aName'].'\'))';
-			$where_sql .= " AND created_by in (SELECT AdminName FROM tw_admin WHERE AdminLuxGroup LIKE '%".$_SESSION['logininfo']['aName']."%' OR AdminName = '".$_SESSION['logininfo']['aName']."')";
-		}		
+			$where_sql .= " AND sid = (SELECT FtyName FROM tw_admin WHERE AdminName = '".$_SESSION['ftylogininfo']['aName']."')";
+		}
+        $where_sql .= " AND s_status <> '(D)' AND s_status <> 'delete'";
 		// echo $where_sql;
 			
 		$where_sql.= ' ORDER BY creation_date DESC ';
 		$_SESSION['search_criteria']['page'] = $current_page;
 
 		$temp_table = ' sample_order';
-		$list_field = ' SQL_CALC_FOUND_ROWS so_no, send_to, creation_date, created_by, s_status, customer, approved_by ';
+		$list_field = ' SQL_CALC_FOUND_ROWS so_no, send_to, creation_date, created_by, s_status, customer, approved_by, sample_order_file ';
 
 		//get the row count for this seaching criteria
 		//$row_count = $mysql->sp('CALL backend_list_count(?, ?)', $temp_table,$where_sql);
@@ -218,6 +218,8 @@ $form->begin();
 //        }
         $rs->SetRecordCol("APPROVE BY", "approved_by");
 		$rs->SetRecordCol("PDF", "so_no", $sort, $edit,"model/sample_order_pdf.php?pdf=1","so_no");
+        //http://58.177.207.149/sys/upload/sample_order_file/SO00000968_20171023123429.PDF
+		$rs->SetRecordCol("Sketches", "so_no", $sort, $edit,"model/sample_order_pdf.php?pdf=1","so_no");
 //		$rs->SetRecordCol("SHIPPED", "so_no", $sort, $edit,"?act=modifysample_order","chg_status");
 //		$rs->SetRecordCol("MODIFY", "so_no", $sort, $edit,"?act=modifysample_order","modid");
 //		$rs->SetRecordCol("DEL", "so_no", $sort, $edit,"?act=modifysample_order","delid");
