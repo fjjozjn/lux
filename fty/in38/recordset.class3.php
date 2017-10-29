@@ -190,6 +190,10 @@ Class RecordSetControl3 {
 						}elseif( $this->col_content[$j]["title"] == '插入BOM'){
                             //加了個，能彈出新頁面的連接
                             echo "<a href='".$temp_link."'><img title='插入BOM' src='../../images/button_bom.png'></a>";
+                        }elseif( $this->col_content[$j]["title"] == 'Sketches'){
+                            if(isset($value_arr[$i]['sample_order_file']) && $value_arr[$i]['sample_order_file']){
+                                echo "<a target='_blank' href='http://58.177.207.149/sys/upload/sample_order_file/".$value_arr[$i]['sample_order_file']."'><img title='Sketches' src='../../images/button_document-pdf.png'></a>";
+                            }
                         }else{
 							echo "<a class='button' href='".$temp_link."'>".$this->col_content[$j]["title"]."</a>";
 						}
@@ -293,7 +297,7 @@ Class RecordSetControl3 {
 
                                 }elseif($this->col_content[$j]["field"] == 'd_date' || $this->col_content[$j]["field"] == 'expected_date' || $this->col_content[$j]["field"] == 'mark_date'){
 									echo date('Y-m-d', strtotime($value_arr[$i][$this->col_content[$j]["field"]]));
-								}elseif($this->col_content[$j]["field"] == 'istatus'){
+								}elseif($this->col_content[$j]["field"] == 'istatus' || $this->col_content[$j]["field"] == 's_status'){
 									//不同的状态用不同颜色的字显示
 									switch($value_arr[$i][$this->col_content[$j]["field"]]){
 										case 'Complete':
