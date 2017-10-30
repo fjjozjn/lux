@@ -4,6 +4,9 @@ if(!defined('BEEN_INCLUDE') || !is_object($myerror))exit('Welcome to The Matrix'
 //检查访问者IP，以确定本测试页可以显示
 //ipRestrict();
 
+//上传文件可能很大
+set_time_limit(0);
+
 //20130807 加copyso_no和appendso_no，原来忘了加
 //20171027 暂时去掉
 //judgeUserPermNew( (isset($_GET['modid'])?$_GET['modid']:'').(isset($_GET['delid'])?$_GET['delid']:'').(isset($_GET['chg_status'])?$_GET['chg_status']:'').(isset($_GET['copyso_no'])?$_GET['copyso_no']:'').(isset($_GET['appendso_no'])?$_GET['appendso_no']:'').(isset($_GET['rev_so_no'])?$_GET['rev_so_no']:'') );
