@@ -107,7 +107,12 @@ if(isset($_GET['so_no']) && $_GET['so_no'] != ''){
 	
 	// writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='')
 	// writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
-	
+
+    //mod 20171104 加未审核水印
+    if ($result['s_status'] == '(D)') {
+        $pdf->Image('../../images/draft.gif', 55, 70, 100, 100, '', '', '', false, 300, '', false, false, 0, false, false, false);
+    }
+
 	// create some HTML content
 	$pdf->SetFont('droidsansfallback', '', 20);
 	//div的高度不可調，用span方便多了！！！
