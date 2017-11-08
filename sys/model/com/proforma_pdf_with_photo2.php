@@ -235,13 +235,18 @@ if (isset($_GET['pvid']) && $_GET['pvid'] != '') {
                 //$result2[$i]['photos']是原來的， $mid_photo 是縮小後的
                 //$pic_path_com是原來的路徑， $pic_path_small是縮小後的路徑
                 $mid_photo = 'm_' . $result2[$i]['photos'];
+                $small_photo = 's_' . $result2[$i]['photos'];
                 //縮小的圖片不存在才進行縮小操作
-                if (!is_file('../../' . $pic_path_small . $mid_photo) == true) {
-                    //makethumb('../../' . $pic_path_com . $result2[$i]['photos'], '../../' . $pic_path_small . $mid_photo, 'm');
-                } else {
+                if (is_file('../../' . $pic_path_small . $mid_photo) == true) {
                     //20160510 改为图片存在才显示，生成缩小图片有问题
                     //寬高下面表格中都定好了，img裏就沒必要再做設定了，這裡用m_的圖片，分辨率高點
                     $img_html = '<img src="/sys/' . $pic_path_small . $mid_photo . '" align="middle" />';
+                } else {
+                    //makethumb('../../' . $pic_path_com . $result2[$i]['photos'], '../../' . $pic_path_small . $mid_photo, 'm');
+                    //20171108 有的时候有s图没有m图
+                    if (is_file('../../' . $pic_path_small . $small_photo) == true) {
+                        $img_html = '<img src="/sys/' . $pic_path_small . $small_photo . '" align="middle" />';
+                    }
                 }
             }
         }
