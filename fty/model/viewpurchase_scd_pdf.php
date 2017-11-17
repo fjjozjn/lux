@@ -61,6 +61,11 @@ if(isset($_GET['pcid']) && $_GET['pcid'] != ''){
 			die('Without Permission To Access');
 		}
 	}
+
+    $pp_result = $mysql->qone('SELECT * FROM fty_production_plan WHERE pcid = ?', $_GET['pcid']);
+    if(empty($pp_result)){
+        die('請先進入訂單並填寫<生產計劃>');
+    }
 	
 	$result1 = $mysql->qone('select * from purchase where pcid = ?', $_GET['pcid']);
 	if(!$result1){
