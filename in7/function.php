@@ -2050,9 +2050,9 @@ function get_fty_task($pid){
 function get_fty_purchase(){
     $fty_purchase = array();
     if(isFtyAdmin()){
-        $rs = mysql_q('select pcid from purchase where istatus = ? order by pcid desc', '(I)');
+        $rs = mysql_q('select pcid from purchase where istatus = ? order by in_date desc', '(I)');
     }else{
-        $rs = mysql_q('select pcid from purchase where sid = ? and istatus = ? order by pcid', $_SESSION['ftylogininfo']['aFtyName'], '(I)');
+        $rs = mysql_q('select pcid from purchase where sid = ? and istatus = ? order by in_date desc', $_SESSION['ftylogininfo']['aFtyName'], '(I)');
     }
     if($rs){
         $rows = mysql_fetch();
