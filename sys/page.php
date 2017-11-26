@@ -339,6 +339,7 @@ if(strpos($act, 'formdetail') !== 0){
                 <!--li><a href="?act=com-chart&today">Gantt Chart</a></li-->
                 <li><a target="_blank" href="model/com/pdf_luxcraft_stock_list.php">Luxcraft Stock List</a></li>
                 <li><a href="?act=com-monthly_sales_figure">Monthly Sales Figure</a></li>
+                <li><a href="?act=com-monthly_payment_figure">Monthly Payment Figure</a></li>
             </ul>
         </li>
 
@@ -695,6 +696,7 @@ if(strpos($act, 'formdetail') !== 0){
                 <!--li><a href="?act=com-chart&today">Gantt Chart</a></li-->
                 <li><a target="_blank" href="model/com/pdf_luxcraft_stock_list.php">Luxcraft Stock List</a></li>
                 <li><a href="?act=com-monthly_sales_figure">Monthly Sales Figure</a></li>
+                <li><a href="?act=com-monthly_payment_figure">Monthly Payment Figure</a></li>
             </ul>
         </li>
 
