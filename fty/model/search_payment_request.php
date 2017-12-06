@@ -29,10 +29,6 @@ if($myerror->getWarn()){
 // print_r_pre($temp_grp);
     $form = new My_Forms();
     $formItems = array(
-        'm_id' => array(
-            'type' => 'text',
-            'value' => @$_SESSION['search_criteria']['m_id'],
-        ),
         'payment_request_by' => array(
             'type' => 'text',
             'value' => @$_SESSION['search_criteria']['payment_request_by'],
@@ -70,10 +66,10 @@ if($myerror->getWarn()){
                     <legend class='legend'>搜索物料采购单</legend>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
                         <tr>
-                            <td>物料采购单编号 : </td>
-                            <td><? $form->show('m_id'); ?></td>
-                            <td>采购人 : </td>
-                            <td><? $form->show('created_by'); ?></td>
+                            <td>申请人 : </td>
+                            <td><? $form->show('payment_request_by'); ?></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>起始日期 : </td>
@@ -110,9 +106,9 @@ if($myerror->getWarn()){
     if ($getAnyPost || isset($_GET['page'])){
         $rs = new RecordSetControl3;
         $rs->record_per_page = ADMIN_ROW_PER_PAGE;
-        $rs->addnew_link = "?act=search_material_buy";
+        $rs->addnew_link = "?act=search_payment_request";
         $rs->display_new_button = false;
-        $rs->sort_field = "m_id";
+        $rs->sort_field = "id";
         $rs->sort_seq = "DESC";
 
         $current_page = 1;
@@ -125,11 +121,8 @@ if($myerror->getWarn()){
 
         $where_sql = "";
 
-        if (strlen(@$_SESSION['search_criteria']['m_id'])){
-            $where_sql.= " AND m_id Like '%".$_SESSION['search_criteria']['m_id'].'%\'';
-        }
-        if (strlen(@$_SESSION['search_criteria']['created_by'])){
-            $where_sql.= " AND created_by Like '%".$_SESSION['search_criteria']['created_by'].'%\'';
+        if (strlen(@$_SESSION['search_criteria']['payment_request_by'])){
+            $where_sql.= " AND payment_request_by Like '%".$_SESSION['search_criteria']['payment_request_by'].'%\'';
         }
         if (strlen(@$_SESSION['search_criteria']['start_date'])){
             if (strlen(@$_SESSION['search_criteria']['end_date'])){
@@ -152,8 +145,8 @@ if($myerror->getWarn()){
         $where_sql.= " ORDER BY in_date DESC ";
         $_SESSION['search_criteria']['page'] = $current_page;
 
-        $temp_table = ' fty_material_buy';
-        $list_field = ' SQL_CALC_FOUND_ROWS *, id, m_id, reference, attention, created_by, in_date, expected_date';
+        $temp_table = ' fty_payment_request';
+        $list_field = ' SQL_CALC_FOUND_ROWS *';
 
         //get the row count for this seaching criteria
         //$row_count = $mysql->sp('CALL backend_list_count(?, ?)', $temp_table,$where_sql);
@@ -164,13 +157,9 @@ if($myerror->getWarn()){
         // echo 'CALL backend_list(0,10,"'.$temp_table.'", "'.$where_sql.'")';
 
         //$rs->col_width = "100";
-        $rs->SetRecordCol("物料采购单编号", "m_id");
-        $rs->SetRecordCol("生产单编号", "reference");
-        $rs->SetRecordCol("物料供应商", "attention");
-        $rs->SetRecordCol("预计交料日期", "expected_date");
-        $rs->SetRecordCol("采购人", "created_by");
+        $rs->SetRecordCol("申请时间", "payment_request_date");
+        $rs->SetRecordCol("申请人", "payment_request_by");
         $rs->SetRecordCol("日期", "in_date");
-        $rs->SetRecordCol("采购日期", "expected_date");
 
         $sort = GENERAL_NO;
         $edit = GENERAL_YES;
