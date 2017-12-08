@@ -4622,3 +4622,44 @@ function SearchWarehousePid(i)
     });
     //Search功能實現*********end*******
 }
+
+function searchFtyCustomer(obj){
+    //type select 框
+    var fpr_type_select = $(obj);//这里是关键，clone后都能有效！！
+    //type select 的值
+    var selectText = fpr_type_select.val();
+
+    var fpr_fty_customer_select = fpr_type_select.parent().parent().next().children().children();
+    fpr_fty_customer_select.empty();
+
+    //所有的数据行有一个.repeat的Class，得到数据行的大小
+    var vcount = $("#tbody tr").filter(".repeat").size();
+
+    var html = '';
+
+    var qs = 'ajax=1&act=ajax-choose_fty_customer&type='+selectText;
+    $.ajax({
+        type: "GET",
+        url: "index.php",
+        data: qs,
+        cache: false,
+        dataType: "html",
+        error: function(){
+            alert('系统错误，查询 fty customer 失败');
+        },
+        success: function(data){
+            if(data.indexOf('no-') < 0){
+                var data_array = data.split("|");
+                html = '<option value="">- select -</option>';
+                for(i=0; i<data_array.length; i++){
+                    html += "<option value='"+data_array[i]+"'>"+data_array[i]+"</option>";
+                }
+                fpr_fty_customer_select.removeAttr("disabled").append(html);
+
+            }else{
+                html = '<option value="">无记录</option>';
+                fpr_fty_customer_select.removeAttr("disabled").append(html);
+            }
+        }
+    });
+}

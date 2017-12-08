@@ -157,17 +157,21 @@ if($myerror->getWarn()){
         // echo 'CALL backend_list(0,10,"'.$temp_table.'", "'.$where_sql.'")';
 
         //$rs->col_width = "100";
-        $rs->SetRecordCol("申请时间", "payment_request_date");
-        $rs->SetRecordCol("申请人", "payment_request_by");
-        $rs->SetRecordCol("日期", "in_date");
+        $rs->SetRecordCol("申请时间", "in_date");
+        $rs->SetRecordCol("申请人", "created_by");
+        $rs->SetRecordCol("实际付款金额", "actual_pay_amount");
+        $rs->SetRecordCol("状态", "is_approve");
+        $rs->SetRecordCol("审批人", "approved_by");
+        $rs->SetRecordCol("创建日期", "in_date");
+        $rs->SetRecordCol("最后修改日期", "mod_date");
 
         $sort = GENERAL_NO;
         $edit = GENERAL_YES;
 
-        $rs->SetRecordCol("修改", "id", $sort, $edit, "?act=modify_material_buy", "modid");
+        $rs->SetRecordCol("修改", "id", $sort, $edit, "?act=modify_payment_request", "modid");
         //$rs->SetRecordCol("PDF", "pcid", $sort, $edit, "model/viewpurchase_pdf.php?pdf=1","pcid");
-        $rs->SetRecordCol("删除", "id", $sort, $edit, "?act=modify_material_buy", "delid");
-        $rs->SetRSSorting('?act=search_material_buy');
+        $rs->SetRecordCol("删除", "id", $sort, $edit, "?act=modify_payment_request", "delid");
+        $rs->SetRSSorting('?act=search_payment_request');
 
         /*
         $cur_page = 0;

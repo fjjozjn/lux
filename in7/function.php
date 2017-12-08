@@ -1120,6 +1120,13 @@ function get_sys_department(){
         array('Other', 'Other'),
     );
 }
+//20171208
+function get_fty_wlgy_jg_type(){
+    return array(
+        array('物料', '1'),
+        array('加工', '2'),
+    );
+}
 
 
 /*************************************************
