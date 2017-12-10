@@ -19,7 +19,7 @@ $formItems = array(
 
     //这个是隐藏起来的
     'fpr_type' => array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"', 'disabled' => 'disabled'),
-    'fpr_fty_customer' => array('type' => 'select', 'options' => '', 'disabled' => 'disabled'),
+    'fpr_fty_customer' => array('type' => 'select', 'options' => array(), 'disabled' => 'disabled'),
     'fpr_pay_amount' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
 
     //这个是显示的第一个
@@ -109,60 +109,41 @@ if($myerror->getError()){
 }elseif($myerror->getOk()){
     require_once(ROOT_DIR.'model/inside_ok.php');
 }else{
-
     if($myerror->getWarn()){
         require_once(ROOT_DIR.'model/inside_warn.php');
     }
-
-
     ?>
-    <h1 class="green">物料采购单<em>* item must be filled in</em></h1>
+    <h1 class="green">财务申请单<em>* item must be filled in</em></h1>
     <fieldset>
         <legend class='legend'>新增</legend>
         <?php
         $goodsForm->begin();
         ?>
         <div style="margin-left:28px;">
-            <label class="formtitle" for="g_cast"><font size="+1">输入物料</font></label>
             <table width="100%" id="tableDnD_wl">
                 <tbody id="tbody">
                 <tr class="formtitle nodrop nodrag">
                     <td width="2%"></td>
                     <td>类别</td>
-                    <td>物料编号：名称</td>
-                    <td>规格颜色</td>
-                    <td>单位</td>
-                    <td>单价</td>
-                    <td>数量/重量值</td>
-                    <td>损耗率(%)</td>
-                    <td width="10%">合计</td>
-                    <td width="20%">备注</td>
+                    <td>供应商</td>
+                    <td>应付</td>
+                    <td>付款金额</td>
                     <td width="5%"></td>
                 </tr>
                 <tr class="template repeat" valign="top" onmouseover="product_itme_mouseover(this)" onmouseout="product_item_mouseout(this)">
                     <td id="index" class="dragHandle"></td>
-                    <td><? $goodsForm->show('g_m_type');?></td>
-                    <td><? $goodsForm->show('g_m_id_name');?></td>
-                    <td id="color"></td>
-                    <td id="unit"></td>
-                    <td><? $goodsForm->show('g_m_price');?></td>
-                    <td><? $goodsForm->show('g_m_value');?></td>
-                    <td><div id="m_loss"></div></td>
-                    <td><div id="m_total"></div></td>
-                    <td><? $goodsForm->show('g_m_remark');?></td>
+                    <td><? $goodsForm->show('fpr_type');?></td>
+                    <td><? $goodsForm->show('fpr_fty_customer');?></td>
+                    <td><div id="ap"></div></td>
+                    <td><? $goodsForm->show('fpr_pay_amount');?></td>
                     <td><div id="del" onclick="delBomItem(this)"></div><input type="hidden" id="g_m_id" name="g_m_id" value="" disabled="disabled"/></td>
                 </tr>
                 <tr class="repeat" valign="top" onmouseover="product_itme_mouseover(this)" onmouseout="product_item_mouseout(this)">
                     <td id="index" class="dragHandle"></td>
-                    <td><? $goodsForm->show('g_m_type1');?></td>
-                    <td><? $goodsForm->show('g_m_id_name1');?></td>
-                    <td id="color1"></td>
-                    <td id="unit1"></td>
-                    <td><? $goodsForm->show('g_m_price1');?></td>
-                    <td><? $goodsForm->show('g_m_value1');?></td>
-                    <td><div id="m_loss"></div></td>
-                    <td><div id="m_total"></div></td>
-                    <td><? $goodsForm->show('g_m_remark1');?></td>
+                    <td><? $goodsForm->show('fpr_type1');?></td>
+                    <td><? $goodsForm->show('fpr_fty_customer1');?></td>
+                    <td><div id="ap"></div></td>
+                    <td><? $goodsForm->show('fpr_pay_amount1');?></td>
                     <td><div id="del1" onclick="delBomItem(this)"></div><input type="hidden" id="g_m_id1" name="g_m_id1" value="" disabled="disabled"/></td>
                 </tr>
                 </tbody>
@@ -184,13 +165,8 @@ if($myerror->getError()){
     $(function(){
         $(".template").hide();
 
-        searchProduct(15, '');
-        searchProduct(15, '1');
         //table tr层表单可拖动
         $("#tableDnD").tableDnD({dragHandle: ".dragHandle"});
-
-        $("#wlgy_cid").not('.special').selectbox();
-        $("#wlgy_attention").not('.special').selectbox();
 
         selectFtyCustomer("wlgy_");
     })
