@@ -310,7 +310,7 @@ if(isset($_SESSION['fty_product']) && $_SESSION['fty_product'] == 'access'){
 <?
 }else{
     echo '<script>alert("Invalid Password!");</script>';
-    echo '<script>window.location.href="http://luxdesign.hk/product.htm";</script>';
+    echo '<script>window.location.href="http://www.luxdesign.hk/catalog.html";</script>';
 }
 ?>
 
