@@ -160,7 +160,7 @@ if($myerror->getWarn()){
         $rs->SetRecordCol("申请时间", "in_date");
         $rs->SetRecordCol("申请人", "created_by");
         $rs->SetRecordCol("实际付款金额", "actual_pay_amount");
-        $rs->SetRecordCol("状态", "is_approve");
+        $rs->SetRecordCol("状态", "status");
         $rs->SetRecordCol("审批人", "approved_by");
         $rs->SetRecordCol("创建日期", "in_date");
         $rs->SetRecordCol("最后修改日期", "mod_date");

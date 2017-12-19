@@ -34,20 +34,16 @@ $goodsForm->init($formItems);
 
 if(!$myerror->getAny() && $goodsForm->check()){
 
-    $wlgy_cid = $_POST['wlgy_cid'];
-    $wlgy_reference = $_POST['wlgy_reference'];
-    $wlgy_attention = trim($_POST['wlgy_attention']);
-    $wlgy_address = $_POST['wlgy_address'];
-    $wlgy_expected_date = $_POST['wlgy_expected_date'];
-    $wlgy_remark = $_POST['wlgy_remark'];
+    //var_dump($_POST);die();
+
     $today = dateMore();
     $staff = $_SESSION['ftylogininfo']['aName'];
 
     $i = 0;
-    $prev_num = 7;//第一个post的是form的标识串，还有6个表单项，所以是7
+    $prev_num = 1;//第一个post的是form的标识串，还有0个表单项，所以是1
     $last_num = 1;//后面的post，有个submit
     $item = array();
-    foreach( $_POST as $v){
+    foreach($_POST as $v){
         if( $i < $prev_num){
             $i++;
         }elseif($i >= count($_POST) - $last_num){
@@ -59,46 +55,28 @@ if(!$myerror->getAny() && $goodsForm->check()){
     }
 
     //这个是设置每个ITEM的元素个数
-    $each_item_num = 4;
+    $each_item_num = 3;
     $item_num = intval(count($item)/$each_item_num);
 
-    $material_arr = array();
-    $m_index = 0;
+    $payment_request_arr = array();
+    $fpr_index = 0;
 
     for($j = 0; $j < $item_num; $j++){
-        $material_arr[$j]['price'] = $item[$m_index++];
-        $material_arr[$j]['value'] = $item[$m_index++];
-        $material_arr[$j]['remark'] = $item[$m_index++];
-        $material_arr[$j]['m_id'] = $item[$m_index++];
+        $payment_request_arr[$j]['pay_amount'] = $item[$fpr_index++];
+        $payment_request_arr[$j]['type'] = $item[$fpr_index++];
+        $payment_request_arr[$j]['fty_cid'] = $item[$fpr_index++];
     }
 
-    //fb($material_arr);die('#');
+    //fb($payment_request_arr);die('#');
 
-    //判断是否输入的ID已存在，因为存在的话由于数据库限制，就会新增失败
-    $judge = $mysql->q('select id from fty_material_buy where m_id = ?', $m_id);
-    if(!$judge){
-        $result = $mysql->q('insert into fty_material_buy set m_id = ?, cid = ?, attention = ?, address = ?, reference = ?, expected_date = ?, remark = ?, in_date = ?, mod_date = ?, created_by = ?, mod_by = ?', $m_id, $wlgy_cid, $wlgy_attention, $wlgy_address, $wlgy_reference, $wlgy_expected_date, $wlgy_remark, $today, $today, $staff, $staff);
-
-        if($result){
-            $total = 0;
-            foreach($material_arr as $v){
-                $rtn = $mysql->qone('select m_name, m_type, m_color, m_unit, m_loss from fty_material where m_id = ?', $v['m_id']);
-                $m_total = round($v['price']*$v['value']*(1+$rtn['m_loss']/100), 2);
-                $mysql->q('insert into fty_material_buy_item set main_id = ?, m_type = ?, m_id = ?, m_name = ?, m_color = ?, m_unit = ?, m_price = ?, m_value = ?, m_total = ?, m_remark = ?', $result, $rtn['m_type'], $v['m_id'], $rtn['m_name'], $rtn['m_color'], $rtn['m_unit'], $v['price'], $v['value'], $m_total, $v['remark']);
-                //更改库存
-                changeFtyMaterialNum($v['m_id'], $v['value']);
-                $total += $m_total;
-            }
-
-            //物料供应商ap（应付欠款）修改
-            $mysql->q('update fty_wlgy_customer set ap = ap + ? where cid = ?', $total, $wlgy_cid);
-
-            $myerror->ok('新增 物料采购单 成功!', 'search_material_buy&page=1');
-        }else{
-            $myerror->error('新增 物料采购单 失败', 'BACK');
+    $result = $mysql->q('insert into fty_payment_request set created_by = ?, mod_by = ?, in_date = ?, mod_date = ?', $staff, $staff, $today, $today);
+    if ($result) {
+        foreach ($payment_request_arr as $v) {
+            $mysql->q('insert into fty_payment_request_item set main_id = ?, type = ?, fty_cid = ?, pay_amount = ?', $result, $v['type'], $v['fty_cid'], $v['pay_amount']);
         }
-    }else{
-        $myerror->error('输入的 物料采购单ID 已存在，新增失败', 'BACK');
+        $myerror->ok('新增 付款申请单 成功!', 'search_payment_request&page=1');
+    } else {
+        $myerror->error('新增 付款申请单 失败', 'BACK');
     }
 }
 
@@ -136,7 +114,7 @@ if($myerror->getError()){
                     <td><? $goodsForm->show('fpr_fty_customer');?></td>
                     <td id="ap"></td>
                     <td><? $goodsForm->show('fpr_pay_amount');?></td>
-                    <td><div id="del" onclick="delBomItem(this)"></div><input type="hidden" id="g_m_id" name="g_m_id" value="" disabled="disabled"/></td>
+                    <td><div id="del" onclick="delBomItem(this)"></div><input type="hidden" id="fpr_type_value" name="fpr_type_value" value="" disabled="disabled"/><input type="hidden" id="fpr_fty_customer_value" name="fpr_fty_customer_value" value="" disabled="disabled"/></td>
                 </tr>
                 <tr class="repeat" valign="top" onmouseover="product_itme_mouseover(this)" onmouseout="product_item_mouseout(this)">
                     <td id="index" class="dragHandle"></td>
@@ -144,7 +122,7 @@ if($myerror->getError()){
                     <td><? $goodsForm->show('fpr_fty_customer1');?></td>
                     <td id="ap"></td>
                     <td><? $goodsForm->show('fpr_pay_amount1');?></td>
-                    <td><div id="del1" onclick="delBomItem(this)"></div><input type="hidden" id="g_m_id1" name="g_m_id1" value="" disabled="disabled"/></td>
+                    <td><div id="del1" onclick="delBomItem(this)"></div><input type="hidden" id="fpr_type_value1" name="fpr_type_value1" value="" disabled="disabled"/><input type="hidden" id="fpr_fty_customer_value1" name="fpr_fty_customer_value1" value="" disabled="disabled"/></td>
                 </tr>
                 </tbody>
             </table>
@@ -164,7 +142,6 @@ if($myerror->getError()){
 <script>
     $(function(){
         $(".template").hide();
-
         //table tr层表单可拖动
         $("#tableDnD").tableDnD({dragHandle: ".dragHandle"});
     })

@@ -4675,17 +4675,19 @@ function searchFtyCustomerDetail(obj){
     var fpr_pay_amount_input = ap_td.next().children().children();
     //DEL 位置
     var del_div = fpr_pay_amount_input.parent().parent().next().children();
-    //hidden g_m_id
-    var hidden_g_m_id = del_div.next();
+    //hidden fpr_type_value
+    var hidden_fpr_type_value = del_div.next();
+    //hidden fpr_fty_customer_value
+    var hidden_fpr_fty_customer_value = hidden_fpr_type_value.next();
 
     //用时间戳来区别表单
     var timestamp = Date.parse(new Date())/1000;
 
     var typeText = fpr_type_select.val();
+    hidden_fpr_type_value.val(typeText);
     var selectText = fpr_fty_customer_select.val();
     var selectText_array = selectText.split(":");
-    //hidden 赋值为ID
-    hidden_g_m_id.val(trim(selectText_array[0]));
+    hidden_fpr_fty_customer_value.val(trim(selectText_array[0]));
 
     var qs = 'ajax=1&act=ajax-search_fty_customer_detail&type='+typeText+'&value='+selectText_array[0];
     $.ajax({
@@ -4699,11 +4701,7 @@ function searchFtyCustomerDetail(obj){
         },
         success: function(data){
             if(data.indexOf('no-') < 0){
-                var data_array = data.split("|");
-                color_td.html(data_array[0]);
-                unit_td.html(data_array[2]);
-                g_m_price_input.val(data_array[1]);
-                g_m_loss.html(data_array[3]);
+                ap_td.html(data);
 
                 //先複製框，再在原來的框中插入值
                 $("#tbody>.template")
@@ -4716,25 +4714,21 @@ function searchFtyCustomerDetail(obj){
                     //給id附新的值
                     //find 后一定要有 end 不知道为什么？？
 
-                    .find("#g_m_type").removeClass("disabled").removeAttr("disabled").attr("id", "g_m_type"+timestamp).attr("name", "g_m_type"+timestamp).end()
-                    .find("#g_m_id_name").attr("id", "g_m_id_name"+timestamp).attr("name", "g_m_id_name"+timestamp).end()
-                    .find("#g_m_price").attr("id", "g_m_price"+timestamp).attr("name", "g_m_price"+timestamp).end()
-                    .find("#g_m_value").attr("id", "g_m_value"+timestamp).attr("name", "g_m_value"+timestamp).end()
-                    .find("#g_m_remark").attr("id", "g_m_remark"+timestamp).attr("name", "g_m_remark"+timestamp).end()
+                    .find("#fpr_type").removeClass("disabled").removeAttr("disabled").attr("id", "fpr_type"+timestamp).attr("name", "fpr_type"+timestamp).end()
+                    .find("#fpr_fty_customer").attr("id", "fpr_fty_customer"+timestamp).attr("name", "fpr_fty_customer"+timestamp).end()
+                    .find("#fpr_pay_amount").attr("id", "fpr_pay_amount"+timestamp).attr("name", "fpr_pay_amount"+timestamp).end()
                     //hidden
-                    .find("#g_m_id").attr("id", "g_m_id"+timestamp).attr("name", "g_m_id"+timestamp).end()
+                    .find("#fpr_type_value").attr("id", "fpr_type_value"+timestamp).attr("name", "fpr_type_value"+timestamp).end()
+                    .find("#fpr_fty_customer_value").attr("id", "fpr_fty_customer_value"+timestamp).attr("name", "fpr_fty_customer_value"+timestamp).end()
 
                     //插入表格
                     .appendTo($("#tbody"));
 
-                g_m_type_select.attr("disabled", "disabled");
-                //用hidden input来代替这个select的提交了，所以可以把这个disabled掉了
-                g_m_id_name_select.attr("disabled", "disabled");
-
-                hidden_g_m_id.removeClass("disabled").removeAttr("disabled");
-                g_m_price_input.removeClass("disabled").removeAttr("disabled");
-                g_m_value_input.removeClass("disabled").removeAttr("disabled");
-                g_m_remark_input.removeClass("disabled").removeAttr("disabled");
+                fpr_type_select.attr("disabled", "disabled");
+                fpr_fty_customer_select.attr("disabled", "disabled");
+                hidden_fpr_type_value.removeClass("disabled").removeAttr("disabled");
+                hidden_fpr_fty_customer_value.removeClass("disabled").removeAttr("disabled");
+                fpr_pay_amount_input.removeClass("disabled").removeAttr("disabled");
                 del_div.html('<img src="../../sys/images/del-icon.png" onmouseout="$(this).css(\'opacity\',\'0.5\')" onmouseover="$(this).css(\'opacity\',\'1\')" style="opacity: 0.5;" title="Delete" />').end()
             }
         }
