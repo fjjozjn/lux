@@ -19,12 +19,12 @@ $formItems = array(
 
     //这个是隐藏起来的
     'fpr_type' => array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"', 'disabled' => 'disabled'),
-    'fpr_fty_customer' => array('type' => 'select', 'options' => array(), 'disabled' => 'disabled'),
+    'fpr_fty_customer' => array('type' => 'select', 'options' => array(), 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'disabled' => 'disabled'),
     'fpr_pay_amount' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
 
     //这个是显示的第一个
     'fpr_type1' => array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"'),
-    'fpr_fty_customer1' => array('type' => 'select', 'options' => '', 'disabled' => 'disabled'),
+    'fpr_fty_customer1' => array('type' => 'select', 'options' => '', 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'disabled' => 'disabled'),
     'fpr_pay_amount1' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
 
     'submitbtn'	=> array('type' => 'submit', 'value' => ' Submit '),
@@ -134,7 +134,7 @@ if($myerror->getError()){
                     <td id="index" class="dragHandle"></td>
                     <td><? $goodsForm->show('fpr_type');?></td>
                     <td><? $goodsForm->show('fpr_fty_customer');?></td>
-                    <td><div id="ap"></div></td>
+                    <td id="ap"></td>
                     <td><? $goodsForm->show('fpr_pay_amount');?></td>
                     <td><div id="del" onclick="delBomItem(this)"></div><input type="hidden" id="g_m_id" name="g_m_id" value="" disabled="disabled"/></td>
                 </tr>
@@ -142,7 +142,7 @@ if($myerror->getError()){
                     <td id="index" class="dragHandle"></td>
                     <td><? $goodsForm->show('fpr_type1');?></td>
                     <td><? $goodsForm->show('fpr_fty_customer1');?></td>
-                    <td><div id="ap"></div></td>
+                    <td id="ap"></td>
                     <td><? $goodsForm->show('fpr_pay_amount1');?></td>
                     <td><div id="del1" onclick="delBomItem(this)"></div><input type="hidden" id="g_m_id1" name="g_m_id1" value="" disabled="disabled"/></td>
                 </tr>
@@ -167,7 +167,5 @@ if($myerror->getError()){
 
         //table tr层表单可拖动
         $("#tableDnD").tableDnD({dragHandle: ".dragHandle"});
-
-        selectFtyCustomer("wlgy_");
     })
 </script>

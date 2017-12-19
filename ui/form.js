@@ -427,7 +427,7 @@ function formRebuilder(){
 	//某些目录下用selectbox就太复杂了，所以不用 mod 20120814
     //20130801 加payment_new
     //20130805 payment_new 里改用 class=special
-	if(location.href.indexOf('sendform') < 0 && location.href.indexOf('modifyform') < 0 && location.href.indexOf('add_material_buy') < 0 && location.href.indexOf('modify_material_buy') < 0 && location.href.indexOf('add_material_in') < 0 && location.href.indexOf('modify_material_in') < 0 && location.href.indexOf('add_material_out') < 0 && location.href.indexOf('modify_material_out') < 0/* && location.href.indexOf('add_payment_new') < 0 && location.href.indexOf('modify_payment_new') < 0*/){
+	if(location.href.indexOf('add_payment_request') < 0 && location.href.indexOf('modify_payment_request') < 0 && location.href.indexOf('sendform') < 0 && location.href.indexOf('modifyform') < 0 && location.href.indexOf('add_material_buy') < 0 && location.href.indexOf('modify_material_buy') < 0 && location.href.indexOf('add_material_in') < 0 && location.href.indexOf('modify_material_in') < 0 && location.href.indexOf('add_material_out') < 0 && location.href.indexOf('modify_material_out') < 0/* && location.href.indexOf('add_payment_new') < 0 && location.href.indexOf('modify_payment_new') < 0*/){
 		$('select').not('.special').selectbox();
 	}
 	$('body').append('<div id="mytt"></div>').children('#mytt')
