@@ -19,7 +19,7 @@ $formItems = array(
 
     //这个是隐藏起来的
     'fpr_type' => array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"', 'disabled' => 'disabled'),
-    'fpr_fty_customer' => array('type' => 'select', 'options' => array(), 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'disabled' => 'disabled'),
+    'fpr_fty_customer' => array('type' => 'select', 'options' => '', 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'disabled' => 'disabled'),
     'fpr_pay_amount' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
 
     //这个是显示的第一个
@@ -59,12 +59,12 @@ if(!$myerror->getAny() && $goodsForm->check()){
     $item_num = intval(count($item)/$each_item_num);
 
     $payment_request_arr = array();
-    $fpr_index = 0;
+    $index = 0;
 
     for($j = 0; $j < $item_num; $j++){
-        $payment_request_arr[$j]['pay_amount'] = $item[$fpr_index++];
-        $payment_request_arr[$j]['type'] = $item[$fpr_index++];
-        $payment_request_arr[$j]['fty_cid'] = $item[$fpr_index++];
+        $payment_request_arr[$j]['pay_amount'] = $item[$index++];
+        $payment_request_arr[$j]['type'] = $item[$index++];
+        $payment_request_arr[$j]['fty_cid'] = $item[$index++];
     }
 
     //fb($payment_request_arr);die('#');
