@@ -152,14 +152,9 @@ if($myerror->getError()){
                         <td id="index" class="dragHandle"></td>
                         <td><? $goodsForm->show('fpr_type'.$i);?></td>
                         <td><? $goodsForm->show('fpr_fty_customer'.$i);?></td>
-                        <td id="color<?=$i?>"><?=$mod_result[$i]['m_color']?></td>
-                        <td id="unit<?=$i?>"><?=$mod_result[$i]['m_unit']?></td>
-                        <td><? $goodsForm->show('g_m_price'.$i);?></td>
-                        <td><? $goodsForm->show('g_m_value'.$i);?></td>
-                        <td><div id="m_loss"><?=$mod_result[$i]['m_loss']?></div></td>
-                        <td><div id="m_total"><?=$mod_result[$i]['m_total']?></div></td>
-                        <td><? $goodsForm->show('g_m_remark'.$i);?></td>
-                        <td><div id="del<?=$i?>" onclick="delBomItem(this)"><img src="../../sys/images/del-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="Delete" /></div><input type="hidden" id="g_m_id<?=$i?>" name="g_m_id<?=$i?>" value="<?=$mod_result[$i]['m_id']?>" /></td>
+                        <td id="ap"></td>
+                        <td><? $goodsForm->show('fpr_pay_amount'.$i);?></td>
+                        <td><div id="del<?=$i?>" onclick="delBomItem(this)"><img src="../../sys/images/del-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="Delete" /></div><input type="hidden" id="fpr_type_value<?=$i?>" name="fpr_type_value<?=$i?>" value="<?=$mod_result[$i]['type']?>" /><input type="hidden" id="fpr_fty_customer_value<?=$i?>" name="fpr_fty_customer_value<?=$i?>" value="<?=$mod_result[$i]['fty_cid']?>" /></td>
                     </tr>
                 <?
                 }
@@ -167,20 +162,14 @@ if($myerror->getError()){
                 ?>
                 <tr class="repeat" valign="top" onmouseover="product_itme_mouseover(this)" onmouseout="product_item_mouseout(this)">
                     <td id="index" class="dragHandle"></td>
-                    <td><? $goodsForm->show('g_m_type'.$i);?></td>
-                    <td><? $goodsForm->show('g_m_id_name'.$i);?></td>
-                    <td id="color<?=$i?>"></td>
-                    <td id="unit<?=$i?>"></td>
-                    <td><? $goodsForm->show('g_m_price'.$i);?></td>
-                    <td><? $goodsForm->show('g_m_value'.$i);?></td>
-                    <td><div id="m_loss"></div></td>
-                    <td><div id="m_total"></div></td>
-                    <td><? $goodsForm->show('g_m_remark'.$i);?></td>
-                    <td><div id="del<?=$i?>" onclick="delBomItem(this)"></div><input type="hidden" id="g_m_id<?=$i?>" name="g_m_id<?=$i?>" value="" disabled="disabled"/></td>
+                    <td><? $goodsForm->show('fpr_type'.$i);?></td>
+                    <td><? $goodsForm->show('fpr_fty_customer'.$i);?></td>
+                    <td id="ap"></td>
+                    <td><? $goodsForm->show('fpr_pay_amount'.$i);?></td>
+                    <td><div id="del<?=$i?>" onclick="delBomItem(this)"></div><input type="hidden" id="fpr_type_value<?=$i?>" name="fpr_type_value<?=$i?>" value="" disabled="disabled"/><input type="hidden" id="fpr_fty_customer_value<?=$i?>" name="fpr_fty_customer_value<?=$i?>" value="" disabled="disabled"/></td>
                 </tr>
                 </tbody>
             </table>
-
             <div class="line"></div>
         </div>
         <?
@@ -189,7 +178,6 @@ if($myerror->getError()){
     </fieldset>
     <?
     $goodsForm->end();
-
 }
 ?>
 
