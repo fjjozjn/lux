@@ -44,6 +44,7 @@ if($myerror->getWarn()){
             //物料 ： 这个是隐藏起来的
             'fpr_type' => array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"', 'disabled' => 'disabled'),
             'fpr_fty_customer' => array('type' => 'select', 'options' => '', 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'disabled' => 'disabled'),
+            'fpr_fty_customer_ap' => array('type' => 'text', 'restrict' => 'number', 'readonly' => 'readonly'),
             'fpr_pay_amount' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
 
             'submitbtn'	=> array('type' => 'submit', 'value' => ' 保存 '),
@@ -51,12 +52,14 @@ if($myerror->getWarn()){
 
         for($i = 0; $i < $item_num; $i++){
             $formItems['fpr_type'.$i] = array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"', 'value' => isset($mod_result[$i]['type'])?$mod_result[$i]['type']:'', 'disabled' => 'disabled');
-            $formItems['fpr_fty_customer'.$i] = array('type' => 'select', 'options' => array(array($mod_result[$i]['fty_cid'].' : '.$mod_result[$i]['m_name'], $mod_result[$i]['fty_cid'].' : '.$mod_result[$i]['m_name'])), 'disabled' => 'disabled', 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'value' => isset($mod_result[$i]['m_id'])?$mod_result[$i]['m_id'].' : '.$mod_result[$i]['m_name']:'');
+            $formItems['fpr_fty_customer'.$i] = array('type' => 'select', 'options' => array(array($mod_result[$i]['fty_customer'], $mod_result[$i]['fty_customer'])), 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'value' => isset($mod_result[$i]['fty_customer'])?$mod_result[$i]['fty_customer']:'', 'disabled' => 'disabled');
+            $formItems['fpr_fty_customer_ap'.$i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result[$i]['fty_customer_ap'])?$mod_result[$i]['fty_customer_ap']:'', 'readonly' => 'readonly');
             $formItems['fpr_pay_amount'.$i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result[$i]['pay_amount'])?$mod_result[$i]['pay_amount']:'');
         }
         //最后一个
         $formItems['fpr_type'.$i] = array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"');
         $formItems['fpr_fty_customer'.$i] = array('type' => 'select', 'options' => '', 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'disabled' => 'disabled');
+        $formItems['fpr_fty_customer_ap'.$i] = array('type' => 'text', 'restrict' => 'number', 'readonly' => 'readonly');
         $formItems['fpr_pay_amount'.$i] = array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled');
 
         $goodsForm->init($formItems);
@@ -92,7 +95,7 @@ if($myerror->getWarn()){
             for($j = 0; $j < $item_num; $j++){
                 $payment_request_arr[$j]['pay_amount'] = $item[$index++];
                 $payment_request_arr[$j]['type'] = $item[$index++];
-                $payment_request_arr[$j]['fty_cid'] = $item[$index++];
+                $payment_request_arr[$j]['fty_customer'] = $item[$index++];
             }
 
             //fb($payment_request_arr);die('#');
@@ -101,7 +104,7 @@ if($myerror->getWarn()){
             if($result){
                 $rtn = $mysql->q('delete from fty_payment_request_item where main_id = ?', $_GET['modid']);
                 foreach($payment_request_arr as $v){
-                    $mysql->q('insert into fty_payment_request_item set main_id = ?, type = ?, fty_cid = ?, pay_amount = ?', $_GET['modid'], $v['type'], $v['fty_cid'], $v['pay_amount']);
+                    $mysql->q('insert into fty_payment_request_item set main_id = ?, type = ?, fty_customer = ?, pay_amount = ?', $_GET['modid'], $v['type'], $v['fty_customer'], $v['pay_amount']);
                 }
                 $myerror->ok('修改 付款申请单 成功!', 'search_payment_request&page=1');
             }else{
@@ -154,7 +157,7 @@ if($myerror->getError()){
                         <td><? $goodsForm->show('fpr_fty_customer'.$i);?></td>
                         <td id="ap"></td>
                         <td><? $goodsForm->show('fpr_pay_amount'.$i);?></td>
-                        <td><div id="del<?=$i?>" onclick="delBomItem(this)"><img src="../../sys/images/del-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="Delete" /></div><input type="hidden" id="fpr_type_value<?=$i?>" name="fpr_type_value<?=$i?>" value="<?=$mod_result[$i]['type']?>" /><input type="hidden" id="fpr_fty_customer_value<?=$i?>" name="fpr_fty_customer_value<?=$i?>" value="<?=$mod_result[$i]['fty_cid']?>" /></td>
+                        <td><div id="del<?=$i?>" onclick="delBomItem(this)"><img src="../../sys/images/del-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="Delete" /></div><input type="hidden" id="fpr_type_value<?=$i?>" name="fpr_type_value<?=$i?>" value="<?=$mod_result[$i]['type']?>" /><input type="hidden" id="fpr_fty_customer_value<?=$i?>" name="fpr_fty_customer_value<?=$i?>" value="<?=$mod_result[$i]['fty_customer']?>" /></td>
                     </tr>
                 <?
                 }

@@ -20,17 +20,18 @@ $formItems = array(
     //这个是隐藏起来的
     'fpr_type' => array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"', 'disabled' => 'disabled'),
     'fpr_fty_customer' => array('type' => 'select', 'options' => '', 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'disabled' => 'disabled'),
+    'fpr_fty_customer_ap' => array('type' => 'text', 'restrict' => 'number', 'readonly' => 'readonly'),
     'fpr_pay_amount' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
 
     //这个是显示的第一个
     'fpr_type1' => array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"'),
     'fpr_fty_customer1' => array('type' => 'select', 'options' => '', 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'disabled' => 'disabled'),
+    'fpr_fty_customer_ap1' => array('type' => 'text', 'restrict' => 'number', 'readonly' => 'readonly'),
     'fpr_pay_amount1' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
 
     'submitbtn'	=> array('type' => 'submit', 'value' => ' Submit '),
 );
 $goodsForm->init($formItems);
-
 
 if(!$myerror->getAny() && $goodsForm->check()){
 
@@ -55,16 +56,17 @@ if(!$myerror->getAny() && $goodsForm->check()){
     }
 
     //这个是设置每个ITEM的元素个数
-    $each_item_num = 3;
+    $each_item_num = 4;
     $item_num = intval(count($item)/$each_item_num);
 
     $payment_request_arr = array();
     $index = 0;
 
     for($j = 0; $j < $item_num; $j++){
+        $payment_request_arr[$j]['fty_customer_ap'] = $item[$index++];
         $payment_request_arr[$j]['pay_amount'] = $item[$index++];
         $payment_request_arr[$j]['type'] = $item[$index++];
-        $payment_request_arr[$j]['fty_cid'] = $item[$index++];
+        $payment_request_arr[$j]['fty_customer'] = $item[$index++];
     }
 
     //fb($payment_request_arr);die('#');
@@ -72,7 +74,7 @@ if(!$myerror->getAny() && $goodsForm->check()){
     $result = $mysql->q('insert into fty_payment_request set created_by = ?, mod_by = ?, in_date = ?, mod_date = ?', $staff, $staff, $today, $today);
     if ($result) {
         foreach ($payment_request_arr as $v) {
-            $mysql->q('insert into fty_payment_request_item set main_id = ?, type = ?, fty_cid = ?, pay_amount = ?', $result, $v['type'], $v['fty_cid'], $v['pay_amount']);
+            $mysql->q('insert into fty_payment_request_item set main_id = ?, type = ?, fty_customer = ?, fty_customer_ap = ?, pay_amount = ?', $result, $v['type'], $v['fty_customer'], $v['fty_customer_ap'], $v['pay_amount']);
         }
         $myerror->ok('新增 付款申请单 成功!', 'search_payment_request&page=1');
     } else {
@@ -112,7 +114,7 @@ if($myerror->getError()){
                     <td id="index" class="dragHandle"></td>
                     <td><? $goodsForm->show('fpr_type');?></td>
                     <td><? $goodsForm->show('fpr_fty_customer');?></td>
-                    <td id="ap"></td>
+                    <td><? $goodsForm->show('fpr_fty_customer_ap');?></td>
                     <td><? $goodsForm->show('fpr_pay_amount');?></td>
                     <td><div id="del" onclick="delBomItem(this)"></div><input type="hidden" id="fpr_type_value" name="fpr_type_value" value="" disabled="disabled"/><input type="hidden" id="fpr_fty_customer_value" name="fpr_fty_customer_value" value="" disabled="disabled"/></td>
                 </tr>
@@ -120,7 +122,7 @@ if($myerror->getError()){
                     <td id="index" class="dragHandle"></td>
                     <td><? $goodsForm->show('fpr_type1');?></td>
                     <td><? $goodsForm->show('fpr_fty_customer1');?></td>
-                    <td id="ap"></td>
+                    <td><? $goodsForm->show('fpr_fty_customer_ap1');?></td>
                     <td><? $goodsForm->show('fpr_pay_amount1');?></td>
                     <td><div id="del1" onclick="delBomItem(this)"></div><input type="hidden" id="fpr_type_value1" name="fpr_type_value1" value="" disabled="disabled"/><input type="hidden" id="fpr_fty_customer_value1" name="fpr_fty_customer_value1" value="" disabled="disabled"/></td>
                 </tr>

@@ -4669,10 +4669,10 @@ function searchFtyCustomerDetail(obj){
     var fpr_fty_customer_select = $(obj);
     var fpr_type_select = fpr_fty_customer_select.parent().parent().prev().children().children();
 
-    //ap 显示位置
-    var ap_td = fpr_fty_customer_select.parent().parent().next();
+    //ap 输入框
+    var fpr_fty_customer_ap_input = fpr_fty_customer_select.parent().parent().next().children().children();
     //pay_amount 输入框
-    var fpr_pay_amount_input = ap_td.next().children().children();
+    var fpr_pay_amount_input = fpr_fty_customer_ap_input.parent().parent().next().children().children();
     //DEL 位置
     var del_div = fpr_pay_amount_input.parent().parent().next().children();
     //hidden fpr_type_value
@@ -4687,7 +4687,7 @@ function searchFtyCustomerDetail(obj){
     hidden_fpr_type_value.val(typeText);
     var selectText = fpr_fty_customer_select.val();
     var selectText_array = selectText.split(":");
-    hidden_fpr_fty_customer_value.val(trim(selectText_array[0]));
+    hidden_fpr_fty_customer_value.val(trim(selectText));//库里保存完整的，cid:name格式
 
     var qs = 'ajax=1&act=ajax-search_fty_customer_detail&type='+typeText+'&value='+selectText_array[0];
     $.ajax({
@@ -4716,6 +4716,7 @@ function searchFtyCustomerDetail(obj){
 
                     .find("#fpr_type").removeClass("disabled").removeAttr("disabled").attr("id", "fpr_type"+timestamp).attr("name", "fpr_type"+timestamp).end()
                     .find("#fpr_fty_customer").attr("id", "fpr_fty_customer"+timestamp).attr("name", "fpr_fty_customer"+timestamp).end()
+                    .find("#fpr_fty_customer_ap").attr("id", "fpr_fty_customer_ap"+timestamp).attr("name", "fpr_fty_customer_ap"+timestamp).end()
                     .find("#fpr_pay_amount").attr("id", "fpr_pay_amount"+timestamp).attr("name", "fpr_pay_amount"+timestamp).end()
                     //hidden
                     .find("#fpr_type_value").attr("id", "fpr_type_value"+timestamp).attr("name", "fpr_type_value"+timestamp).end()
