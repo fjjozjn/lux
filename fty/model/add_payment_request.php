@@ -20,13 +20,13 @@ $formItems = array(
     //这个是隐藏起来的
     'fpr_type' => array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"', 'disabled' => 'disabled'),
     'fpr_fty_customer' => array('type' => 'select', 'options' => '', 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'disabled' => 'disabled'),
-    'fpr_fty_customer_ap' => array('type' => 'text', 'restrict' => 'number', 'readonly' => 'readonly'),
+    'fpr_fty_customer_ap' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
     'fpr_pay_amount' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
 
     //这个是显示的第一个
     'fpr_type1' => array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"'),
     'fpr_fty_customer1' => array('type' => 'select', 'options' => '', 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'disabled' => 'disabled'),
-    'fpr_fty_customer_ap1' => array('type' => 'text', 'restrict' => 'number', 'readonly' => 'readonly'),
+    'fpr_fty_customer_ap1' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
     'fpr_pay_amount1' => array('type' => 'text', 'restrict' => 'number', 'disabled' => 'disabled'),
 
     'submitbtn'	=> array('type' => 'submit', 'value' => ' Submit '),

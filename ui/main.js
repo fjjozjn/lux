@@ -4701,7 +4701,7 @@ function searchFtyCustomerDetail(obj){
         },
         success: function(data){
             if(data.indexOf('no-') < 0){
-                ap_td.html(data);
+                fpr_fty_customer_ap_input.val(data);
 
                 //先複製框，再在原來的框中插入值
                 $("#tbody>.template")
@@ -4727,6 +4727,7 @@ function searchFtyCustomerDetail(obj){
 
                 fpr_type_select.attr("disabled", "disabled");
                 fpr_fty_customer_select.attr("disabled", "disabled");
+                fpr_fty_customer_ap_input.removeClass("disabled").removeAttr("disabled").attr("readonly", "readonly");
                 hidden_fpr_type_value.removeClass("disabled").removeAttr("disabled");
                 hidden_fpr_fty_customer_value.removeClass("disabled").removeAttr("disabled");
                 fpr_pay_amount_input.removeClass("disabled").removeAttr("disabled");
