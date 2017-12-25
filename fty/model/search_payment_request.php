@@ -160,14 +160,16 @@ if($myerror->getWarn()){
         $rs->SetRecordCol("申请时间", "in_date");
         $rs->SetRecordCol("申请人", "created_by");
         $rs->SetRecordCol("实际付款金额", "actual_pay_amount");
-        $rs->SetRecordCol("状态", "status");
-        $rs->SetRecordCol("审批人", "approved_by");
         $rs->SetRecordCol("创建日期", "in_date");
         $rs->SetRecordCol("最后修改日期", "mod_date");
 
         $sort = GENERAL_NO;
         $edit = GENERAL_YES;
 
+        $rs->SetRecordCol("批核", "id", $sort, $edit,"?act=approve_payment_request", "approveId");
+        $rs->SetRecordCol("状态", "status");
+        $rs->SetRecordCol("批核人", "approved_by");
+        $rs->SetRecordCol("批核时间", "approved_date");
         $rs->SetRecordCol("修改", "id", $sort, $edit, "?act=modify_payment_request", "modid");
         //$rs->SetRecordCol("PDF", "pcid", $sort, $edit, "model/viewpurchase_pdf.php?pdf=1","pcid");
         $rs->SetRecordCol("删除", "id", $sort, $edit, "?act=modify_payment_request", "delid");
