@@ -27,9 +27,16 @@ if ($myerror->getWarn()) {
             $item_num = count($mod_result);
         }
         if ($mod_result['status'] == 2) {
-
+            //页面还要继续，还要填ap
         } elseif ($mod_result['status'] == 1) {
+            $rs = $mysql->q('update fty_payment_request set status = ? where main_id = ?', 2, $_GET['approveId']);
+            if($rs){
+                //操作回滚ap
 
+                $myerror->ok('付款单取消批核 成功!', 'search_payment_request&page=1');
+            }else{
+                $myerror->error('付款单取消批核 失败!', 'search_payment_request&page=1');
+            }
         } else {
             die('error status!');
         }
@@ -62,6 +69,8 @@ if ($myerror->getWarn()) {
 
         $result = $mysql->q('update fty_payment_request set actual_pay_amount = ?, status = ?, approved_by = ?, approved_date = ? where id = ?', $_POST['fpr_actual_pay_amount'], 1, $staff, $today, $_GET['approveId']);
         if ($result) {
+            //操作扣除ap
+
             $myerror->ok('批核 付款申请单 成功!', 'search_payment_request&page=1');
         } else {
             $myerror->error('批核 付款申请单 失败', 'BACK');
