@@ -2190,3 +2190,14 @@ function getSupplier(){
     }
     return $supplier;
 }
+
+/*************************************************
+ * 处理逻辑
+ */
+function handleFtyCustomerAp($type, $cid, $action, $ap){
+    if ($type == 1) {
+        mysql_q('update fty_wlgy_customer set concat("ap=ap", $action)? where cid = ?', $ap, $cid);
+    } elseif ($type == 2) {
+        mysql_q('update fty_jg_customer set concat("ap=ap", $action)? where cid = ?', $ap, $cid);
+    }
+}

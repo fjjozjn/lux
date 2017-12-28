@@ -22,9 +22,10 @@ if ($myerror->getWarn()) {
         $mod_result = $mysql->qone('SELECT * FROM fty_payment_request WHERE id = ?', $_GET['approveId']);
         $rs = $mysql->q('SELECT * FROM fty_payment_request_item WHERE main_id = ?', $_GET['approveId']);
         $item_num = 0;
+        $mod_result_item = array();
         if ($rs) {
-            $mod_result = $mysql->fetch();
-            $item_num = count($mod_result);
+            $mod_result_item = $mysql->fetch();
+            $item_num = count($mod_result_item);
         }
         if ($mod_result['status'] == 2) {
             //页面还要继续，还要填ap
@@ -46,15 +47,15 @@ if ($myerror->getWarn()) {
 
     $goodsForm = new My_Forms();
     $formItems = array(
-        'fpr_actual_pay_amount' => array('title' => '实际付款金额', 'type' => 'text', 'restrict' => 'number'),
         'submitbtn' => array('type' => 'submit', 'value' => ' 保存 '),
     );
 
     for ($i = 0; $i < $item_num; $i++) {
-        $formItems['fpr_type' . $i] = array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"', 'value' => isset($mod_result[$i]['type']) ? $mod_result[$i]['type'] : '', 'disabled' => 'disabled');
-        $formItems['fpr_fty_customer' . $i] = array('type' => 'select', 'options' => array(array($mod_result[$i]['fty_customer'], $mod_result[$i]['fty_customer'])), 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'value' => isset($mod_result[$i]['fty_customer']) ? $mod_result[$i]['fty_customer'] : '', 'disabled' => 'disabled');
-        $formItems['fpr_fty_customer_ap' . $i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result[$i]['fty_customer_ap']) ? $mod_result[$i]['fty_customer_ap'] : '', 'disabled' => 'disabled');
-        $formItems['fpr_pay_amount' . $i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result[$i]['pay_amount']) ? $mod_result[$i]['pay_amount'] : '', 'disabled' => 'disabled');
+        $formItems['fpr_type' . $i] = array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'value' => isset($mod_result_item[$i]['type']) ? $mod_result_item[$i]['type'] : '', 'disabled' => 'disabled');
+        $formItems['fpr_fty_customer' . $i] = array('type' => 'select', 'options' => array(array($mod_result_item[$i]['fty_customer'], $mod_result_item[$i]['fty_customer'])), 'value' => isset($mod_result_item[$i]['fty_customer']) ? $mod_result_item[$i]['fty_customer'] : '');
+        $formItems['fpr_fty_customer_ap' . $i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result_item[$i]['fty_customer_ap']) ? $mod_result_item[$i]['fty_customer_ap'] : '', 'disabled' => 'disabled');
+        $formItems['fpr_pay_amount' . $i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result_item[$i]['pay_amount']) ? $mod_result_item[$i]['pay_amount'] : '', 'disabled' => 'disabled');
+        $formItems['fpr_actual_pay_amount' . $i] = array('type' => 'text', 'restrict' => 'number');
     }
 
     $goodsForm->init($formItems);
@@ -65,11 +66,44 @@ if ($myerror->getWarn()) {
         $today = dateMore();
         $staff = $_SESSION['ftylogininfo']['aName'];
 
+        $i = 0;
+        $prev_num = 1;//第一个post的是form的标识串，还有0个表单项，所以是1
+        $last_num = 1;//后面的post，有个submit
+        $item = array();
+        foreach($_POST as $v){
+            if( $i < $prev_num){
+                $i++;
+            }elseif($i >= count($_POST) - $last_num){
+                break;
+            }else{
+                $item[] = $v;
+                $i++;
+            }
+        }
+
+        //这个是设置每个ITEM的元素个数
+        $each_item_num = 2;
+        $item_num = intval(count($item)/$each_item_num);
+
+        $payment_request_arr = array();
+        $index = 0;
+        for($j = 0; $j < $item_num; $j++){
+            $payment_request_arr[$j]['fty_customer_ap'] = $item[$index++];
+            $payment_request_arr[$j]['pay_amount'] = $item[$index++];
+            $payment_request_arr[$j]['type'] = $item[$index++];
+            $payment_request_arr[$j]['fty_customer'] = $item[$index++];
+        }
         //fb($payment_request_arr);die('#');
 
-        $result = $mysql->q('update fty_payment_request set actual_pay_amount = ?, status = ?, approved_by = ?, approved_date = ? where id = ?', $_POST['fpr_actual_pay_amount'], 1, $staff, $today, $_GET['approveId']);
+        //操作扣除ap
+        foreach ($mod_result_item as $item) {
+            $temp = explode(':', $item['fty_customer']);
+            handleFtyCustomerAp($item['type'], $temp[0], '-', $item['']);
+        }
+
+        $result = $mysql->q('update fty_payment_request set status = ?, approved_by = ?, approved_date = ? where id = ?', 1, $staff, $today, $_GET['approveId']);
+
         if ($result) {
-            //操作扣除ap
 
             $myerror->ok('批核 付款申请单 成功!', 'search_payment_request&page=1');
         } else {
@@ -101,6 +135,7 @@ if ($myerror->getError()) {
                     <td>供应商</td>
                     <td>应付</td>
                     <td>付款金额</td>
+                    <td>实际付款金额</td>
                 </tr>
                 <?
                 for ($i = 0; $i < $item_num; $i++) {
@@ -110,14 +145,13 @@ if ($myerror->getError()) {
                         <td><? $goodsForm->show('fpr_fty_customer' . $i);?></td>
                         <td><? $goodsForm->show('fpr_fty_customer_ap' . $i);?></td>
                         <td><? $goodsForm->show('fpr_pay_amount' . $i);?></td>
+                        <td><? $goodsForm->show('fpr_actual_pay_amount' . $i);?></td>
                     </tr>
                 <?
                 }
                 ?>
                 </tbody>
             </table>
-            <div class="line"></div>
-            <? $goodsForm->show('fpr_actual_pay_amount');?>
             <div class="line"></div>
         </div>
         <?

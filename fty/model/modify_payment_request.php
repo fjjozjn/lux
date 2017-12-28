@@ -28,12 +28,13 @@ if($myerror->getWarn()){
         }
     }else{
         if(isset($_GET['modid']) && $_GET['modid'] != ''){
-            $mod_result = $mysql->qone('SELECT * FROM fty_payment_request WHERE id = ?', $_GET['modid']);
+            //$mod_result = $mysql->qone('SELECT * FROM fty_payment_request WHERE id = ?', $_GET['modid']);
             $rs = $mysql->q('SELECT * FROM fty_payment_request_item WHERE main_id = ?', $_GET['modid']);
             $item_num = 0;
+            $mod_result_item = array();
             if($rs){
-                $mod_result = $mysql->fetch();
-                $item_num = count($mod_result);
+                $mod_result_item = $mysql->fetch();
+                $item_num = count($mod_result_item);
             }
         }else{
             die('Need modid!');
@@ -51,10 +52,10 @@ if($myerror->getWarn()){
         );
 
         for($i = 0; $i < $item_num; $i++){
-            $formItems['fpr_type'.$i] = array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"', 'value' => isset($mod_result[$i]['type'])?$mod_result[$i]['type']:'', 'disabled' => 'disabled');
-            $formItems['fpr_fty_customer'.$i] = array('type' => 'select', 'options' => array(array($mod_result[$i]['fty_customer'], $mod_result[$i]['fty_customer'])), 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'value' => isset($mod_result[$i]['fty_customer'])?$mod_result[$i]['fty_customer']:'', 'disabled' => 'disabled');
-            $formItems['fpr_fty_customer_ap'.$i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result[$i]['fty_customer_ap'])?$mod_result[$i]['fty_customer_ap']:'', 'readonly' => 'readonly');
-            $formItems['fpr_pay_amount'.$i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result[$i]['pay_amount'])?$mod_result[$i]['pay_amount']:'');
+            $formItems['fpr_type'.$i] = array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"', 'value' => isset($mod_result_item[$i]['type'])?$mod_result_item[$i]['type']:'', 'disabled' => 'disabled');
+            $formItems['fpr_fty_customer'.$i] = array('type' => 'select', 'options' => array(array($mod_result_item[$i]['fty_customer'], $mod_result_item[$i]['fty_customer'])), 'addon' => 'onchange="searchFtyCustomerDetail(this)"', 'value' => isset($mod_result_item[$i]['fty_customer'])?$mod_result_item[$i]['fty_customer']:'', 'disabled' => 'disabled');
+            $formItems['fpr_fty_customer_ap'.$i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result_item[$i]['fty_customer_ap'])?$mod_result_item[$i]['fty_customer_ap']:'', 'readonly' => 'readonly');
+            $formItems['fpr_pay_amount'.$i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result_item[$i]['pay_amount'])?$mod_result_item[$i]['pay_amount']:'');
         }
         //最后一个
         $formItems['fpr_type'.$i] = array('type' => 'select', 'options' => get_fty_wlgy_jg_type(), 'addon' => 'onchange="searchFtyCustomer(this)"');
@@ -158,7 +159,7 @@ if($myerror->getError()){
                         <td><? $goodsForm->show('fpr_fty_customer'.$i);?></td>
                         <td><? $goodsForm->show('fpr_fty_customer_ap'.$i);?></td>
                         <td><? $goodsForm->show('fpr_pay_amount'.$i);?></td>
-                        <td><div id="del<?=$i?>" onclick="delBomItem(this)"><img src="../../sys/images/del-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="Delete" /></div><input type="hidden" id="fpr_type_value<?=$i?>" name="fpr_type_value<?=$i?>" value="<?=$mod_result[$i]['type']?>" /><input type="hidden" id="fpr_fty_customer_value<?=$i?>" name="fpr_fty_customer_value<?=$i?>" value="<?=$mod_result[$i]['fty_customer']?>" /></td>
+                        <td><div id="del<?=$i?>" onclick="delBomItem(this)"><img src="../../sys/images/del-icon.png" onmouseout="$(this).css('opacity','0.5')" onmouseover="$(this).css('opacity','1')" style="opacity: 0.5;" title="Delete" /></div><input type="hidden" id="fpr_type_value<?=$i?>" name="fpr_type_value<?=$i?>" value="<?=$mod_result_item[$i]['type']?>" /><input type="hidden" id="fpr_fty_customer_value<?=$i?>" name="fpr_fty_customer_value<?=$i?>" value="<?=$mod_result_item[$i]['fty_customer']?>" /></td>
                     </tr>
                 <?
                 }
