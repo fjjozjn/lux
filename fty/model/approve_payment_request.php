@@ -88,12 +88,9 @@ if ($myerror->getWarn()) {
         $payment_request_arr = array();
         $index = 0;
         for($j = 0; $j < $item_num; $j++){
-            $payment_request_arr[$j]['fty_customer_ap'] = $item[$index++];
-            $payment_request_arr[$j]['pay_amount'] = $item[$index++];
-            $payment_request_arr[$j]['type'] = $item[$index++];
-            $payment_request_arr[$j]['fty_customer'] = $item[$index++];
+            $payment_request_arr[$item[$index++]] = $item[$index++];
         }
-        //fb($payment_request_arr);die('#');
+        fb($payment_request_arr);die('#');
 
         //操作扣除ap
         foreach ($mod_result_item as $item) {

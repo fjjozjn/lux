@@ -159,7 +159,6 @@ if($myerror->getWarn()){
         //$rs->col_width = "100";
         $rs->SetRecordCol("申请时间", "in_date");
         $rs->SetRecordCol("申请人", "created_by");
-        $rs->SetRecordCol("实际付款金额", "actual_pay_amount");
         $rs->SetRecordCol("创建日期", "in_date");
         $rs->SetRecordCol("最后修改日期", "mod_date");
 
