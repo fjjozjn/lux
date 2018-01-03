@@ -182,7 +182,7 @@ Class RecordSetControl3 {
 							//加了個，能彈出新頁面的連接
 							echo "<a target='_blank' href='".$temp_link."'><img title='产品送检单' src='../../images/button_document-text.png'></a>";
 						}elseif( $this->col_content[$j]["title"] == '批核'){
-							if(@$value_arr[$i]['p_status'] == '未完成' || @$value_arr[$i]['istatus'] == '(D)'){
+							if(@$value_arr[$i]['p_status'] == '未完成' || @$value_arr[$i]['istatus'] == '(D)' || @$value_arr[$i]['status'] == '2'){
 								echo "<a href='".$temp_link."'><img title='批核' src='../../images/button_ok.png'></a>";
 							}else{
 								echo "<a href='".$temp_link."'><img title='取消批核' src='../../images/button_action-undo.png'></a>";
@@ -304,7 +304,7 @@ Class RecordSetControl3 {
 											echo '<font color="#40AA53"><b>Complete</b></font>';
 											break;	
 										case 'Partial':
-											echo '<font color="#FF0000"><b>Partial</b></font>'; 
+											echo '<font color="#FF0000"><b>Partial</b></font>';
 											break;
 										case 'Deposit':
 											echo '<font color="#FF00FF"><b>Deposit</b></font>';

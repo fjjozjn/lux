@@ -2190,3 +2190,22 @@ function getSupplier(){
     }
     return $supplier;
 }
+
+/*************************************************
+ * 处理逻辑
+ */
+function handleFtyCustomerAp($type, $cid, $action, $ap){
+    if ($type == 1) {
+        if ($action == 1) {
+            mysql_q('update fty_wlgy_customer set ap=ap+? where cid=?', $ap, $cid);
+        } elseif ($action == 2) {
+            mysql_q('update fty_wlgy_customer set ap=ap-? where cid=?', $ap, $cid);
+        }
+    } elseif ($type == 2) {
+        if ($action == 1) {
+            mysql_q('update fty_jg_customer set ap=ap+? where cid = ?', $ap, $cid);
+        } elseif ($action == 2) {
+            mysql_q('update fty_jg_customer set ap=ap-? where cid = ?', $ap, $cid);
+        }
+    }
+}
