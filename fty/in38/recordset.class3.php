@@ -297,7 +297,7 @@ Class RecordSetControl3 {
 
                                 }elseif($this->col_content[$j]["field"] == 'd_date' || $this->col_content[$j]["field"] == 'expected_date' || $this->col_content[$j]["field"] == 'mark_date'){
 									echo date('Y-m-d', strtotime($value_arr[$i][$this->col_content[$j]["field"]]));
-								}elseif($this->col_content[$j]["field"] == 'istatus' || $this->col_content[$j]["field"] == 's_status'){
+								}elseif($this->col_content[$j]["field"] == 'istatus' || $this->col_content[$j]["field"] == 's_status' || $this->col_content[$j]["field"] == 'status'){
 									//不同的状态用不同颜色的字显示
 									switch($value_arr[$i][$this->col_content[$j]["field"]]){
 										case 'Complete':
@@ -334,6 +334,12 @@ Class RecordSetControl3 {
                                         case 'delete':
 											echo '<img title="已删除" width="32px" height="32px" src="/images/deleted.gif" />';
 											break;
+                                        case '1':
+                                            echo '已批核';
+                                            break;
+                                        case '2':
+                                            echo '未批核';
+                                            break;
 										default:
 											echo $value_arr[$i][$this->col_content[$j]["field"]]; 
 									}
