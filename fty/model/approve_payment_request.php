@@ -59,6 +59,7 @@ if ($myerror->getWarn()) {
         $formItems['fpr_fty_customer' . $i] = array('type' => 'select', 'options' => array(array($mod_result_item[$i]['fty_customer'], $mod_result_item[$i]['fty_customer'])), 'value' => isset($mod_result_item[$i]['fty_customer']) ? $mod_result_item[$i]['fty_customer'] : '', 'disabled' => 'disabled');
         $formItems['fpr_fty_customer_ap' . $i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result_item[$i]['fty_customer_ap']) ? $mod_result_item[$i]['fty_customer_ap'] : '', 'disabled' => 'disabled');
         $formItems['fpr_pay_amount' . $i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result_item[$i]['pay_amount']) ? $mod_result_item[$i]['pay_amount'] : '', 'disabled' => 'disabled');
+        $formItems['fpr_remark' . $i] = array('type' => 'text', 'value' => isset($mod_result_item[$i]['remark']) ? $mod_result_item[$i]['remark'] : '', 'disabled' => 'disabled');
         $formItems['fpr_actual_pay_amount' . $i] = array('type' => 'text', 'restrict' => 'number');
     }
 
@@ -135,6 +136,7 @@ if ($myerror->getError()) {
                     <td>供应商</td>
                     <td>应付</td>
                     <td>付款金额</td>
+                    <td>备注</td>
                     <td>实际付款金额</td>
                 </tr>
                 <?
@@ -145,6 +147,7 @@ if ($myerror->getError()) {
                         <td><? $goodsForm->show('fpr_fty_customer' . $i); ?></td>
                         <td><? $goodsForm->show('fpr_fty_customer_ap' . $i); ?></td>
                         <td><? $goodsForm->show('fpr_pay_amount' . $i); ?></td>
+                        <td><? $goodsForm->show('fpr_remark' . $i); ?></td>
                         <td><? $goodsForm->show('fpr_actual_pay_amount' . $i); ?></td>
                     </tr>
                     <?
