@@ -45,6 +45,8 @@ if($myerror->getWarn()){
             'production_shipmark' => array('title' => 'Production Shipmark', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['production_shipmark'])?$mod_result['production_shipmark']:''),
             'production_remarks' => array('title' => 'Production Remarks', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['production_remarks'])?$mod_result['production_remarks']:''),
 
+            'ap' => array('title' => 'AP（临时栏位）', 'type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result['ap'])?$mod_result['ap']:'0'),
+
             'submitbtn'	=> array('type' => 'submit', 'value' => ' 保存 '),
         );
 
@@ -67,7 +69,10 @@ if($myerror->getWarn()){
             $production_shipmark = '';//$_POST['production_shipmark'];
             $production_remarks = '';//$_POST['production_remarks'];
 
-            $result = $mysql->q('update fty_wlgy_customer set name = ?, markup_ratio = ?, deposit = ?, balance = ?, website = ?, remark = ?, created_by = ?, production_packaging = ?, production_shipmark = ?, production_remarks = ? where cid = ?', $name, $markup_ratio, $deposit, $balance, $website, $remark, $created_by, $production_packaging, $production_shipmark, $production_remarks, $_GET['modid']);
+            //add 180201
+            $ap = $_POST['ap'];
+
+            $result = $mysql->q('update fty_wlgy_customer set name = ?, markup_ratio = ?, deposit = ?, balance = ?, website = ?, remark = ?, created_by = ?, production_packaging = ?, production_shipmark = ?, production_remarks = ?, ap = ? where cid = ?', $name, $markup_ratio, $deposit, $balance, $website, $remark, $created_by, $production_packaging, $production_shipmark, $production_remarks, $ap, $_GET['modid']);
             if($result){
                 $myerror->ok('修改 物料供应商 成功!', 'search_wlgy_customer&page=1');
             }else{
@@ -146,6 +151,13 @@ if($myerror->getWarn()){
                     <td width="33%">&nbsp;</td>
                 </tr>
             </table>-->
+            <table>
+                <tr valign="top">
+                    <td width="33%"><? $goodsForm->show('ap');?></td>
+                    <td width="33%">&nbsp;</td>
+                    <td width="33%">&nbsp;</td>
+                </tr>
+            </table>
             <div class="line"></div>
             <?
             $goodsForm->show('submitbtn');
@@ -156,4 +168,3 @@ if($myerror->getWarn()){
 
     }
 }
-?>
