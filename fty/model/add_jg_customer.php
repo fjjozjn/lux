@@ -13,7 +13,7 @@ $goodsForm = new My_Forms();
 $formItems = array(
 
     'cid' => array('title' => '加工商编号', 'type' => 'text', 'minlen' => 1, 'maxlen' => 5, 'required' => 1),
-    'name' => array('title' => '加工商名字', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 80, 'required' => 1),
+    'name' => array('title' => '加工商名', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 80, 'required' => 1),
     'markup_ratio' => array('title' => 'Markup Ratio', 'type' => 'text', 'restrict' => 'number', 'minlen' => 1, 'maxlen' => 20/*, 'required' => 1*/),
     //'terms' => array('title' => 'Terms', 'type' => 'text', 'restrict' => 'number', 'minlen' => 1, 'maxlen' => 20),
     'deposit' => array('type' => 'text', 'restrict' => 'number', 'minlen' => 1, 'maxlen' => 5, 'addon' => 'style="width:50px"'/*, 'required' => 1*/, 'value' => '0'),
@@ -24,6 +24,8 @@ $formItems = array(
     'production_packaging' => array('title' => 'Production Packaging', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 1000),
     'production_shipmark' => array('title' => 'Production Shipmark', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 1000),
     'production_remarks' => array('title' => 'Production Remarks', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 1000),
+
+    'bank_no' => array('title' => '银行账号', 'type' => 'text', 'restrict' => 'number', 'maxlen' => 50),
 
     'submitbtn'	=> array('type' => 'submit', 'value' => ' Submit '),
 );
@@ -45,9 +47,11 @@ if(!$myerror->getAny() && $goodsForm->check()){
     $production_shipmark = '';//$_POST['production_shipmark'];
     $production_remarks = '';//$_POST['production_remarks'];
 
+    $bank_no = $_POST['bank_no'];
+
     $judge = $mysql->q('select cid from fty_jg_customer where cid = ?', $cid);
     if(!$judge){
-        $result = $mysql->q('insert into fty_jg_customer (cid, name, website, markup_ratio, deposit, balance, remark, created_by, production_packaging, production_shipmark, production_remarks) values ('.moreQm(11).')', $cid, $name, $website, $markup_ratio, $deposit, $balance, $remark, $created_by, $production_packaging, $production_shipmark, $production_remarks);
+        $result = $mysql->q('insert into fty_jg_customer set cid = ?, name = ?, website = ?, markup_ratio = ?, deposit = ?, balance = ?, remark = ?, created_by = ?, production_packaging = ?, production_shipmark = ?, production_remarks = ?, bank_no = ?', $cid, $name, $website, $markup_ratio, $deposit, $balance, $remark, $created_by, $production_packaging, $production_shipmark, $production_remarks, $bank_no);
         if($result){
             $myerror->ok('新增 加工商 成功!', 'search_jg_customer&page=1');
         }else{
@@ -121,6 +125,13 @@ if($myerror->getError()){
                 <td width="33%">&nbsp;</td>
             </tr>
         </table>-->
+        <table>
+            <tr valign="top">
+                <td width="33%"><? $goodsForm->show('bank_no');?></td>
+                <td width="33%">&nbsp;</td>
+                <td width="33%">&nbsp;</td>
+            </tr>
+        </table>
         <div class="line"></div>
         <?
 

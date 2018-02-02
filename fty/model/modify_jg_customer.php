@@ -31,21 +31,22 @@ if($myerror->getWarn()){
         $goodsForm = new My_Forms();
         $formItems = array(
 
-            'cid' => array('title' => 'Customer ID', 'type' => 'text', 'minlen' => 1, 'maxlen' => 5, 'required' => 1, 'readonly' => 'readonly', 'value' => isset($mod_result['cid'])?$mod_result['cid']:''),
+            'cid' => array('title' => '加工商编号', 'type' => 'text', 'minlen' => 1, 'maxlen' => 5, 'required' => 1, 'readonly' => 'readonly', 'value' => isset($mod_result['cid'])?$mod_result['cid']:''),
             //'created_by' => array('title' => 'Created by', 'type' => 'select', 'required' => 1, 'options' => $user, 'value' => isset($mod_result['created_by'])?$mod_result['created_by']:''),
-            'name' => array('title' => 'Company', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 80, 'required' => 1, 'value' => isset($mod_result['name'])?$mod_result['name']:''),
+            'name' => array('title' => '加工商名', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 80, 'required' => 1, 'value' => isset($mod_result['name'])?$mod_result['name']:''),
             'markup_ratio' => array('title' => 'Markup Ratio', 'type' => 'text', 'restrict' => 'number', 'minlen' => 1, 'maxlen' => 20/*, 'required' => 1*/, 'value' => isset($mod_result['markup_ratio'])?$mod_result['markup_ratio']:''),
             //'terms' => array('title' => 'Terms', 'type' => 'text', 'restrict' => 'number', 'minlen' => 1, 'maxlen' => 20, 'value' => isset($mod_result['terms'])?$mod_result['terms']:''),
             'deposit' => array('type' => 'text', 'restrict' => 'number', 'minlen' => 1, 'maxlen' => 5, 'value' => isset($mod_result['deposit'])?$mod_result['deposit']:'0', 'addon' => 'style="width:50px"'/*, 'required' => 1*/),
             'balance' => array('type' => 'text', 'restrict' => 'number', 'minlen' => 1, 'maxlen' => 5, 'value' => isset($mod_result['balance'])?$mod_result['balance']:'0', 'addon' => 'style="width:50px"'/*, 'required' => 1*/),
-            'website' => array('title' => 'Website', 'type' => 'text', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['website'])?$mod_result['website']:''),
-            'remark' => array('title' => 'Remark', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['remark'])?$mod_result['remark']:''),
+            'website' => array('title' => '网站', 'type' => 'text', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['website'])?$mod_result['website']:''),
+            'remark' => array('title' => '备注', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['remark'])?$mod_result['remark']:''),
 
             'production_packaging' => array('title' => 'Production Packaging', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['production_packaging'])?$mod_result['production_packaging']:''),
             'production_shipmark' => array('title' => 'Production Shipmark', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['production_shipmark'])?$mod_result['production_shipmark']:''),
             'production_remarks' => array('title' => 'Production Remarks', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['production_remarks'])?$mod_result['production_remarks']:''),
 
             'ap' => array('title' => 'AP（临时栏位）', 'type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result['ap'])?$mod_result['ap']:'0'),
+            'bank_no' => array('title' => '银行账号', 'type' => 'text', 'restrict' => 'number', 'maxlen' => 50, 'value' => isset($mod_result['bank_no'])?$mod_result['bank_no']:''),
 
             'submitbtn'	=> array('type' => 'submit', 'value' => ' 保存 '),
         );
@@ -72,7 +73,9 @@ if($myerror->getWarn()){
             //add 180201
             $ap = $_POST['ap'];
 
-            $result = $mysql->q('update fty_jg_customer set name = ?, markup_ratio = ?, deposit = ?, balance = ?, website = ?, remark = ?, created_by = ?, production_packaging = ?, production_shipmark = ?, production_remarks = ?, ap = ? where cid = ?', $name, $markup_ratio, $deposit, $balance, $website, $remark, $created_by, $production_packaging, $production_shipmark, $production_remarks, $ap, $_GET['modid']);
+            $bank_no = $_POST['bank_no'];
+
+            $result = $mysql->q('update fty_jg_customer set name = ?, markup_ratio = ?, deposit = ?, balance = ?, website = ?, remark = ?, created_by = ?, production_packaging = ?, production_shipmark = ?, production_remarks = ?, ap = ?, bank_no = ? where cid = ?', $name, $markup_ratio, $deposit, $balance, $website, $remark, $created_by, $production_packaging, $production_shipmark, $production_remarks, $ap, $bank_no, $_GET['modid']);
             if($result){
                 $myerror->ok('修改 加工商 成功!', 'search_jg_customer&page=1');
             }else{
@@ -153,8 +156,8 @@ if($myerror->getWarn()){
             </table>-->
             <table>
                 <tr valign="top">
+                    <td width="33%"><? $goodsForm->show('bank_no');?></td>
                     <td width="33%"><? $goodsForm->show('ap');?></td>
-                    <td width="33%">&nbsp;</td>
                     <td width="33%">&nbsp;</td>
                 </tr>
             </table>
