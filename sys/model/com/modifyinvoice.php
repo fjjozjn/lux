@@ -193,7 +193,7 @@ MADE IN CHINA';
 				'i_fax' => array('title' => 'Fax', 'type' => 'text', 'minlen' => 1, 'maxlen' => 20, 'value' => isset($mod_result['fax'])?$mod_result['fax']:''),
 				'i_currency' => array('title' => 'Currency', 'type' => 'select', 'options' => get_currency_type(), 'required' => 1, 'value' => isset($mod_result['currency'])?$mod_result['currency']:''),
 				'i_unit' => array('title' => 'Unit', 'type' => 'select', 'options' => get_unit(), 'value' => isset($mod_result['unit'])?$mod_result['unit']:''),
-				'i_packing_num' => array('title' => 'Packing List NO.', 'type' => 'text', 'minlen' => 1, 'maxlen' => 20, 'value' => isset($mod_result['packing_num'])?$mod_result['packing_num']:'', 'readonly' => 'readonly'),
+				'i_packing_num' => array('title' => 'Packing List NO.', 'type' => 'text', 'value' => isset($mod_result['packing_num'])?$mod_result['packing_num']:'', 'readonly' => 'readonly'),
 				'i_discount' => array('title' => 'Discount', 'type' => 'text', 'minlen' => 1, 'maxlen' => 20, 'value' => isset($mod_result['discount'])?intval($mod_result['discount']):''),
 				//'i_delivery_date' => array('title' => 'Delivery Date', 'type' => 'text', 'restrict' => 'date', 'value' => isset($_GET['pvid'])?date('Y-m-d'):(isset($mod_result['delivery_date'])?date('Y-m-d', strtotime($mod_result['delivery_date'])):'')),
 				//'i_waybill_no' => array('title' => 'Waybill NO.', 'type' => 'text', 'minlen' => 1, 'maxlen' => 20, 'value' => isset($mod_result['waybill_no'])?intval($mod_result['waybill_no']):''),
