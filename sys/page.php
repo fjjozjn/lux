@@ -322,6 +322,7 @@ if(strpos($act, 'formdetail') !== 0){
                             </li>
                         </ul>
                     </li>
+                    <li><a href="?act=com-search_payment_request&is_approve=0&page=1">Payment Request</a></li>
                 </ul>
             </li>
         <? } ?>
@@ -350,7 +351,7 @@ if(strpos($act, 'formdetail') !== 0){
                         <li><a href="?act=managehr">apply</a></li>
                     </ul>
                 </li>
-                <li><a href="?act=com-search_payment_request&is_approve=0&page=1">Purchase Request<i>&gt;</i></a>
+                <li><a href="?act=com-search_purchase_request&is_approve=0&page=1">Purchase Request<i>&gt;</i></a>
                     <ul>
                         <li><a href="?act=com-add_payment_request">Add</a></li>
                     </ul>
@@ -679,6 +680,7 @@ if(strpos($act, 'formdetail') !== 0){
                             </li>
                         </ul>
                     </li>
+                    <li><a href="?act=com-search_payment_request&is_approve=0&page=1">Payment Request</a></li>
                 </ul>
             </li>
         <? } ?>
@@ -707,7 +709,7 @@ if(strpos($act, 'formdetail') !== 0){
                         <li><a href="?act=managehr">apply</a></li>
                     </ul>
                 </li>
-                <li><a href="?act=com-search_payment_request&is_approve=0&page=1">Purchase Request<i>&gt;</i></a>
+                <li><a href="?act=com-search_purchase_request&is_approve=0&page=1">Purchase Request<i>&gt;</i></a>
                     <ul>
                         <li><a href="?act=com-add_payment_request">Add</a></li>
                     </ul>
