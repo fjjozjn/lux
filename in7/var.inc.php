@@ -440,26 +440,6 @@ if(in_array($_SERVER['SERVER_NAME'], array('192.168.1.200', 'fjjozjn.vicp.cc')))
 	$storeDomain = 'http://store.'. $domain;
 	$prizeDomain = 'http://prize.'. $domain;
 	$verifyDomain = 'http://verify.'. $domain;
-	
-	$goDbInfo = array(
-		'host' => '127.0.0.1',
-		'user' => 'root',
-		'passwd' => 'admin',
-		'database' => 'krnt_db',
-		'port' => NULL,
-		'socket' => NULL,
-		'charset' => 'utf8',
-	);
-	
-	$luxDbInfo = array(
-		'host' => '127.0.0.1',
-		'user' => 'root',
-		'passwd' => 'admin',
-		'database' => 'lux',
-		'port' => NULL,
-		'socket' => NULL,
-		'charset' => 'utf8',
-	);
 }else{
 	// local test
 	$domain = 'sz.com';
@@ -468,27 +448,8 @@ if(in_array($_SERVER['SERVER_NAME'], array('192.168.1.200', 'fjjozjn.vicp.cc')))
 	$storeDomain = 'http://store.'. $domain;
 	$prizeDomain = 'http://prize.'. $domain;
 	$verifyDomain = 'http://ks.'. $domain;
-	
-	$goDbInfo = array(
-		'host' => '127.0.0.1',
-		'user' => 'root',
-		'passwd' => '123456',
-		'database' => 'krnt_db',
-		'port' => NULL,
-		'socket' => NULL,
-		'charset' => 'utf8',
-	);
-	
-	$luxDbInfo = array(
-		'host' => '127.0.0.1',
-		'user' => 'root',
-		'passwd' => '3993979102',
-		'database' => 'lux',
-		'port' => NULL,
-		'socket' => NULL,
-		'charset' => 'utf8',
-	);
 }
 
+require(ROOT_DIR.'in7/db.php');
 
 $alwaysDebugIpList	= array('202.105.134.28', '192.168.1.169', '192.168.1.25', '61.93.232.225');			//始终显示DEBUG信息的来源IP
