@@ -73,7 +73,7 @@ if($myerror->getWarn()){
 // print_r_pre($_GET);
 // print_r_pre($GLOBALS);
     ?>
-    <h1 class="green">PURCHASE REQUEST<em>* indicates required fields</em></h1>
+    <h1 class="green">PAYMENT REQUEST<em>* indicates required fields</em></h1>
 
     <table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
         <tr>
