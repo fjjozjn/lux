@@ -1,8 +1,13 @@
 <?php
+/**
+ * Author: zhangjn
+ * Date: 2018/2/6
+ * Time: 15:28
+ */
 // print_r_pre($_SESSION);
 // print_r_pre($_POST);
 
-//check permission 
+//check permission
 //checkAdminPermission(PERM_ENQ_GAME_ACC);
 if($myerror->getWarn()){
     require_once(ROOT_DIR.'model/inside_warn.php');
@@ -24,7 +29,7 @@ if($myerror->getWarn()){
 
 //get staff group information
 // $mysql->sp('CALL backend_detail(?, ?, ?)', '1', 'tw_admingrp', '1');
-// $temp_grp = $mysql->fetch(0,1);	
+// $temp_grp = $mysql->fetch(0,1);
 // for($i = 0 ; $i < count($temp_grp); $i++){
     // $temp = array($temp_grp[$i]['AdminGrpName'],$temp_grp[$i]['AdminGrpID']);
     // $row_grp[] = $temp;
@@ -73,7 +78,7 @@ if($myerror->getWarn()){
 // print_r_pre($_GET);
 // print_r_pre($GLOBALS);
     ?>
-    <h1 class="green">PAYMENT REQUEST<em>* indicates required fields</em></h1>
+    <h1 class="green">PURCHASE REQUEST<em>* indicates required fields</em></h1>
 
     <table width="700" border="0" cellspacing="0" cellpadding="0" align="center">
         <tr>
@@ -96,8 +101,8 @@ if($myerror->getWarn()){
                         <tr>
                             <td align="right">Created by : </td>
                             <td align="left"><? $form->show('created_by'); ?></td>
-                            <td align="right"></td>
-                            <td align="left"></td>
+                            <td align="right">Approve : </td>
+                            <td align="left"><? $form->show('is_approve'); ?></td>
                         </tr>
                         <tr><td>&nbsp;</td></tr>
                         <tr>
@@ -128,7 +133,7 @@ if($myerror->getWarn()){
     if ($getAnyPost || isset($_GET['page'])){
         $rs = new RecordSetControl2;
         $rs->record_per_page = ADMIN_ROW_PER_PAGE;
-        $rs->addnew_link = "?act=com-search_payment_request";
+        $rs->addnew_link = "?act=com-search_purchase_request";
         $rs->display_new_button = false;
         $rs->sort_field = "id";
         $rs->sort_seq = "DESC";
@@ -152,6 +157,10 @@ if($myerror->getWarn()){
         if (strlen(@$_SESSION['search_criteria']['created_by'])){
             $where_sql.= " AND created_by Like '%".$_SESSION['search_criteria']['created_by'].'%\'';
         }
+
+        if (strlen(@$_SESSION['search_criteria']['is_approve'])){
+            $where_sql.= " AND is_approve = ".$_SESSION['search_criteria']['is_approve'];
+        }
         if (strlen(@$_SESSION['search_criteria']['start_date'])){
             if (strlen(@$_SESSION['search_criteria']['end_date'])){
                 $where_sql.= " AND created_date between '".$_SESSION['search_criteria']['start_date']." 00:00:00' AND '".$_SESSION['search_criteria']['end_date']." 23:59:59'";
@@ -163,7 +172,7 @@ if($myerror->getWarn()){
         }
         // echo $where_sql;
 
-        $where_sql.= ' AND is_approve = 1 ORDER BY id DESC';
+        $where_sql.= ' ORDER BY id DESC';
         $_SESSION['search_criteria']['page'] = $current_page;
 
         $temp_table = ' payment_request';
@@ -191,13 +200,17 @@ if($myerror->getWarn()){
         $sort = GENERAL_NO;
         $edit = GENERAL_YES;
 
+        //20130217 不能在这里用 isSysAdmin 因为里面有select语句，会替代了上面的 backend_list_withfield 找出的数据，导致数据都不见了
+        if ($_SESSION['logininfo']['aName'] == 'ZJN' || $_SESSION['logininfo']['aName'] == 'KEVIN'){
+            $rs->SetRecordCol("APPROVE", "id", $sort, $edit, "?act=com-modify_payment_request", "approveid");
+        }
+        $rs->SetRecordCol("Approve", "is_approve");
         $rs->SetRecordCol("Approved by", "approved_by");
-        $rs->SetRecordCol("Pay", "id", $sort, $edit,"?act=com-modify_payment_request", "payid");
         $rs->SetRecordCol("Paid by", "paid_by");
         $rs->SetRecordCol("Paid Date", "paid_date");
         $rs->SetRecordCol("MODIFY", "id", $sort, $edit, "?act=com-modify_payment_request", "modid");
         $rs->SetRecordCol("DEL", "id", $sort, $edit, "?act=com-modify_payment_request", "delid");
-        $rs->SetRSSorting('?act=com-search_payment_request');
+        $rs->SetRSSorting('?act=com-search_purchase_request');
 
         /*
         $cur_page = 0;

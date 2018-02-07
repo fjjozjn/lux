@@ -88,6 +88,13 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
             $myerror->error('Failure !', 'com-search_payment_request&page=1');
         }
     }
+}elseif(isset($_GET['payid']) && isId($_GET['payid'])){
+    $rs = $mysql->q('update payment_request set is_approve = 2, paid_by = ?, paid_date = ? where id = ?', $_SESSION['logininfo']['aNameChi'], dateMore(), $_GET['payid']);
+    if($rs){
+        $myerror->ok('Success !', 'com-search_payment_request&page=1');
+    }else{
+        $myerror->error('Failure !', 'com-search_payment_request&page=1');
+    }
 }else{
     if(isset($_GET['modid']) && $_GET['modid'] != ''){
         $mod_result = $mysql->qone('SELECT * FROM payment_request WHERE id = ?', $_GET['modid']);

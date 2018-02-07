@@ -1053,6 +1053,7 @@ function get_payment_request_approve_status(){
     return array(
         array('Approved', '1'),
         array('Pending', '0'),
+        array('Paid', '2'),
     );
 }
 //20160523
