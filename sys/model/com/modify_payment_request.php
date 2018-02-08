@@ -98,6 +98,7 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
 }else{
     if(isset($_GET['modid']) && $_GET['modid'] != ''){
         $mod_result = $mysql->qone('SELECT * FROM payment_request WHERE id = ?', $_GET['modid']);
+        $payment_request_approve_status = transArrayFormat(get_payment_request_approve_status());
     }
 
     $goodsForm = new My_Forms();
@@ -114,6 +115,14 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
             'addon' => 'style="width:200px"', 'value' => isset($mod_result['remark'])?$mod_result['remark']:''),
         'bank_details' => array('title' => 'Bank Details', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 500,
             'addon' => 'style="width:200px"', 'value' => isset($mod_result['bank_details'])?$mod_result['bank_details']:''),
+        'created_by' => array('title' => 'Created By', 'type' => 'text', 'value' => isset($mod_result['created_by'])?$mod_result['created_by']:'', 'disabled' => 'disabled'),
+        'mod_by' => array('title' => 'Last Modify By', 'type' => 'text', 'value' => isset($mod_result['mod_by'])?$mod_result['mod_by']:'', 'disabled' => 'disabled'),
+        'created_date' => array('title' => 'Creation Date', 'type' => 'text', 'value' => isset($mod_result['created_date'])?$mod_result['created_date']:'', 'disabled' => 'disabled'),
+        'mod_date' => array('title' => 'Last Update', 'type' => 'text', 'value' => isset($mod_result['mod_date'])?$mod_result['mod_date']:'', 'disabled' => 'disabled'),
+        'is_approve' => array('title' => 'Status', 'type' => 'text', 'value' => isset($mod_result['is_approve'])?$payment_request_approve_status[$mod_result['is_approve']]:'', 'disabled' => 'disabled'),
+        'approved_by' => array('title' => 'Approved By', 'type' => 'text', 'value' => isset($mod_result['approved_by'])?$mod_result['approved_by']:'', 'disabled' => 'disabled'),
+        'paid_by' => array('title' => 'Paid By', 'type' => 'text', 'value' => isset($mod_result['paid_by'])?$mod_result['paid_by']:'', 'disabled' => 'disabled'),
+        'paid_date' => array('title' => 'Paid Date', 'type' => 'text', 'value' => isset($mod_result['paid_date'])?$mod_result['paid_date']:'', 'disabled' => 'disabled'),
 
         'submitbtn'	=> array('type' => 'submit', 'value' => ' Submit '),
     );
@@ -178,6 +187,21 @@ if($myerror->getError()){
                 <td width="25%"><? $goodsForm->show('remark');?></td>
                 <td width="25%"><? $goodsForm->show('bank_details');?></td>
                 <td width="25%"></td>
+            </tr>
+        </table>
+        <div class="line"></div>
+        <table width="100%" id="table">
+            <tr valign="top">
+                <td width="25%"><? $goodsForm->show('created_by');?></td>
+                <td width="25%"><? $goodsForm->show('mod_by');?></td>
+                <td width="25%"><? $goodsForm->show('created_date');?></td>
+                <td width="25%"><? $goodsForm->show('mod_date');?></td>
+            </tr>
+            <tr valign="top">
+                <td width="25%"><? $goodsForm->show('is_approve');?></td>
+                <td width="25%"><? $goodsForm->show('approved_by');?></td>
+                <td width="25%"><? $goodsForm->show('paid_by');?></td>
+                <td width="25%"><? $goodsForm->show('paid_date');?></td>
             </tr>
         </table>
         <div class="line"></div>

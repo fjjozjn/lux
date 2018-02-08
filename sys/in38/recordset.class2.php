@@ -563,7 +563,9 @@ Class RecordSetControl2 {
 										echo redFont('Approved');	
 									}elseif($value_arr[$i][$this->col_content[$j]["field"]] == 0){
 										echo 'Pending';
-									}else{
+									}elseif($value_arr[$i][$this->col_content[$j]["field"]] == 2){
+                                        echo greenFont('Paid');
+                                    }else{
 										echo 'Error! (201301221553)';	
 									}
 								}elseif($this->col_content[$j]["field"] == 'show_in_catalog'){
