@@ -1324,25 +1324,25 @@ function show_status($status){
 
 
 //判断是否是sys的admin
-function isSysAdmin(){
-    //fb($_SESSION['logininfo']['aName']);
-	if(isset($_SESSION['logininfo']['aName'])){
-		$rs = mysql_q('select AdminName from tw_admin where AdminLuxGroup = ?', 'admin');
-		if($rs){
-			$rtn = mysql_fetch();
-			foreach($rtn as $v){
-				if($_SESSION['logininfo']['aName'] == $v['AdminName']){
-					return true;	
-				}
-			}
-		}else{
-			return false;	
-		}
-	}else{
-		return false;	
-	}
-	return false;
-}
+//function isSysAdmin(){
+//    //fb($_SESSION['logininfo']['aName']);
+//	if(isset($_SESSION['logininfo']['aName'])){
+//		$rs = mysql_q('select AdminName from tw_admin where AdminLuxGroup = ?', 'admin');
+//		if($rs){
+//			$rtn = mysql_fetch();
+//			foreach($rtn as $v){
+//				if($_SESSION['logininfo']['aName'] == $v['AdminName']){
+//					return true;
+//				}
+//			}
+//		}else{
+//			return false;
+//		}
+//	}else{
+//		return false;
+//	}
+//	return false;
+//}
 
 
 //检测提交的请假或加班的时间段有哪些有效时间点

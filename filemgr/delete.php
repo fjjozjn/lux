@@ -1,12 +1,15 @@
 <?php
 extract($_REQUEST);
-include('db.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/in7/global.php');
 
-$sql=mysql_query("select * from filemgr where id='$del'");
-$row=mysql_fetch_array($sql);
-
-unlink("files/$row[name]");
-
-mysql_query("delete from filemgr where id='$del'");
+if(isSysAdmin()) {
+    $row = $mysql->qone("select * from filemgr where id = ?", $del);
+    unlink("files/$row[name]");
+    $mysql->q("delete from filemgr where id = ?", $del);
+}else{
+    $row = $mysql->qone("select * from filemgr where id = ? and user_id = ?", $del, $_SESSION["logininfo"]["aID"]);
+    unlink("files/$row[name]");
+    $mysql->q("delete from filemgr where id = ? and user_id = ?", $del, $_SESSION["logininfo"]["aID"]);
+}
 
 header("Location:index.php");
