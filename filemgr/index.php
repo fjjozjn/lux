@@ -14,7 +14,7 @@ if (isset($_POST['submit']) != "") {
 
     move_uploaded_file($temp, "files/" . $name);
 
-    $rs = $mysql->q("insert into filemgr set name = ?, user_id = ?, in_date = ?", $name, $_SESSION["logininfo"]["aID"], dateMore());
+    $rs = $mysql->q("insert into filemgr set name = ?, user_id = ?, user_name = ?, in_date = ?", $name, $_SESSION["logininfo"]["aID"], $_SESSION["logininfo"]["aName"], dateMore());
     if ($rs) {
         header("location:index.php");
     } else {
