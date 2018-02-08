@@ -618,6 +618,11 @@ function redFont($str){
 	return '<font color="#FF0000">'.$str.'</font>';	
 }
 
+//绿色字体
+function greenFont($str){
+    return '<font color="#40AA53">'.$str.'</font>';
+}
+
 //20130813 从sys/admin_function.php 转移过来，因sys和fty都要用
 function cal_date_new($a_time,$b_time)
 {
@@ -1127,6 +1132,14 @@ function get_fty_wlgy_jg_type(){
         array('物料', '1'),
         array('加工', '2'),
     );
+}
+//20180208 将selectbox数组转换为key-value格式数组，方便使用
+function transArrayFormat($arr){
+    $result = array();
+    foreach($arr as $item){
+        $result[$item[1]] = $item[0];
+    }
+    return $result;
 }
 
 
