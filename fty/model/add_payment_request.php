@@ -112,6 +112,7 @@ if($myerror->getError()){
                     <td>应付</td>
                     <td>付款金额</td>
                     <td>备注</td>
+                    <td>实际付款金额</td>
                     <td width="5%"></td>
                 </tr>
                 <tr class="template repeat" valign="top" onmouseover="product_itme_mouseover(this)" onmouseout="product_item_mouseout(this)">
@@ -121,6 +122,7 @@ if($myerror->getError()){
                     <td><? $goodsForm->show('fpr_fty_customer_ap');?></td>
                     <td><? $goodsForm->show('fpr_pay_amount');?></td>
                     <td><? $goodsForm->show('fpr_remark');?></td>
+                    <td></td>
                     <td><div id="del" onclick="delBomItem(this)"></div><input type="hidden" id="fpr_type_value" name="fpr_type_value" value="" disabled="disabled"/><input type="hidden" id="fpr_fty_customer_value" name="fpr_fty_customer_value" value="" disabled="disabled"/></td>
                 </tr>
                 <tr class="repeat" valign="top" onmouseover="product_itme_mouseover(this)" onmouseout="product_item_mouseout(this)">
@@ -130,6 +132,7 @@ if($myerror->getError()){
                     <td><? $goodsForm->show('fpr_fty_customer_ap1');?></td>
                     <td><? $goodsForm->show('fpr_pay_amount1');?></td>
                     <td><? $goodsForm->show('fpr_remark1');?></td>
+                    <td></td>
                     <td><div id="del1" onclick="delBomItem(this)"></div><input type="hidden" id="fpr_type_value1" name="fpr_type_value1" value="" disabled="disabled"/><input type="hidden" id="fpr_fty_customer_value1" name="fpr_fty_customer_value1" value="" disabled="disabled"/></td>
                 </tr>
                 </tbody>

@@ -4675,8 +4675,10 @@ function searchFtyCustomerDetail(obj){
     var fpr_pay_amount_input = fpr_fty_customer_ap_input.parent().parent().next().children().children();
     //remark 输入框
     var fpr_remark_input = fpr_pay_amount_input.parent().parent().next().children().children();
+    //actual_pay_amount 位置
+	var fpr_actual_pay_amount = fpr_remark_input.parent().parent().next();
     //DEL 位置
-    var del_div = fpr_remark_input.parent().parent().next().children();
+    var del_div = fpr_actual_pay_amount.next().children();
     //hidden fpr_type_value
     var hidden_fpr_type_value = del_div.next();
     //hidden fpr_fty_customer_value
