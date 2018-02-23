@@ -254,12 +254,12 @@ Class RecordSetControl2 {
 								echo '<a title="Approve" href="javascript:if(confirm(\'Approve后将会发通知邮件给相关工厂人员，是否继续?\'))window.location=\''.$temp_link.'\'"><img src="../../images/button_ok.png"></a>';
 							}elseif((isset($value_arr[$i]['istatus']) && $value_arr[$i]['istatus'] != '(D)' && @$value_arr[$i]['istatus'] != 'delete') || (isset($value_arr[$i]['s_status']) && $value_arr[$i]['s_status'] != '(D)' && @$value_arr[$i]['s_status'] != 'delete')){
 								echo "<a title='Disapprove' href='".$temp_link."'><img src='../../images/button_action-undo.png'></a>";
-							}elseif($value_arr[$i]['is_approve'] == 0){
+							}elseif(isset($value_arr[$i]['is_approve']) && $value_arr[$i]['is_approve'] == 0){
                                 echo "<a title='Approve' href='".$temp_link."'><img src='../../images/button_ok.png'></a>";
-                            }elseif($value_arr[$i]['is_approve'] == 1){
+                            }elseif(isset($value_arr[$i]['is_approve']) && $value_arr[$i]['is_approve'] == 1){
                                 echo "<a title='Disapprove' href='".$temp_link."'><img src='../../images/button_action-undo.png'></a>";
                             }else{
-                                echo "<a class='button' href='#'>UNDEFINED</a>";
+                                echo "";
                             }
 						}elseif( $this->col_content[$j]["title"] == 'HR_APPROVE'){
 							if($value_arr[$i]['is_approve'] == 0){

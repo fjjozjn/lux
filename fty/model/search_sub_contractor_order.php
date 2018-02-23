@@ -173,7 +173,7 @@ if($myerror->getWarn()){
         $_SESSION['search_criteria']['page'] = $current_page;
 
         $temp_table = ' fty_sub_contractor_order';
-        $list_field = ' SQL_CALC_FOUND_ROWS id, send_to, sco_id, created_by, in_date, istatus, customer, customer_po, expected_date, total as sco_total';
+        $list_field = ' SQL_CALC_FOUND_ROWS id, send_to, sco_id, created_by, in_date, istatus, customer, customer_po, expected_date, total as sco_total, approved_by';
 
         //get the row count for this seaching criteria
         //$row_count = $mysql->sp('CALL backend_list_count(?, ?)', $temp_table,$where_sql);
@@ -198,6 +198,7 @@ if($myerror->getWarn()){
         $edit = GENERAL_YES;
 
         $rs->SetRecordCol("批核", "id", $sort, $edit,"?act=modify_sub_contractor_order", "changeid");
+        $rs->SetRecordCol("审批人", "approved_by");
         $rs->SetRecordCol("修改", "id", $sort, $edit, "?act=modify_sub_contractor_order", "modid");
         $rs->SetRecordCol("PDF", "id", $sort, $edit, "model/pdf_sub_contractor_order.php?pdf=1","id");
         $rs->SetRecordCol("删除", "id", $sort, $edit, "?act=modify_sub_contractor_order", "delid");

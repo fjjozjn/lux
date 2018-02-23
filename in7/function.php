@@ -888,6 +888,7 @@ function get_bank_acc(){
         array('HK(USD)', 'HK(USD)'),
         array('SZ(CASH)', 'SZ(CASH)'),
         array('SZ(COMPANY)', 'SZ(COMPANY)'),
+        array('DG(FACTORY)', 'DG(FACTORY)'),
         array('Cash/Cheque', 'Cash/Cheque')
     );
 }
