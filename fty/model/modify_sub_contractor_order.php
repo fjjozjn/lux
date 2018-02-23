@@ -27,10 +27,10 @@ if($myerror->getWarn()){
         $rtn = $mysql->qone('select istatus from fty_sub_contractor_order where id = ?', $_GET['changeid']);
         $str = '';
         if($rtn['istatus'] == '(D)'){
-            $rs = $mysql->q('update fty_sub_contractor_order set istatus = ? where id = ?', '(I)', $_GET['changeid']);
+            $rs = $mysql->q('update fty_sub_contractor_order set istatus = ?, approved_by = ?, approved_date = ? where id = ?', '(I)', $_SESSION["ftylogininfo"]["aName"], dateMore(), $_GET['changeid']);
             $str = '(I)';
         }else{
-            $rs = $mysql->q('update fty_sub_contractor_order set istatus = ? where id = ?', '(D)',  $_GET['changeid']);
+            $rs = $mysql->q('update fty_sub_contractor_order set istatus = ?, approved_by = ?, approved_date = ? where id = ?', '(D)', $_SESSION["ftylogininfo"]["aName"], dateMore(), $_GET['changeid']);
             $str = '(D)';
         }
         if($rs){
