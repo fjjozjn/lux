@@ -118,7 +118,7 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
             }
         }elseif($rtn['s_status'] == '(I)'){
             if(isSysAdmin()){
-                $rs = $mysql->q('update sample_order set s_status = ?, approved_by = concat(approved_by,?), approved_date = ? where so_no = ?', '(D)', 'disapproved', $now, $_GET['approve_so_no']);
+                $rs = $mysql->q('update sample_order set s_status = ?, approved_by = ?, approved_date = ? where so_no = ?', '(D)', $_SESSION["logininfo"]["aName"].' disapproved', $now, $_GET['approve_so_no']);
                 if($rs){
                     $myerror->ok('状态由(I)改为(D)!', 'com-searchsample_order&page=1');
                 }else{

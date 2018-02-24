@@ -30,8 +30,9 @@ if ($myerror->getWarn()) {
         if ($mod_result['status'] == 2) {
             //页面还要继续，还要填ap
         } elseif ($mod_result['status'] == 1) {
-            $rs = $mysql->q('update fty_payment_request set status = ? where id = ?', 2, $_GET['approveId']);
-            if ($rs) {
+            $rs1 = $mysql->q('update fty_payment_request set status = ?, approved_by = ? where id = ?', 2, $_SESSION['ftylogininfo']['aName'].' disapproved', $_GET['approveId']);
+            $rs2 = $mysql->q('update fty_payment_request_item set actual_pay_amount = 0 where main_id = ?', $_GET['approveId']);
+            if ($rs1 && $rs2) {
                 //操作回滚ap
                 foreach ($mod_result_item as $item) {
                     $temp = explode(':', $item['fty_customer']);
@@ -100,12 +101,30 @@ if ($myerror->getWarn()) {
         $result = $mysql->q('update fty_payment_request set status = ?, approved_by = ?, approved_date = ? where id = ?', 1, $staff, $today, $_GET['approveId']);
 
         if ($result) {
+            $email_content = '<table><tr><td>类别</td><td>供应商</td><td>应付</td><td>付款金额</td><td>备注</td><td>实际付款金额</td></tr>';
+            $type = transArrayFormat(get_fty_wlgy_jg_type());
             //操作扣除ap
             foreach ($mod_result_item as $item) {
                 $temp = explode(':', $item['fty_customer']);
                 $mysql->q('update fty_payment_request_item set actual_pay_amount = ? where id = ?', $payment_request_arr[$item['id']], $item['id']);
                 handleFtyCustomerAp($item['type'], $temp[0], 2, $payment_request_arr[$item['id']]);
+                $email_content .= '<tr><td>'.$type[$item['type']].'</td><td>'.$item['fty_customer'].'</td><td>'.$item['fty_customer_ap'].'</td><td>'.$item['pay_amount'].'</td><td>'.$item['remark'].'</td><td>'.$item['actual_pay_amount'].'</td></tr>';
             }
+            $email_content .= '</table>';
+
+            //发邮件
+            require_once(ROOT_DIR.'class/Mail/mail.php');
+            $rtn = $mysql->qone('select email_fty_user_info_to, email_admin_request_to from setting');
+            $account_info = array('date' => date('Y-m-d'));
+            //邮件的信息
+            $info1 = "你好,<br />付款申请单已核批，内容如下<br />'.$email_content.'<br />详情请登入系统查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
+            $info2 = "你好,<br />付款申请单已核批，内容如下<br />'.$email_content.'<br />详情请登入系统查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
+            $info3 = $_SESSION['ftylogininfo']['aName']." 你好,<br />付款申请单已核批，内容如下<br />'.$email_content.'<br />详情请登入系统查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
+
+            send_mail(trim($rtn['email_fty_user_info_to']), '', "付款申请单 - ".$_GET['approveId'], $info1, $account_info);
+            send_mail(trim($rtn['email_admin_request_to']), '', "付款申请单 - ".$_GET['approveId'], $info2, $account_info);
+            send_mail(trim($_SESSION['ftylogininfo']['aAdminEmail']), '', "付款申请单 - ".$_GET['approveId'], $info3, $account_info);
+
             $myerror->ok('批核 付款申请单 成功!', 'search_payment_request&page=1');
         } else {
             $myerror->error('批核 付款申请单 失败', 'BACK');

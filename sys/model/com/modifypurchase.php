@@ -101,7 +101,7 @@ if($myerror->getWarn()){
         }elseif($rtn['istatus'] == '(I)'){
             //mod 20130209普通用户不能把已核批的状态改回为未核批
             if(isSysAdmin()){
-                $rs = $mysql->q('update purchase set istatus = ?, approved_by = concat(approved_by,?) where pcid = ?', '(D)', 'disapproved', $_GET['approve_po_no']);
+                $rs = $mysql->q('update purchase set istatus = ?, approved_by = ? where pcid = ?', '(D)', $_SESSION["logininfo"]["aName"].' disapproved', $_GET['approve_po_no']);
                 if($rs){
 
                     //20141210 disapprove，都清除 qc schedule

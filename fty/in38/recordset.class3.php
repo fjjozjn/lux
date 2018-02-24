@@ -185,7 +185,7 @@ Class RecordSetControl3 {
 							if(@$value_arr[$i]['p_status'] == '未完成' || @$value_arr[$i]['istatus'] == '(D)' || @$value_arr[$i]['status'] == '2'){
 								echo "<a href='".$temp_link."'><img title='批核' src='../../images/button_ok.png'></a>";
 							}else{
-								echo "<a href='".$temp_link."'><img title='取消批核' src='../../images/button_action-undo.png'></a>";
+								echo '<a href="javascript:if(confirm(\'此操作将直接取消核批，所有数据回滚，确认操作?\'))window.location=\''.$temp_link.'\'"><img title="取消批核" src="../../images/button_action-undo.png" /></a>';
 							}
 						}elseif( $this->col_content[$j]["title"] == '插入BOM'){
                             //加了個，能彈出新頁面的連接
