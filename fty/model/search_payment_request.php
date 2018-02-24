@@ -169,6 +169,7 @@ if($myerror->getWarn()){
         $rs->SetRecordCol("状态", "status");
         $rs->SetRecordCol("批核人", "approved_by");
         $rs->SetRecordCol("批核时间", "approved_date");
+        $rs->SetRecordCol("付款", "id", $sort, $edit,"?act=paydone_payment_request", "paydoneId");
         $rs->SetRecordCol("修改", "id", $sort, $edit, "?act=modify_payment_request", "modid");
         //$rs->SetRecordCol("PDF", "pcid", $sort, $edit, "model/viewpurchase_pdf.php?pdf=1","pcid");
         $rs->SetRecordCol("删除", "id", $sort, $edit, "?act=modify_payment_request", "delid");

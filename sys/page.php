@@ -369,7 +369,7 @@ if(strpos($act, 'formdetail') !== 0){
                         <li><a href="/product/index.php" target="_blank">Lux catalog</a></li>
                     </ul>
                 </li>
-                <li><a target="_blank" href="/filemgr">File Manager</a></li>
+                <li><a target="_blank" href="?act=filemgr">File Manager</a></li>
             </ul>
         </li>
 
@@ -728,7 +728,7 @@ if(strpos($act, 'formdetail') !== 0){
                         <li><a href="/product/index.php" target="_blank">Lux catalog</a></li>
                     </ul>
                 </li>
-                <li><a target="_blank" href="/filemgr">File Manager</a></li>
+                <li><a target="_blank" href="?act=filemgr">File Manager</a></li>
             </ul>
         </li>
 

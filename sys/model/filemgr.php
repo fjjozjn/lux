@@ -1,0 +1,1 @@
+<iframe src="http://<?=$host?>/filemgr/" width="100%" height="800px" scrolling="auto"></iframe>

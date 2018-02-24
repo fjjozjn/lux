@@ -194,6 +194,8 @@ Class RecordSetControl3 {
                             if(isset($value_arr[$i]['sample_order_file']) && $value_arr[$i]['sample_order_file']){
                                 echo "<a target='_blank' href='http://58.177.207.149/sys/upload/sample_order_file/".$value_arr[$i]['sample_order_file']."'><img title='Sketches' src='../../images/button_document-pdf.png'></a>";
                             }
+                        }elseif( $this->col_content[$j]["title"] == '付款'){
+                            echo "<a href='".$temp_link."'><img title='付款' src='../../images/button_ok.png'></a>";
                         }else{
 							echo "<a class='button' href='".$temp_link."'>".$this->col_content[$j]["title"]."</a>";
 						}
