@@ -54,7 +54,7 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
                 $myerror->error($msg, 'com-search_payment_request&page=1');
             }
         }elseif($rtn['is_approve'] == 1){
-            $rs = $mysql->q('update payment_request set is_approve = 0, approved_by = concat(approved_by,?) where id = ?', 'disapproved', $_GET['approveid']);
+            $rs = $mysql->q('update payment_request set is_approve = 0, approved_by = ? where id = ?', $_SESSION["logininfo"]["aName"].' disapproved', $_GET['approveid']);
             if($rs){
                 //send email to admin
                 require_once(ROOT_DIR.'class/Mail/mail.php');
