@@ -229,7 +229,7 @@ if($myerror->getWarn()){
 
                 if(isset($_GET['modid']) && $_GET['modid'] != ''){
 
-                    $result = $mysql->q('update fty_sub_contractor_order set send_to = ?, address = ?, attention = ?, reference = ?, remark = ?, total = ?, ex_total = ?, remarks = ?, cid = ?, ship_mark = ?, packaging = ?, customer_po = ?, customer = ?, mod_date = ?, expected_date = ?, mod_by = ?, istatus = ? where id = ?', $jg_send_to, $jg_address, $jg_attention, $jg_reference, $jg_remark, $total, $ex_total, '', $jg_cid, '', '', $jg_customer_po, $jg_customer, $mod_date, $jg_expected_date, $mod_by, '(I)', $_GET['modid']);
+                    $result = $mysql->q('update fty_sub_contractor_order set send_to = ?, address = ?, attention = ?, reference = ?, remark = ?, total = ?, ex_total = ?, remarks = ?, cid = ?, ship_mark = ?, packaging = ?, customer_po = ?, customer = ?, mod_date = ?, expected_date = ?, mod_by = ? where id = ?', $jg_send_to, $jg_address, $jg_attention, $jg_reference, $jg_remark, $total, $ex_total, '', $jg_cid, '', '', $jg_customer_po, $jg_customer, $mod_date, $jg_expected_date, $mod_by, $_GET['modid']);
 
                     if($result){
                         $rtn = $mysql->q('delete from fty_sub_contractor_order_item where main_id = ?', $_GET['modid']);
@@ -251,7 +251,7 @@ if($myerror->getWarn()){
                     //判断是否输入的pcid已存在，因为存在的话由于数据库限制，就会新增失败
                     $judge = $mysql->q('select sco_id from fty_sub_contractor_order where sco_id = ?', $sco_id);
                     if(!$judge){
-                        $result = $mysql->q('insert into fty_sub_contractor_order set sco_id = ?, send_to = ?, address = ?, attention = ?, reference = ?, remark = ?, total = ?, ex_total = ?, remarks = ?, cid = ?, ship_mark = ?, packaging = ?, customer_po = ?, customer = ?, in_date = ?, mod_date = ?, expected_date = ?, created_by = ?, mod_by = ?, istatus = ?', $sco_id, $jg_send_to, $jg_address, $jg_attention, $jg_reference, $jg_remark, $total, $ex_total, '', $jg_cid, '', '', $jg_customer_po, $jg_customer, $in_date, $mod_date, $jg_expected_date, $created_by, $mod_by, '(I)');
+                        $result = $mysql->q('insert into fty_sub_contractor_order set sco_id = ?, send_to = ?, address = ?, attention = ?, reference = ?, remark = ?, total = ?, ex_total = ?, remarks = ?, cid = ?, ship_mark = ?, packaging = ?, customer_po = ?, customer = ?, in_date = ?, mod_date = ?, expected_date = ?, created_by = ?, mod_by = ?, istatus = ?', $sco_id, $jg_send_to, $jg_address, $jg_attention, $jg_reference, $jg_remark, $total, $ex_total, '', $jg_cid, '', '', $jg_customer_po, $jg_customer, $in_date, $mod_date, $jg_expected_date, $created_by, $mod_by, '(D)');
                         $main_id = $mysql->id();
 
                         if($result){
