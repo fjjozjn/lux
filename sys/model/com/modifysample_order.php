@@ -191,29 +191,29 @@ if(isset($_GET['delid']) && $_GET['delid'] != ''){
         //20170831
         $add_tip = '';
         $file_target = '';
-//        $file_date = date('YmdHis');
-//        fb('$_FILES');
-//        fb($_FILES);
-//        if( (@$_FILES['sample_order_file']['type'] == 'application/pdf' && (@$_FILES['sample_order_file']['size'] / 1024) <= 10240) || @$_FILES['sample_order_file']['name'] == '' ) {
-//            if (@$_FILES['sample_order_file']['error'] > 0 && @$_FILES['sample_order_file']['error'] != 4){
-//                $myerror->error('Upload file failure ! Return Code: '.@$_FILES['sample_order_file']['error'], 'BACK');
-//            }else {
-//                if (@$_FILES['sample_order_file']['name'] != '') {
-//                    // 转为大写字母(pid + 时间 + 原图片的后缀名)
-//                    $temp = end(explode('.', @$_FILES['sample_order_file']['name']));
-//                    $file_target = strtoupper($so_no . '_' . $file_date .'.'. $temp);
-//                    //上传图片
-//                    move_uploaded_file(@$_FILES['sample_order_file']['tmp_name'], iconv('UTF-8', 'GBK', $sample_order_file_path_com . $file_target));
-//                    if (file_exists(iconv('UTF-8', 'GBK', $sample_order_file_path_com . $file_target))) {
-//                        $add_tip .= 'Upload file ' . $file_target . ' success! ';
-//                    } else {
-//                        $add_tip .= 'Upload file ' . $file_target . ' <i>failure</i>! ';
-//                    }
-//                }
-//            }
-//        }else{
-//            $myerror->error('上传文件 失败! 请选择PDF格式的文件上传! 且文件大小不要超过 10 MB!', 'BACK');
-//        }
+        $file_date = date('YmdHis');
+        fb('$_FILES');
+        fb($_FILES);
+        if( (@$_FILES['sample_order_file']['type'] == 'application/pdf' && (@$_FILES['sample_order_file']['size'] / 1024) <= 10240) || @$_FILES['sample_order_file']['name'] == '' ) {
+            if (@$_FILES['sample_order_file']['error'] > 0 && @$_FILES['sample_order_file']['error'] != 4){
+                $myerror->error('Upload file failure ! Return Code: '.@$_FILES['sample_order_file']['error'], 'BACK');
+            }else {
+                if (@$_FILES['sample_order_file']['name'] != '') {
+                    // 转为大写字母(pid + 时间 + 原图片的后缀名)
+                    $temp = end(explode('.', @$_FILES['sample_order_file']['name']));
+                    $file_target = strtoupper($so_no . '_' . $file_date .'.'. $temp);
+                    //上传图片
+                    move_uploaded_file(@$_FILES['sample_order_file']['tmp_name'], iconv('UTF-8', 'GBK', $sample_order_file_path_com . $file_target));
+                    if (file_exists(iconv('UTF-8', 'GBK', $sample_order_file_path_com . $file_target))) {
+                        $add_tip .= 'Upload file ' . $file_target . ' success! ';
+                    } else {
+                        $add_tip .= 'Upload file ' . $file_target . ' <i>failure</i>! ';
+                    }
+                }
+            }
+        }else{
+            $myerror->error('上传文件 失败! 请选择PDF格式的文件上传! 且文件大小不要超过 10 MB!', 'BACK');
+        }
 
 		$send_to = $_POST['sid'];
 		$attention = $_POST['attention'];
@@ -441,15 +441,15 @@ $goodsForm->begin();
             <? } ?>
             </tr>
             <tr>
-                <td>7）上载图纸（可多选）：</td>
+                <td>7）上载图纸：</td>
             </tr>
             <tr>
                 <td>
-                	<!-- <input type='file' name='sample_order_file' id='sample_order_file' /> --><!-- <input id="fileupload" type="file" name="files[]" data-url="index.php?ajax=1&act=ajax-sample_order_upload_file" multiple> --><!-- <a target="_blank" href="/sys/<?=""/*$sample_order_file_path_com.$mod_result['sample_order_file']*/?>"><?=""/*$mod_result['sample_order_file']*/?></a> -->
+                	 <input type='file' name='sample_order_file' id='sample_order_file' /><!-- <input id="fileupload" type="file" name="files[]" data-url="index.php?ajax=1&act=ajax-sample_order_upload_file" multiple> --><a target="_blank" href="/sys/<?=$sample_order_file_path_com.$mod_result['sample_order_file']?>"><?=$mod_result['sample_order_file']?></a>
                 	</td>
             </tr>
         </table>
-<div id="upload"></div>
+<!--<div id="upload"></div>-->
 <!--     The fileinput-button span is used to style the file input field as button
 <span class="btn btn-success fileinput-button">
     <i class="glyphicon glyphicon-plus"></i>
@@ -490,8 +490,8 @@ The container for the uploaded files
 $goodsForm->end();
 }
 ?>
-<link rel="stylesheet" type="text/css" href="/ui/jquery_uploadify/Huploadify.css"/>
-<script type="text/javascript" src="/ui/jquery_uploadify/jquery.Huploadify.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="/ui/jquery_uploadify/Huploadify.css"/>-->
+<!--<script type="text/javascript" src="/ui/jquery_uploadify/jquery.Huploadify.js"></script>-->
 
 <!-- Bootstrap styles -->
 <!-- <link rel="stylesheet" href="/ui/jquery_file_upload/css/bootstrap.min.css"> -->
@@ -528,31 +528,31 @@ $(function () {
 
 	selectSampleOrder('');
 
-	$('#upload').Huploadify({
-		auto:true,
-		fileTypeExts:'*.jpg;*.png;*.exe;*.pdf',
-		multi:true,
-		formData:{key:123456,key2:'vvvv'},
-		fileSizeLimit:9999,
-		showUploadedPercent:true,//是否实时显示上传的百分比，如20%
-		showUploadedSize:true,
-		removeTimeout:9999999,
-		uploader:'upload.php',
-		onUploadStart:function(){
-			//alert('开始上传');
-			},
-		onInit:function(){
-			//alert('初始化');
-			},
-		onUploadComplete:function(){
-			//alert('上传完成');
-			},
-		onDelete:function(file){
-			console.log('删除的文件：'+file);
-			console.log(file);
-		}
-		});
-	});
+	// $('#upload').Huploadify({
+	// 	auto:true,
+	// 	fileTypeExts:'*.jpg;*.png;*.exe;*.pdf',
+	// 	multi:true,
+	// 	formData:{key:123456,key2:'vvvv'},
+	// 	fileSizeLimit:9999,
+	// 	showUploadedPercent:true,//是否实时显示上传的百分比，如20%
+	// 	showUploadedSize:true,
+	// 	removeTimeout:9999999,
+	// 	uploader:'upload.php',
+	// 	onUploadStart:function(){
+	// 		//alert('开始上传');
+	// 		},
+	// 	onInit:function(){
+	// 		//alert('初始化');
+	// 		},
+	// 	onUploadComplete:function(){
+	// 		//alert('上传完成');
+	// 		},
+	// 	onDelete:function(file){
+	// 		console.log('删除的文件：'+file);
+	// 		console.log(file);
+	// 	}
+	// 	});
+	// });
 
     // 'use strict';
     // // Change this to the location of your server-side upload handler:
