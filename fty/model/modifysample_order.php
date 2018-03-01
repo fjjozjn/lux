@@ -442,10 +442,10 @@ $goodsForm->begin();
             <? } ?>
             </tr>
             <tr>
-                <td>7）上载图纸：</td>
+                <td>7）图纸：</td>
             </tr>
             <tr>
-                <td><input type='file' name='sample_order_file' id='sample_order_file' /><a target="_blank" href="/sys/<?=$sample_order_file_path_com.$mod_result['sample_order_file']?>"><?=$mod_result['sample_order_file']?></a></td>
+                <td><!--<input type='file' name='sample_order_file' id='sample_order_file' />--><a target="_blank" href="/sys/<?=$sample_order_file_path_com.$mod_result['sample_order_file']?>"><?=$mod_result['sample_order_file']?></a></td>
             </tr>
         </table>
         

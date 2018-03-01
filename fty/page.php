@@ -223,6 +223,8 @@ if(strpos($rtn['FtyGrpID'], '1') !== false){
         <ul>
             <li><a href="?act=delivery_analysis">每月出货统计</a></li>
             <li><a href="?act=sub_contractor_order_analysis">每月外发统计</a></li>
+            <li><a href="?act=fty_jg_customer_ap">加工商应付表</a></li>
+            <li><a href="?act=fty_wlgy_customer_ap">物料商应付表</a></li>
         </ul>
     </li>
 
