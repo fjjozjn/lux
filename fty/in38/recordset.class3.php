@@ -342,6 +342,9 @@ Class RecordSetControl3 {
                                         case '2':
                                             echo '未批核';
                                             break;
+                                        case '3':
+                                            echo redFont('已付款');
+                                            break;
 										default:
 											echo $value_arr[$i][$this->col_content[$j]["field"]]; 
 									}

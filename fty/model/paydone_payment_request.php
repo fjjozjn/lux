@@ -20,14 +20,18 @@ if ($myerror->getWarn()) {
 } else {
     if (isset($_GET['paydoneId']) && $_GET['paydoneId'] != '') {
         $mod_result = $mysql->qone('SELECT * FROM fty_payment_request WHERE id = ?', $_GET['paydoneId']);
-        $rs = $mysql->q('SELECT * FROM fty_payment_request_item WHERE main_id = ?', $_GET['paydoneId']);
-        $item_num = 0;
-        $mod_result_item = array();
-        if ($rs) {
-            $mod_result_item = $mysql->fetch();
-            $item_num = count($mod_result_item);
+        if ($mod_result['status'] == 1 || $mod_result['status'] == 3) {
+            $rs = $mysql->q('SELECT * FROM fty_payment_request_item WHERE main_id = ?', $_GET['paydoneId']);
+            $item_num = 0;
+            $mod_result_item = array();
+            if ($rs) {
+                $mod_result_item = $mysql->fetch();
+                $item_num = count($mod_result_item);
+            }
+            $type = transArrayFormat(get_fty_wlgy_jg_type());
+        } else {
+            $myerror->error('付款申请单还未核批不能进行付款操作!', 'search_payment_request&page=1');
         }
-        $type = transArrayFormat(get_fty_wlgy_jg_type());
     } else {
         die('Need modid!');
     }
@@ -38,74 +42,35 @@ if ($myerror->getWarn()) {
     );
 
     for ($i = 0; $i < $item_num; $i++) {
-        $formItems['fpr_paydone' . $i] = array('type' => 'checkbox', 'options' => array(''), 'value' => isset($mod_result_item[$i]['is_paydone']) ? $mod_result_item[$i]['is_paydone'] : '');
+        $formItems['fpr_paydone' . $i] = array('type' => 'checkbox', 'options' => array(array('付款', '1')), 'value' => isset($mod_result_item[$i]['is_paydone']) ? $mod_result_item[$i]['is_paydone'] : '');
     }
 
     $goodsForm->init($formItems);
 
     if (!$myerror->getAny() && $goodsForm->check()) {
-        fb($_POST);die('@');
+        //fb($_POST);die('@');
 
         $today = dateMore();
         $staff = $_SESSION['ftylogininfo']['aName'];
 
         $i = 0;
-        $prev_num = 1;//第一个post的是form的标识串，还有0个表单项，所以是1
-        $last_num = 1;//后面的post，有个submit
-        $item = array();
-        foreach ($_POST as $v) {
-            if ($i < $prev_num) {
-                $i++;
-            } elseif ($i >= count($_POST) - $last_num) {
-                break;
+        $paydone_num = 0;
+        foreach ($mod_result_item as $update_item) {
+            if (isset($_POST['fpr_paydone'.$i])) {
+                $mysql->q('update fty_payment_request_item set is_paydone = 1 where id = ?', $update_item['id']);
+                $paydone_num++;
             } else {
-                $item[] = $v;
-                $i++;
+                $mysql->q('update fty_payment_request_item set is_paydone = 2 where id = ?', $update_item['id']);
             }
+            $i++;
         }
-
-        //这个是设置每个ITEM的元素个数
-        $each_item_num = 2;
-        $item_num = intval(count($item) / $each_item_num);
-
-        $payment_request_arr = array();
-        $index = 0;
-        for ($j = 0; $j < $item_num; $j++) {
-            $payment_request_arr[$item[$index++]] = $item[$index++];
-        }
-        //fb($payment_request_arr);die('#');
-
-        $result = $mysql->q('update fty_payment_request set status = ?, approved_by = ?, approved_date = ? where id = ?', 1, $staff, $today, $_GET['paydoneId']);
-
-        if ($result) {
-            $email_content = '<table><tr><td>类别</td><td>供应商</td><td>应付</td><td>付款金额</td><td>备注</td><td>实际付款金额</td></tr>';
-            $type = transArrayFormat(get_fty_wlgy_jg_type());
-            //操作扣除ap
-            foreach ($mod_result_item as $item) {
-                $temp = explode(':', $item['fty_customer']);
-                $mysql->q('update fty_payment_request_item set actual_pay_amount = ? where id = ?', $payment_request_arr[$item['id']], $item['id']);
-                handleFtyCustomerAp($item['type'], $temp[0], 2, $payment_request_arr[$item['id']]);
-                $email_content .= '<tr><td>'.$type[$item['type']].'</td><td>'.$item['fty_customer'].'</td><td>'.$item['fty_customer_ap'].'</td><td>'.$item['pay_amount'].'</td><td>'.$item['remark'].'</td><td>'.$item['actual_pay_amount'].'</td></tr>';
-            }
-            $email_content .= '</table>';
-
-            //发邮件
-            require_once(ROOT_DIR.'class/Mail/mail.php');
-            $rtn = $mysql->qone('select email_fty_user_info_to, email_admin_request_to from setting');
-            $account_info = array('date' => date('Y-m-d'));
-            //邮件的信息
-            $info1 = "你好,<br />付款申请单已核批，内容如下<br />'.$email_content.'<br />详情请登入系统查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
-            $info2 = "你好,<br />付款申请单已核批，内容如下<br />'.$email_content.'<br />详情请登入系统查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
-            $info3 = $_SESSION['ftylogininfo']['aName']." 你好,<br />付款申请单已核批，内容如下<br />'.$email_content.'<br />详情请登入系统查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
-
-            send_mail(trim($rtn['email_fty_user_info_to']), '', "付款申请单 - ".$_GET['paydoneId'], $info1, $account_info);
-            send_mail(trim($rtn['email_admin_request_to']), '', "付款申请单 - ".$_GET['paydoneId'], $info2, $account_info);
-            send_mail(trim($_SESSION['ftylogininfo']['aAdminEmail']), '', "付款申请单 - ".$_GET['paydoneId'], $info3, $account_info);
-
-            $myerror->ok('批核 付款申请单 成功!', 'search_payment_request&page=1');
+        if ($paydone_num == $item_num) {
+            $mysql->q('update fty_payment_request set status = 3, mod_by = ?, mod_date = ? where id = ?', $staff, $today, $_GET['paydoneId']);
         } else {
-            $myerror->error('批核 付款申请单 失败', 'BACK');
+            $mysql->q('update fty_payment_request set status = 1, mod_by = ?, mod_date = ? where id = ?', $staff, $today, $_GET['paydoneId']);
         }
+
+        $myerror->ok('付款申请单 付款成功!', 'search_payment_request&page=1');
     }
 }
 
