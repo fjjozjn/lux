@@ -3,7 +3,9 @@
 if(!defined('BEEN_INCLUDE'))exit('Welcome to The Matrix');
 
 //20131219 系统地址
-$host = '58.177.207.149:5900';
+//$host = '58.177.207.149:5900';
+//2017年底
+$host = '58.177.207.149';
 
 // 上傳設置
 $pic_path_ht        = '../files/titleimg/'; //后台图片路径
