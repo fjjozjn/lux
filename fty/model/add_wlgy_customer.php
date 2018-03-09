@@ -25,6 +25,8 @@ $formItems = array(
     'production_shipmark' => array('title' => 'Production Shipmark', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 1000),
     'production_remarks' => array('title' => 'Production Remarks', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 1000),
 
+    'bank_no' => array('title' => '银行账号', 'type' => 'text', 'restrict' => 'number', 'maxlen' => 50),
+
     'submitbtn'	=> array('type' => 'submit', 'value' => ' Submit '),
 );
 $goodsForm->init($formItems);
@@ -45,9 +47,11 @@ if(!$myerror->getAny() && $goodsForm->check()){
     $production_shipmark = '';//$_POST['production_shipmark'];
     $production_remarks = '';//$_POST['production_remarks'];
 
+    $bank_no = $_POST['bank_no'];
+
     $judge = $mysql->q('select cid from fty_wlgy_customer where cid = ?', $cid);
     if(!$judge){
-        $result = $mysql->q('insert into fty_wlgy_customer (cid, name, website, markup_ratio, deposit, balance, remark, created_by, production_packaging, production_shipmark, production_remarks) values ('.moreQm(11).')', $cid, $name, $website, $markup_ratio, $deposit, $balance, $remark, $created_by, $production_packaging, $production_shipmark, $production_remarks);
+        $result = $mysql->q('insert into fty_wlgy_customer set cid = ?, name = ?, website = ?, markup_ratio = ?, deposit = ?, balance = ?, remark = ?, created_by = ?, production_packaging = ?, production_shipmark = ?, production_remarks = ?, bank_no = ?', $cid, $name, $website, $markup_ratio, $deposit, $balance, $remark, $created_by, $production_packaging, $production_shipmark, $production_remarks, $bank_no);
         if($result){
             $myerror->ok('新增 物料供应商 成功!', 'search_wlgy_customer&page=1');
         }else{
@@ -121,6 +125,13 @@ if($myerror->getError()){
                 <td width="33%">&nbsp;</td>
             </tr>
         </table>-->
+        <table>
+            <tr valign="top">
+                <td width="33%"><? $goodsForm->show('bank_no');?></td>
+                <td width="33%">&nbsp;</td>
+                <td width="33%">&nbsp;</td>
+            </tr>
+        </table>
         <div class="line"></div>
         <?
 

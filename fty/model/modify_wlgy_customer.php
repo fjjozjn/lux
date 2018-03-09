@@ -46,6 +46,7 @@ if($myerror->getWarn()){
             'production_remarks' => array('title' => 'Production Remarks', 'type' => 'textarea', 'minlen' => 1, 'maxlen' => 50, 'value' => isset($mod_result['production_remarks'])?$mod_result['production_remarks']:''),
 
             'ap' => array('title' => 'AP（临时栏位）', 'type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result['ap'])?$mod_result['ap']:'0'),
+            'bank_no' => array('title' => '银行账号', 'type' => 'text', 'restrict' => 'number', 'maxlen' => 50, 'value' => isset($mod_result['bank_no'])?$mod_result['bank_no']:''),
 
             'submitbtn'	=> array('type' => 'submit', 'value' => ' 保存 '),
         );
@@ -72,7 +73,9 @@ if($myerror->getWarn()){
             //add 180201
             $ap = $_POST['ap'];
 
-            $result = $mysql->q('update fty_wlgy_customer set name = ?, markup_ratio = ?, deposit = ?, balance = ?, website = ?, remark = ?, created_by = ?, production_packaging = ?, production_shipmark = ?, production_remarks = ?, ap = ? where cid = ?', $name, $markup_ratio, $deposit, $balance, $website, $remark, $created_by, $production_packaging, $production_shipmark, $production_remarks, $ap, $_GET['modid']);
+            $bank_no = $_POST['bank_no'];
+
+            $result = $mysql->q('update fty_wlgy_customer set name = ?, markup_ratio = ?, deposit = ?, balance = ?, website = ?, remark = ?, created_by = ?, production_packaging = ?, production_shipmark = ?, production_remarks = ?, ap = ?, bank_no = ? where cid = ?', $name, $markup_ratio, $deposit, $balance, $website, $remark, $created_by, $production_packaging, $production_shipmark, $production_remarks, $ap, $bank_no, $_GET['modid']);
             if($result){
                 $myerror->ok('修改 物料供应商 成功!', 'search_wlgy_customer&page=1');
             }else{
@@ -153,8 +156,8 @@ if($myerror->getWarn()){
             </table>-->
             <table>
                 <tr valign="top">
+                    <td width="33%"><? $goodsForm->show('bank_no');?></td>
                     <td width="33%"><? $goodsForm->show('ap');?></td>
-                    <td width="33%">&nbsp;</td>
                     <td width="33%">&nbsp;</td>
                 </tr>
             </table>
