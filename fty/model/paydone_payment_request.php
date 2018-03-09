@@ -99,6 +99,7 @@ if ($myerror->getError()) {
                     <td>付款金额</td>
                     <td>备注</td>
                     <td>实际付款金额</td>
+                    <td>银行账号</td>
                     <td>付款</td>
                 </tr>
                 <?
@@ -111,6 +112,7 @@ if ($myerror->getError()) {
                         <td><?=$mod_result_item[$i]['pay_amount']?></td>
                         <td><?=$mod_result_item[$i]['remark']?></td>
                         <td><?=$mod_result_item[$i]['actual_pay_amount']?></td>
+                        <td></td>
                         <td><? $goodsForm->show('fpr_paydone' . $i); ?></td>
                     </tr>
                     <?
