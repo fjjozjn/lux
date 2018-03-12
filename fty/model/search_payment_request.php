@@ -130,7 +130,7 @@ if($myerror->getWarn()){
             }else{
                 $where_sql.= " AND in_date > '".$_SESSION['search_criteria']['start_date']." 00:00:00'";
             }
-        }elseif (strlen(@$_SESSION['search_criteria']['end_date'])){
+        } elseif (strlen(@$_SESSION['search_criteria']['end_date'])){
             $where_sql.= " AND in_date < '".$_SESSION['search_criteria']['end_date']." 23:59:59'";
         }
 
@@ -165,10 +165,14 @@ if($myerror->getWarn()){
         $sort = GENERAL_NO;
         $edit = GENERAL_YES;
 
-        $rs->SetRecordCol("批核", "id", $sort, $edit,"?act=approve_payment_request", "approveId");
+        if (isFtyAdmin()) {
+            $rs->SetRecordCol("批核", "id", $sort, $edit, "?act=approve_payment_request", "approveId");
+        }
         $rs->SetRecordCol("状态", "status");
         $rs->SetRecordCol("批核人", "approved_by");
         $rs->SetRecordCol("批核时间", "approved_date");
+        $rs->SetRecordCol("付款人", "paydone_by");
+        $rs->SetRecordCol("付款时间", "paydone_date");
         $rs->SetRecordCol("付款", "id", $sort, $edit,"?act=paydone_payment_request", "paydoneId");
         $rs->SetRecordCol("修改", "id", $sort, $edit, "?act=modify_payment_request", "modid");
         //$rs->SetRecordCol("PDF", "pcid", $sort, $edit, "model/viewpurchase_pdf.php?pdf=1","pcid");
