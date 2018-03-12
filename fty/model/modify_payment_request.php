@@ -19,12 +19,17 @@ if($myerror->getWarn()){
     require_once(ROOT_DIR.'model/inside_warn.php');
 }else{
     if(isset($_GET['delid']) && $_GET['delid'] != ''){
-        $rs1 = $mysql->q('delete from fty_payment_request_item where main_id = ?', $_GET['delid']);
-        $rs2 = $mysql->q('delete from fty_payment_request where id = ?', $_GET['delid']);
-        if($rs2){
-            $myerror->ok('删除 付款申请单 成功!', 'search_payment_request&page=1');
-        }else{
-            $myerror->error('删除 付款申请单 失败!', 'search_payment_request&page=1');
+        $fty_payment_request_info = $mysql->qone('select status from fty_payment_request where id = ?', $_GET['delid']);
+        if ($fty_payment_request_info['status'] == 2) {
+            $rs1 = $mysql->q('delete from fty_payment_request_item where main_id = ?', $_GET['delid']);
+            $rs2 = $mysql->q('delete from fty_payment_request where id = ?', $_GET['delid']);
+            if ($rs2) {
+                $myerror->ok('删除 付款申请单 成功!', 'search_payment_request&page=1');
+            } else {
+                $myerror->error('删除 付款申请单 失败!', 'search_payment_request&page=1');
+            }
+        } else {
+            $myerror->error('已核批或已付款的付款申请单不能删除!', 'search_payment_request&page=1');
         }
     }else{
         if(isset($_GET['modid']) && $_GET['modid'] != ''){
@@ -62,6 +67,9 @@ if($myerror->getWarn()){
             } elseif ($mod_result['status'] == 2) {
                 $formItems['fpr_pay_amount'.$i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result_item[$i]['pay_amount'])?$mod_result_item[$i]['pay_amount']:'');
                 $formItems['fpr_remark'.$i] = array('type' => 'text', 'value' => isset($mod_result_item[$i]['remark'])?$mod_result_item[$i]['remark']:'');
+            } elseif ($mod_result['status'] == 3) {
+                $formItems['fpr_pay_amount'.$i] = array('type' => 'text', 'restrict' => 'number', 'value' => isset($mod_result_item[$i]['pay_amount'])?$mod_result_item[$i]['pay_amount']:'', 'readonly' => 'readonly');
+                $formItems['fpr_remark'.$i] = array('type' => 'text', 'value' => isset($mod_result_item[$i]['remark'])?$mod_result_item[$i]['remark']:'', 'readonly' => 'readonly');
             }
         }
         //最后一个

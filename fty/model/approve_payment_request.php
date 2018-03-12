@@ -106,7 +106,14 @@ if ($myerror->getWarn()) {
             //操作扣除ap
             foreach ($mod_result_item as $item) {
                 $temp = explode(':', $item['fty_customer']);
-                $mysql->q('update fty_payment_request_item set actual_pay_amount = ? where id = ?', $payment_request_arr[$item['id']], $item['id']);
+                if ($item['type'] == 1) {
+                    $bank_info = $mysql->qone('select bank_no from fty_wlgy_customer where cid = ?', $temp[0]);
+                } elseif ($item['type'] == 2) {
+                    $bank_info = $mysql->qone('select bank_no from fty_jg_customer where cid = ?', $temp[0]);
+                } else {
+                    $bank_info['bank_no'] = '';
+                }
+                $mysql->q('update fty_payment_request_item set actual_pay_amount = ?, bank_no = ? where id = ?', $payment_request_arr[$item['id']], $bank_info['bank_no'], $item['id']);
                 handleFtyCustomerAp($item['type'], $temp[0], 2, $payment_request_arr[$item['id']]);
                 $email_content .= '<tr><td>'.$type[$item['type']].'</td><td>'.$item['fty_customer'].'</td><td>'.$item['fty_customer_ap'].'</td><td>'.$item['pay_amount'].'</td><td>'.$item['remark'].'</td><td>'.$item['actual_pay_amount'].'</td></tr>';
             }

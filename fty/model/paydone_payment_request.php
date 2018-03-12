@@ -65,9 +65,9 @@ if ($myerror->getWarn()) {
             $i++;
         }
         if ($paydone_num == $item_num) {
-            $mysql->q('update fty_payment_request set status = 3, mod_by = ?, mod_date = ? where id = ?', $staff, $today, $_GET['paydoneId']);
+            $mysql->q('update fty_payment_request set status = 3, paydone_by = ?, paydone_date = ? where id = ?', $staff, $today, $_GET['paydoneId']);
         } else {
-            $mysql->q('update fty_payment_request set status = 1, mod_by = ?, mod_date = ? where id = ?', $staff, $today, $_GET['paydoneId']);
+            $mysql->q('update fty_payment_request set status = 1, paydone_by = ?, paydone_date = ? where id = ?', $staff, $today, $_GET['paydoneId']);
         }
 
         $myerror->ok('付款申请单 付款成功!', 'search_payment_request&page=1');
@@ -112,7 +112,7 @@ if ($myerror->getError()) {
                         <td><?=$mod_result_item[$i]['pay_amount']?></td>
                         <td><?=$mod_result_item[$i]['remark']?></td>
                         <td><?=$mod_result_item[$i]['actual_pay_amount']?></td>
-                        <td></td>
+                        <td><?=$mod_result_item[$i]['bank_no']?></td>
                         <td><? $goodsForm->show('fpr_paydone' . $i); ?></td>
                     </tr>
                     <?
