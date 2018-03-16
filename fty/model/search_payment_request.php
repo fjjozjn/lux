@@ -165,9 +165,9 @@ if($myerror->getWarn()){
         $sort = GENERAL_NO;
         $edit = GENERAL_YES;
 
-        if (isFtyAdmin()) {
+        //if (isFtyAdmin()) {
             $rs->SetRecordCol("批核", "id", $sort, $edit, "?act=approve_payment_request", "approveId");
-        }
+        //}
         $rs->SetRecordCol("状态", "status");
         $rs->SetRecordCol("批核人", "approved_by");
         $rs->SetRecordCol("批核时间", "approved_date");
