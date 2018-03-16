@@ -101,7 +101,7 @@ if ($myerror->getWarn()) {
         $result = $mysql->q('update fty_payment_request set status = ?, approved_by = ?, approved_date = ? where id = ?', 1, $staff, $today, $_GET['approveId']);
 
         if ($result) {
-            $email_content = '<table><tr><td>类别</td><td>供应商</td><td>应付</td><td>付款金额</td><td>备注</td><td>实际付款金额</td></tr>';
+            $email_content = '<table><tr><td>类别</td><td>供应商</td><td>应付</td><td>申请付款金额</td><td>备注</td><td>实际付款金额</td></tr>';
             $type = transArrayFormat(get_fty_wlgy_jg_type());
             //操作扣除ap
             foreach ($mod_result_item as $item) {
@@ -161,7 +161,7 @@ if ($myerror->getError()) {
                     <td>类别</td>
                     <td>供应商</td>
                     <td>应付</td>
-                    <td>付款金额</td>
+                    <td>申请付款金额</td>
                     <td>备注</td>
                     <td>实际付款金额</td>
                 </tr>
