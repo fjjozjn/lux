@@ -110,7 +110,7 @@ if($myerror->getError()){
                     <td>类别</td>
                     <td>供应商</td>
                     <td>应付</td>
-                    <td>付款金额</td>
+                    <td>申请付款金额</td>
                     <td>备注</td>
                     <td>实际付款金额</td>
                     <td width="5%"></td>
