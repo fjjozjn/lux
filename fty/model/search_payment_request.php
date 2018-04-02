@@ -122,16 +122,16 @@ if($myerror->getWarn()){
         $where_sql = "";
 
         if (strlen(@$_SESSION['search_criteria']['payment_request_by'])){
-            $where_sql.= " AND payment_request_by Like '%".$_SESSION['search_criteria']['payment_request_by'].'%\'';
+            $where_sql.= " AND fty_payment_request.payment_request_by Like '%".$_SESSION['search_criteria']['payment_request_by'].'%\'';
         }
         if (strlen(@$_SESSION['search_criteria']['start_date'])){
             if (strlen(@$_SESSION['search_criteria']['end_date'])){
-                $where_sql.= " AND in_date between '".$_SESSION['search_criteria']['start_date']." 00:00:00' AND '".$_SESSION['search_criteria']['end_date']." 23:59:59'";
+                $where_sql.= " AND fty_payment_request.in_date between '".$_SESSION['search_criteria']['start_date']." 00:00:00' AND '".$_SESSION['search_criteria']['end_date']." 23:59:59'";
             }else{
-                $where_sql.= " AND in_date > '".$_SESSION['search_criteria']['start_date']." 00:00:00'";
+                $where_sql.= " AND fty_payment_request.in_date > '".$_SESSION['search_criteria']['start_date']." 00:00:00'";
             }
         } elseif (strlen(@$_SESSION['search_criteria']['end_date'])){
-            $where_sql.= " AND in_date < '".$_SESSION['search_criteria']['end_date']." 23:59:59'";
+            $where_sql.= " AND fty_payment_request.in_date < '".$_SESSION['search_criteria']['end_date']." 23:59:59'";
         }
 
         //普通用户只能搜索到自己开的单 与 状态不为D的单
@@ -142,11 +142,11 @@ if($myerror->getWarn()){
         }*/
 
         // echo $where_sql;
-        $where_sql.= " ORDER BY in_date DESC ";
+        $where_sql.= " GROUP BY fty_payment_request.id ORDER BY fty_payment_request.in_date DESC ";
         $_SESSION['search_criteria']['page'] = $current_page;
 
-        $temp_table = ' fty_payment_request';
-        $list_field = ' SQL_CALC_FOUND_ROWS *';
+        $temp_table = ' fty_payment_request left join fty_payment_request_item on fty_payment_request.id = fty_payment_request_item.main_id';
+        $list_field = ' SQL_CALC_FOUND_ROWS fty_payment_request.*, sum(fty_payment_request_item.pay_amount) as pay_amount_total';
 
         //get the row count for this seaching criteria
         //$row_count = $mysql->sp('CALL backend_list_count(?, ?)', $temp_table,$where_sql);
@@ -159,7 +159,8 @@ if($myerror->getWarn()){
         //$rs->col_width = "100";
         $rs->SetRecordCol("申请时间", "in_date");
         $rs->SetRecordCol("申请人", "created_by");
-        $rs->SetRecordCol("创建日期", "in_date");
+        $rs->SetRecordCol("申请总额", "pay_amount_total");
+        //$rs->SetRecordCol("创建日期", "in_date");
         $rs->SetRecordCol("最后修改日期", "mod_date");
 
         $sort = GENERAL_NO;

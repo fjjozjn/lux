@@ -101,7 +101,7 @@ if ($myerror->getWarn()) {
         $result = $mysql->q('update fty_payment_request set status = ?, approved_by = ?, approved_date = ? where id = ?', 1, $staff, $today, $_GET['approveId']);
 
         if ($result) {
-            $email_content = '<table><tr><td>类别</td><td>供应商</td><td>应付</td><td>申请付款金额</td><td>备注</td><td>实际付款金额</td></tr>';
+            $email_content = '<table border="1"><tr><td>类别</td><td>供应商</td><td>应付</td><td>申请付款金额</td><td>备注</td><td>实际付款金额</td></tr>';
             $type = transArrayFormat(get_fty_wlgy_jg_type());
             //操作扣除ap
             foreach ($mod_result_item as $item) {
@@ -128,11 +128,14 @@ if ($myerror->getWarn()) {
             $info2 = "你好,<br />付款申请单已核批，内容如下<br />'.$email_content.'<br />详情请登入系统查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
             $info3 = $_SESSION['ftylogininfo']['aName']." 你好,<br />付款申请单已核批，内容如下<br />'.$email_content.'<br />详情请登入系统查看.<br />(此郵件為系統訊息, 請勿回覆)<br />Best Regards,<br />Lux Design Limited";
 
-            send_mail(trim($rtn['email_fty_user_info_to']), '', "付款申请单 - ".$_GET['approveId'], $info1, $account_info);
-            send_mail(trim($rtn['email_admin_request_to']), '', "付款申请单 - ".$_GET['approveId'], $info2, $account_info);
-            send_mail(trim($_SESSION['ftylogininfo']['aAdminEmail']), '', "付款申请单 - ".$_GET['approveId'], $info3, $account_info);
+            $receiver1 = trim($rtn['email_fty_user_info_to']);
+            $receiver2 = trim($rtn['email_admin_request_to']);
+            $receiver3 = trim($_SESSION['ftylogininfo']['aAdminEmail']);
+            send_mail($receiver1, '', "付款申请单 - ".$_GET['approveId'], $info1, $account_info);
+            send_mail($receiver2, '', "付款申请单 - ".$_GET['approveId'], $info2, $account_info);
+            send_mail($receiver3, '', "付款申请单 - ".$_GET['approveId'], $info3, $account_info);
 
-            $myerror->ok('批核 付款申请单 成功!', 'search_payment_request&page=1');
+            $myerror->ok('批核 付款申请单 成功!(邮件发送给:'.$receiver1.','.$receiver2.','.$receiver3.')', 'search_payment_request&page=1');
         } else {
             $myerror->error('批核 付款申请单 失败', 'BACK');
         }
