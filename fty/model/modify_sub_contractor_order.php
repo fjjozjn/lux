@@ -25,16 +25,16 @@ if($myerror->getWarn()){
         }
     }elseif(isset($_GET['changeid']) && $_GET['changeid'] != ''){
         $rtn = $mysql->qone('select istatus from fty_sub_contractor_order where id = ?', $_GET['changeid']);
-        $str = '';
+        $new_status = '';
         if($rtn['istatus'] == '(D)'){
-            $rs = $mysql->q('update fty_sub_contractor_order set istatus = ?, approved_by = ?, approved_date = ? where id = ?', '(I)', $_SESSION["ftylogininfo"]["aName"], dateMore(), $_GET['changeid']);
-            $str = '(I)';
+            $new_status = '(I)';
+            $rs = $mysql->q('update fty_sub_contractor_order set istatus = ?, approved_by = ?, approved_date = ? where id = ?', $new_status, $_SESSION["ftylogininfo"]["aName"], dateMore(), $_GET['changeid']);
         }else{
-            $rs = $mysql->q('update fty_sub_contractor_order set istatus = ?, approved_by = ?, approved_date = ? where id = ?', '(D)', $_SESSION["ftylogininfo"]["aName"], dateMore(), $_GET['changeid']);
-            $str = '(D)';
+            $new_status = '(D)';
+            $rs = $mysql->q('update fty_sub_contractor_order set istatus = ?, approved_by = ?, approved_date = ? where id = ?', $new_status, '', '', $_GET['changeid']);
         }
         if($rs){
-            $myerror->ok('更改 加工单 状态为 '.$str.'!', 'search_sub_contractor_order&page=1');
+            $myerror->ok('更改 加工单 状态为 '.$new_status.'!', 'search_sub_contractor_order&page=1');
         }else{
             $myerror->error('更改 加工单 状态失败!', 'search_sub_contractor_order&page=1');
         }

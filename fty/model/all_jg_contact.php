@@ -69,8 +69,8 @@ if($myerror->getWarn()){
 
         $sort = GENERAL_NO;
         $edit = GENERAL_YES;
-        $rs->SetRecordCol("修改", "id", $sort, $edit,"?act=c_modify_jg_contact","modid");
-        $rs->SetRecordCol("删除", "id", $sort, $edit,"?act=c_modify_jg_contact","delid");
+        $rs->SetRecordCol("修改", "id", $sort, $edit,"?act=modify_jg_contact","modid");
+        $rs->SetRecordCol("删除", "id", $sort, $edit,"?act=modify_jg_contact","delid");
         $rs->SetRSSorting('?act=all_jg_contact');
 
         $rs->ShowRecordSet($info);
