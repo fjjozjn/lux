@@ -24,17 +24,22 @@ if($myerror->getWarn()){
             $myerror->error('删除加工单失败!', 'search_sub_contractor_order&page=1');
         }
     }elseif(isset($_GET['changeid']) && $_GET['changeid'] != ''){
-        $rtn = $mysql->qone('select istatus from fty_sub_contractor_order where id = ?', $_GET['changeid']);
+        $rtn = $mysql->qone('select istatus, total, cid from fty_sub_contractor_order where id = ?', $_GET['changeid']);
         $new_status = '';
+        $ap_change_notice = '';
         if($rtn['istatus'] == '(D)'){
             $new_status = '(I)';
             $rs = $mysql->q('update fty_sub_contractor_order set istatus = ?, approved_by = ?, approved_date = ? where id = ?', $new_status, $_SESSION["ftylogininfo"]["aName"], dateMore(), $_GET['changeid']);
+            $mysql->q('update fty_jg_customer set ap = ap + ? where cid = ?', $rtn['total'], $rtn['cid']);
+            $ap_change_notice = redFont(' 增加 ').$rtn['total'];
         }else{
             $new_status = '(D)';
             $rs = $mysql->q('update fty_sub_contractor_order set istatus = ?, approved_by = ?, approved_date = ? where id = ?', $new_status, '', '', $_GET['changeid']);
+            $mysql->q('update fty_jg_customer set ap = ap - ? where cid = ?', $rtn['total'], $rtn['cid']);
+            $ap_change_notice = redFont(' 减少 ').$rtn['total'];
         }
         if($rs){
-            $myerror->ok('更改 加工单 状态为 '.$new_status.'!', 'search_sub_contractor_order&page=1');
+            $myerror->ok('更改 加工单 状态为 '.$new_status.'! （加工商AP'.$ap_change_notice.'）', 'search_sub_contractor_order&page=1');
         }else{
             $myerror->error('更改 加工单 状态失败!', 'search_sub_contractor_order&page=1');
         }
@@ -144,7 +149,7 @@ if($myerror->getWarn()){
 
         if(!$myerror->getAny() && $goodsForm->check()){
 
-            fb($_POST);
+            //fb($_POST);
             //die('error');
 
             $sco_id = isset($_GET['pcid'])?fty_autoGenerationID():$_GET['modid'];
@@ -239,7 +244,8 @@ if($myerror->getWarn()){
                         }
 
                         //加工商ap（应付欠款）修改
-                        $mysql->q('update fty_jg_customer set ap = ap + ? where cid = ?', ($total - $mod_result['total']), $jg_cid);
+                        //20180404 改为核批的时候操作
+                        //$mysql->q('update fty_jg_customer set ap = ap + ? where cid = ?', ($total - $mod_result['total']), $jg_cid);
 
                         $myerror->ok('修改加工单成功!', 'search_sub_contractor_order&page=1');
                     }else{
@@ -261,7 +267,8 @@ if($myerror->getWarn()){
                             }
 
                             //加工商ap（应付欠款）修改
-                            $mysql->q('update fty_jg_customer set ap = ap + ? where cid = ?', $total, $jg_cid);
+                            //20180404 改为核批的时候操作
+                            //$mysql->q('update fty_jg_customer set ap = ap + ? where cid = ?', $total, $jg_cid);
 
                             $myerror->ok('新增加工单成功!', 'search_sub_contractor_order&page=1');
                         }else{

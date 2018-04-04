@@ -173,7 +173,7 @@ if($myerror->getWarn()){
         $rs->SetRecordCol("批核人", "approved_by");
         $rs->SetRecordCol("批核时间", "approved_date");
         $rs->SetRecordCol("付款人", "paydone_by");
-        $rs->SetRecordCol("付款时间", "paydone_date");
+        $rs->SetRecordCol("最后付款时间", "last_paydone_date");
         $rs->SetRecordCol("付款", "id", $sort, $edit,"?act=paydone_payment_request", "paydoneId");
         $rs->SetRecordCol("修改", "id", $sort, $edit, "?act=modify_payment_request", "modid");
         //$rs->SetRecordCol("PDF", "pcid", $sort, $edit, "model/viewpurchase_pdf.php?pdf=1","pcid");
