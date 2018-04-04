@@ -356,6 +356,10 @@ define('ACTION_LOG_FTY_ADD_DELIVERY_CHANGE_PO_STATUS', 'action_log_fty_add_deliv
 define('ACTION_LOG_FTY_ADD_DELIVERY_CHANGE_PO_STATUS_S', '509');
 define('ACTION_LOG_FTY_ADD_DELIVERY_CHANGE_PO_STATUS_F', '-509');
 
+define('ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS', 'action_log_fty_customer_ap_change_status');
+define('ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS_PLUS', '510');
+define('ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS_MINUS', '-510');
+
 
 
 //********** luxcraft **********

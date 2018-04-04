@@ -101,7 +101,7 @@ if($myerror->getWarn()){
 
         <fieldset class="center2col" style="width:60%">
             <legend class='legend'>操作</legend>
-            <div style="margin-left:28px;"><a class="button" href="?act=add_jg_contact&cid=<?=$mod_result['cid']?>" onclick="return pdfConfirm()">添加联系人</a></div>
+            <div style="margin-left:28px;"><a class="button" href="?act=add_jg_contact&cid=<?=$mod_result['cid']?>" onclick="return pdfConfirm()">添加联系人</a><a class="button" href="javascript:" onclick="window.open ('model/customer_ap_change_record.php?cid=<?=$mod_result['cid']?>','lux','height=400,width=800,top=0,left=0,toolbar=no,menubar=no,scrollbars=yes, resizable=yes,location=no,status=no')">付款记录</a></div>
         </fieldset>
 
         <fieldset class="center2col" style="width:60%">

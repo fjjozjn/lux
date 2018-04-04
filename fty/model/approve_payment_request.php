@@ -34,10 +34,11 @@ if ($myerror->getWarn()) {
             $rs2 = $mysql->q('update fty_payment_request_item set actual_pay_amount = 0 where main_id = ?', $_GET['approveId']);
             if ($rs1 && $rs2) {
                 //操作回滚ap
-                foreach ($mod_result_item as $item) {
+                //20180404 对AP的操作放到付款时
+                /*foreach ($mod_result_item as $item) {
                     $temp = explode(':', $item['fty_customer']);
                     handleFtyCustomerAp($item['type'], $temp[0], 1, $item['actual_pay_amount']);
-                }
+                }*/
                 $myerror->ok('付款单取消批核 成功!', 'search_payment_request&page=1');
             } else {
                 $myerror->error('付款单取消批核 失败!', 'search_payment_request&page=1');
@@ -114,7 +115,8 @@ if ($myerror->getWarn()) {
                     $bank_info['bank_no'] = '';
                 }
                 $mysql->q('update fty_payment_request_item set actual_pay_amount = ?, bank_no = ? where id = ?', $payment_request_arr[$item['id']], $bank_info['bank_no'], $item['id']);
-                handleFtyCustomerAp($item['type'], $temp[0], 2, $payment_request_arr[$item['id']]);
+                //20180404 对AP的操作放到付款时
+                //handleFtyCustomerAp($item['type'], $temp[0], 2, $payment_request_arr[$item['id']]);
                 $email_content .= '<tr><td>'.$type[$item['type']].'</td><td>'.$item['fty_customer'].'</td><td>'.$item['fty_customer_ap'].'</td><td>'.$item['pay_amount'].'</td><td>'.$item['remark'].'</td><td>'.$item['actual_pay_amount'].'</td></tr>';
             }
             $email_content .= '</table>';
@@ -135,7 +137,7 @@ if ($myerror->getWarn()) {
             send_mail($receiver2, '', "付款申请单 - ".$_GET['approveId'], $info2, $account_info);
             send_mail($receiver3, '', "付款申请单 - ".$_GET['approveId'], $info3, $account_info);
 
-            $myerror->ok('批核 付款申请单 成功!(邮件发送给:'.$receiver1.','.$receiver2.','.$receiver3.')', 'search_payment_request&page=1');
+            $myerror->ok('批核 付款申请单 成功！（邮件发送给:'.$receiver1.'，'.$receiver2.'，'.$receiver3.'）', 'search_payment_request&page=1');
         } else {
             $myerror->error('批核 付款申请单 失败', 'BACK');
         }
