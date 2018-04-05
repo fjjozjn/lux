@@ -444,11 +444,10 @@ function pdfConfirm(){
 
 function UpdateTotal()//更新总金额
 {
-	var vTotalMoney=0;//总金额的初始值为0;               
-	var vTable=$("#tbody");//得到表格的jquery对象
+	var vTotalMoney=0;//总金额的初始值为0;
 	var vTotal = $("#total"); //得到总金额对象
-	var vtxtAfters=vTable.find("#sub");//得到所有的费用对象;
-	vtxtAfters.each(
+	//$("#sub").each(//有相同id的，这样取就只能取出第一个
+	$("td[id^='sub']").each(
 		function(i)
 		{
 			var vTempValue=$(this).html();	
@@ -471,7 +470,11 @@ function quantityBlur(attr_id, sign){
         if(/*sign == 'proforma' || sign == 'invoice'*/sign == 'purchase'){
             var rmb_input = $(this).parent().parent().next().next().children().children();
         }else{
-            var rmb_input = $(this).parent().parent().next().children().children();
+			if(local_url.indexOf('modifyproforma') > 0){
+				var rmb_input = $(this).parent().parent().next().next().children().children();
+			}else{
+				var rmb_input = $(this).parent().parent().next().children().children();
+			}
         }
 		var sub_td = rmb_input.parent().parent().next();
 		var new_price = rmb_input.val().replace(/,/g,"");
@@ -488,7 +491,11 @@ function priceBlur(attr_id, sign){
         if(/*sign == 'proforma' || sign == 'invoice'*/sign == 'purchase'){
             var qut_input = $(this).parent().parent().prev().prev().children().children();
         }else{
-            var qut_input = $(this).parent().parent().prev().children().children();
+        	if(local_url.indexOf('modifyproforma') > 0){
+        		var qut_input = $(this).parent().parent().prev().prev().children().children();
+        	}else{
+        		var qut_input = $(this).parent().parent().prev().children().children();
+        	}
         }
 		var sub_td = $(this).parent().parent().next();
 		//居然 $(this) 和 $("#"+attr_id) 代表的内容是不同的。。。。（以上兩個問題都是由於將JS代碼放在<tr></tr>中才造成的吧，現在正常了。。。）
