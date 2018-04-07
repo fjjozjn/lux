@@ -24,7 +24,7 @@ if($myerror->getWarn()){
     $formItems = array(
         'search_by' => array(
             'type' => 'select',
-            'options' => array(array("Creation Date", "1")/*, array("ETD", "2")*/),
+            'options' => array(array("Value Date", "1")/*, array("ETD", "2")*/),
             'value' => @$_SESSION['search_criteria']['search_by'],
             'required' => 1,
             'nostar'=>1,
@@ -78,7 +78,7 @@ if($myerror->getWarn()){
                 //fb($currency);
                 $rs = '';
                 if ($_SESSION['search_criteria']['search_by'] == 1) {
-                    $rs = $mysql->q('select pn.currency, pn.in_date, sum(pin.received) as total from payment_new pn left join payment_item_new pin on pn.py_no = pin.py_no where pn.istatus <> ? group by pn.py_no', 'delete');
+                    $rs = $mysql->q('select pn.currency, pn.value_date, sum(pin.received) as total from payment_new pn left join payment_item_new pin on pn.py_no = pin.py_no where pn.istatus <> ? group by pn.py_no', 'delete');
                 }/* elseif ($_SESSION['search_criteria']['search_by'] == 2) {
                     $rs = $mysql->q('select total, expected_date as pi_date from proforma where istatus <> ? and expected_date <> ?', 'delete', '');
                 }*/
@@ -86,17 +86,17 @@ if($myerror->getWarn()){
                 if($rs){
                 $rtn = $mysql->fetch();
                 foreach($rtn as $v){
-                    $in_date = explode('-', $v['in_date']);
+                    $value_date = explode('-', $v['value_date']);
                     if ($v['currency'] == 'USD') {
-                        @$pn_total[$in_date[0]][intval($in_date[1])] += round($v['total'], 2);
+                        @$pn_total[$value_date[0]][intval($value_date[1])] += round($v['total'], 2);
                     } else {
-                        @$pn_total[$in_date[0]][intval($in_date[1])] += round($v['total'] / $currency[$v['currency']] * $currency['USD'], 2);
+                        @$pn_total[$value_date[0]][intval($value_date[1])] += round($v['total'] / $currency[$v['currency']] * $currency['USD'], 2);
                     }
                 }
                 //fb($pn_total);die();
                 ?>
                 <fieldset>
-                    <legend class='legend'>Information (all counted in Creation Date of Payment Advice and status except "delete")</legend>
+                    <legend class='legend'>Information (all counted in Value Date of Payment Advice and status except "delete")</legend>
                     <!--                    <div>--><?//=$s_name['name']?><!--</div>-->
                     <br />
                     <table width="100%" border='1' bordercolor='#ABABAB' cellspacing='1' cellpadding='3' bgcolor='#000000' align="center">
