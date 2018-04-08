@@ -15,11 +15,18 @@ if(isset($_GET['type'])){
     }
     if($rs){
         $rtn = $mysql->fetch();
-        $str = '';
+        /*$str = '';
         for($i = 0; $i < count($rtn); $i++){
             $str .= ($i == count($rtn) - 1)?($rtn[$i]['cid'].':'.$rtn[$i]['name']):($rtn[$i]['cid'].':'.$rtn[$i]['name'] . "|");
         }
-        echo $str;
+        echo $str;*/
+
+        $result = [];
+        for($i = 0; $i < count($rtn); $i++){
+            $result[$i]['id'] = $rtn[$i]['cid'].':'.$rtn[$i]['name'];
+            $result[$i]['text'] = $rtn[$i]['cid'].':'.$rtn[$i]['name'];
+        }
+        echo json_encode($result);
     }else{
         echo 'no-1';
     }

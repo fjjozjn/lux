@@ -4651,19 +4651,24 @@ function searchFtyCustomer(obj){
         url: "index.php",
         data: qs,
         cache: false,
-        dataType: "html",
+        dataType: "json",
         error: function(){
             alert('系统错误，查询 fty customer 失败');
         },
         success: function(data){
             if(data.indexOf('no-') < 0){
-                var data_array = data.split("|");
+                /*var data_array = data.split("|");
                 html = '<option value="">- select -</option>';
                 for(i=0; i<data_array.length; i++){
                     html += "<option value='"+data_array[i]+"'>"+data_array[i]+"</option>";
                 }
-                fpr_fty_customer_select.removeAttr("disabled").append(html);
+                fpr_fty_customer_select.removeAttr("disabled").append(html);*/
 
+                fpr_fty_customer_select.select2({
+                    placeholder: '- select -',
+                    data: data
+                });
+                fpr_fty_customer_select.removeAttr("disabled");
             }else{
                 html = '<option value="">无记录</option>';
                 fpr_fty_customer_select.removeAttr("disabled").append(html);
