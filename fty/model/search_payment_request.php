@@ -157,6 +157,7 @@ if($myerror->getWarn()){
         // echo 'CALL backend_list(0,10,"'.$temp_table.'", "'.$where_sql.'")';
 
         //$rs->col_width = "100";
+        $rs->SetRecordCol("ID", "id");
         $rs->SetRecordCol("申请时间", "in_date");
         $rs->SetRecordCol("申请人", "created_by");
         $rs->SetRecordCol("申请总额", "pay_amount_total");
