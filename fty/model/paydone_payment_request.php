@@ -67,7 +67,7 @@ if ($myerror->getWarn()) {
                     //add action log
                     $mysql->sp('CALL admin_log_insert(?, ?, ?, ?, ?, ?, ?, ?)'
                         , $_SESSION['ftylogininfo']['aID'], $ip_real
-                        , ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS, '操作人：'.$_SESSION["ftylogininfo"]["aName"]."，取消付款日期：".$now."，取消付款金额：".$update_item['actual_pay_amount'], ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS_PLUS, "", "cid", $temp[0]);
+                        , ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS, '操作人：'.$_SESSION["ftylogininfo"]["aName"]."，取消付款日期：".$now."，取消付款金额：".$update_item['actual_pay_amount'], ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS_PLUS, "", $temp[0], 0);
                 }
             } else {
                 if (isset($_POST['fpr_paydone' . $i])) {
@@ -77,7 +77,7 @@ if ($myerror->getWarn()) {
                     //add action log
                     $mysql->sp('CALL admin_log_insert(?, ?, ?, ?, ?, ?, ?, ?)'
                         , $_SESSION['ftylogininfo']['aID'], $ip_real
-                        , ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS, '操作人：'.$_SESSION["ftylogininfo"]["aName"]."，付款日期：".$now."，付款金额：".$update_item['actual_pay_amount'], ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS_MINUS, "", "cid", $temp[0]);
+                        , ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS, '操作人：'.$_SESSION["ftylogininfo"]["aName"]."，付款日期：".$now."，付款金额：".$update_item['actual_pay_amount'], ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS_MINUS, "", $temp[0], 0);
                 }
             }
             $i++;
