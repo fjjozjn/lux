@@ -9,7 +9,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/fty/in38/global_admin.php');
 
 if( isset($_GET['cid']) && $_GET['cid']){
 
-    $rtn = $mysql->q('select * from tw_admin_hist where AdminHistAction = ? and AdminHistFieldID = ? order by AdminHistID desc', ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS, $_GET['cid']);
+    $rtn = $mysql->q('select * from tw_admin_hist where AdminHistAction = ? and AdminHistField = ? order by AdminHistID desc', ACTION_LOG_FTY_CUSTOMER_AP_CHANGE_STATUS, $_GET['cid']);
 
     if($rtn){
         $result = $mysql->fetch();
