@@ -149,11 +149,14 @@ if($myerror->getError()){
 
 }
 ?>
-
+<link href="/ui/select2/select2.min.css" rel="stylesheet" />
+<script src="/ui/select2/select2.min.js"></script>
 <script>
     $(function(){
         $(".template").hide();
         //table tr层表单可拖动
         $("#tableDnD").tableDnD({dragHandle: ".dragHandle"});
+        //select2 框初始化
+        $("select[id^='fpr_']").select2();
     })
 </script>
