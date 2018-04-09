@@ -4640,9 +4640,6 @@ function searchFtyCustomer(obj){
     var fpr_fty_customer_select = fpr_type_select.parent().parent().next().children().children();
     fpr_fty_customer_select.empty();
 
-    //所有的数据行有一个.repeat的Class，得到数据行的大小
-    var vcount = $("#tbody tr").filter(".repeat").size();
-
     var html = '';
 
     var qs = 'ajax=1&act=ajax-search_fty_customer&type='+selectText;
@@ -4651,7 +4648,7 @@ function searchFtyCustomer(obj){
         url: "index.php",
         data: qs,
         cache: false,
-        dataType: "json",
+        dataType: "json",//用json格式，select2直接可用
         error: function(){
             alert('系统错误，查询 fty customer 失败');
         },
@@ -4668,7 +4665,7 @@ function searchFtyCustomer(obj){
                     placeholder: '- select -',
                     data: data
                 });
-                fpr_fty_customer_select.removeAttr("disabled");
+                fpr_fty_customer_select.prop("disabled", false);
             }else{
                 html = '<option value="">无记录</option>';
                 fpr_fty_customer_select.removeAttr("disabled").append(html);
