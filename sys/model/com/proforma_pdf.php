@@ -166,7 +166,7 @@ if (isset($_GET['pvid']) && $_GET['pvid'] != '') {
 					<td width="15%">TEL: &nbsp;</td>
 					<td width="43%"><b>' . $result1['tel'] . '</b></td>
 					<td width="20%">UNIT: &nbsp;</td>
-					<td width="22"><b>' . $result1['unit'] . '</b></td>
+					<td width="22%"><b>' . $result1['unit'] . '</b></td>
 				</tr>
 				<tr>
 					<td width="15%">FAX: &nbsp;</td>
